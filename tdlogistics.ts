@@ -46,8 +46,8 @@ class UsersAuthenticate {
 class StaffsAuthenticate {
     private baseUrl: string;
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
-        this.baseUrl = "http://localhost:5000/api/v1/staffs";
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
+        // this.baseUrl = "http://localhost:5000/api/v1/staffs";
     }
 
     async login(username: string, password: string): Promise<any> {
@@ -60,7 +60,7 @@ class StaffsAuthenticate {
             });
 
             const data = response.data;
-            return { error: data.error, message: data.message };
+            return { error: data.error, valid: data.valid, message: data.message };
         } catch (error) {
             console.log("Error logging in: ", error.response.data);
             return error.response.data;
@@ -133,8 +133,8 @@ class UsersOperation {
     private baseUrl: string;
 
     constructor(phoneNumber: string) {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
-        this.baseUrl = "http://localhost:5000/api/v1/users";
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
+        // this.baseUrl = "http://localhost:5000/api/v1/users";
     }
 
     async findByUser(condition: FindingUserByUserCondition) : Promise<any> {
@@ -274,8 +274,8 @@ interface DeletingAgencyCondition {
 class AgencyOperation {
     private baseUrl: string;
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
-        this.baseUrl = "http://localhost:5000/api/v1/agencies";
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
+        // this.baseUrl = "http://localhost:5000/api/v1/agencies";
     }
 
     async create(info: CreatingAgencyInfo): Promise<any> {

@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
+exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
 var UsersAuthenticate = /** @class */ (function () {
     function UsersAuthenticate() {
@@ -101,8 +101,8 @@ var UsersAuthenticate = /** @class */ (function () {
 exports.UsersAuthenticate = UsersAuthenticate;
 var StaffsAuthenticate = /** @class */ (function () {
     function StaffsAuthenticate() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
-        this.baseUrl = "http://localhost:5000/api/v1/staffs";
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
+        // this.baseUrl = "http://localhost:5000/api/v1/staffs";
     }
     StaffsAuthenticate.prototype.login = function (username, password) {
         return __awaiter(this, void 0, void 0, function () {
@@ -120,10 +120,10 @@ var StaffsAuthenticate = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, valid: data.valid, message: data.message }];
                     case 2:
                         error_3 = _a.sent();
-                        console.log("Error logging in: ", error_3.response);
+                        console.log("Error logging in: ", error_3.response.data);
                         return [2 /*return*/, error_3.response.data];
                     case 3: return [2 /*return*/];
                 }
@@ -186,22 +186,19 @@ var StaffsAuthenticate = /** @class */ (function () {
     return StaffsAuthenticate;
 }());
 exports.StaffsAuthenticate = StaffsAuthenticate;
-var User = /** @class */ (function () {
-    function User(phoneNumber) {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
-        this.baseUrl = "http://localhost:5000/api/v1/users";
-        this.phoneNumber = phoneNumber;
+var UsersOperation = /** @class */ (function () {
+    function UsersOperation(phoneNumber) {
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
+        // this.baseUrl = "http://localhost:5000/api/v1/users";
     }
-    User.prototype.fetchInfo = function () {
+    UsersOperation.prototype.findByUser = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get"), {
-                                phone_number: this.phoneNumber,
-                            }, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -217,36 +214,86 @@ var User = /** @class */ (function () {
             });
         });
     };
-    User.prototype.setInfo = function (fullname, email) {
-        this.fullname = fullname;
-        this.email = email;
-    };
-    User.prototype.getInfo = function () {
-        return new Object({
-            fullname: this.fullname,
-            phoneNumber: this.phoneNumber,
-            email: this.email,
-            role: "USER",
-        });
-    };
-    return User;
-}());
-exports.User = User;
-var Staff = /** @class */ (function () {
-    function Staff() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
-        this.baseUrl = "http://localhost:5000/api/v1/staffs";
-    }
-    return Staff;
-}());
-var Agency = /** @class */ (function () {
-    function Agency() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
-        this.baseUrl = "http://localhost:5000/api/v1/agencies";
-    }
-    Agency.prototype.createAgency = function (info) {
+    UsersOperation.prototype.findByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_7;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_7 = _a.sent();
+                        console.log("Error get one user: ", error_7.response.data);
+                        return [2 /*return*/, error_7.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UsersOperation.prototype.create = function (info) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_8;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_8 = _a.sent();
+                        console.log("Error create new user: ", error_8.response.data);
+                        return [2 /*return*/, error_8.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UsersOperation.prototype.update = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_9;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?user_id=").concat(condition.user_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_9 = _a.sent();
+                        console.log("Error create new user: ", error_9.response.data);
+                        return [2 /*return*/, error_9.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return UsersOperation;
+}());
+exports.UsersOperation = UsersOperation;
+var AgencyOperation = /** @class */ (function () {
+    function AgencyOperation() {
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
+        // this.baseUrl = "http://localhost:5000/api/v1/agencies";
+    }
+    AgencyOperation.prototype.create = function (info) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_10;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -259,13 +306,106 @@ var Agency = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_7 = _a.sent();
-                        console.log("Error creating agency: ", error_7.response.data);
-                        return [2 /*return*/, error_7.response.data];
+                        error_10 = _a.sent();
+                        console.log("Error creating agency: ", error_10.response.data);
+                        return [2 /*return*/, error_10.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    return Agency;
+    AgencyOperation.prototype.findByAgency = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_11;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_11 = _a.sent();
+                        console.log("Error finding agency: ", error_11.response.data);
+                        return [2 /*return*/, error_11.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    AgencyOperation.prototype.findByAdmin = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_12;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_12 = _a.sent();
+                        console.log("Error finding agency: ", error_12.response.data);
+                        return [2 /*return*/, error_12.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    AgencyOperation.prototype.update = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_13;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?agency_id=").concat(condition.agency_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_13 = _a.sent();
+                        console.log("Error finding agency: ", error_13.response.data);
+                        return [2 /*return*/, error_13.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    AgencyOperation.prototype.delete = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_14;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?agency_id=").concat(condition.agency_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_14 = _a.sent();
+                        console.log("Error finding agency: ", error_14.response.data);
+                        return [2 /*return*/, error_14.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return AgencyOperation;
 }());
+exports.AgencyOperation = AgencyOperation;
