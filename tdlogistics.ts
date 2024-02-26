@@ -855,8 +855,8 @@ class StaffOperation {
     private baseUrl: string;
 
     constructor() {
-        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staff";
-        // this.baseUrl = "http://localhost:5000/api/v1/staff";
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
+        this.baseUrl = "http://localhost:5000/api/v1/staffs";
     }
 
     async findByStaff(condition: FindingStaffByStaffCondition) : Promise<any> {
@@ -1113,7 +1113,9 @@ class BusinessOperation {
     private baseUrl: string;
 
     constructor() {
-        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/business";
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/business";
+        this.baseUrl = "http://localhost:5000/api/v1/business";
+
     }
 
     async createByAdmin(info: CreateBusinessByAdmin) {
@@ -1376,7 +1378,9 @@ class PartnerStaffOperation {
     private baseUrl: string;
 
     constructor() {
-        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staff";
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staffs";
+        this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
+
     }
 
     async create(info: CreatingPartnerStaff) {
