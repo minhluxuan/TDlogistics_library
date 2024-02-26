@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-
+import fs from "fs";
+import FormData from "form-data";
 class UsersAuthenticate {
     private baseUrl: string;
     constructor() {
@@ -841,8 +842,8 @@ interface DeletingStaffCondition {
     staff_id: string,
 };
 
-interface UpddatingAvaterInfo {
-    avatar: string,
+interface UpddatingAvaterStaffInfo {
+    avatarFile: Buffer,
 };
 
 interface UpdatingPasswordsInfo {
@@ -932,19 +933,24 @@ class StaffOperation {
         }
     }
 
-    async updateAvatar(info: UpddatingAvaterInfo, condition: UpdatingStaffCondition) {
-        try {
-            const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_avatar?staff_id=${condition.staff_id}`, info , {
-                withCredentials: true,
-            });
-            
-            const data = response.data;
-            return { error: data.error, data: data.data, message: data.message };
-        } 
-        catch (error) {
-            console.log("Error update staff avatar: ", error.response.data);
-            return error.response.data;
-        }    
+    async updateAvatar(info: UpddatingAvaterStaffInfo, condition: UpdatingStaffCondition) {
+        try {       
+            // Tạo FormData object và thêm hình ảnh vào đó
+            const formData = new FormData();
+            formData.append('avatar', info.avatarFile);
+  
+            // Gửi yêu cầu POST để tải lên hình ảnh
+            const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_avatar?staff_id=${condition.staff_id}`, formData , {
+              withCredentials: true,
+          });
+        
+            console.log('Image uploaded successfully:', response.data);
+            return response.data; // Trả về dữ liệu phản hồi từ máy chủ
+  
+          } catch (error) {
+            console.error('Error uploading image:', error);
+            throw error; // Ném lỗi để xử lý bên ngoài
+          }   
     }
 
     async updatePassword(info: UpdatingPasswordsInfo, condition: UpdatingStaffCondition) {
@@ -1100,7 +1106,7 @@ interface DeletingBusinessCondition {
 }
 
 interface UpdatingContractInfo {
-    contract: string,
+    contractFile: Buffer,
 }
 
 class BusinessOperation {
@@ -1251,8 +1257,229 @@ class BusinessOperation {
     }
 
     async updateContract(info: UpdatingContractInfo, condition: UpdatingBusinessCondition) {
+        try {        
+            // Tạo FormData object 
+            const formData = new FormData();
+            formData.append('contract', info.contractFile);
+  
+            // Gửi yêu cầu POST để tải lên hình ảnh
+            const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_contract?business_id=${condition.business_id}`, formData , {
+              withCredentials: true,
+          });
+        
+            console.log('File uploaded successfully:', response.data);
+            return response.data; // Trả về dữ liệu phản hồi từ máy chủ
+  
+          } catch (error) {
+            console.error('Error uploading file:', error);
+            throw error; // Ném lỗi để xử lý bên ngoài
+          } 
+    }
+}
+
+interface CreatingPartnerStaff {
+    partner_id: string,
+    username: string,
+    password: string,
+    fullname: string,
+    email: string,
+    phone_number: string,
+    date_of_birth: string, 
+    cccd: string,
+    province: string,
+    district: string,
+    town: string,
+    detail_address: string,
+    role: string,
+    position: string,
+    bin: string,
+    bank: string,
+}
+
+interface FindingByPartnerStaff {
+    staff_id: string,
+}
+
+interface FindingByPartner {
+    partner_id: string,
+    agency_id: string,
+    staff_id: string,
+    username: string,
+    fullname: string,
+    date_of_birth: string, 
+    cccd: string,
+    email: string,
+    phone_number: string,
+    province: string,
+    district: string,
+    town: string,
+    position: string,
+    bin: string,
+    bank: string,
+}
+
+interface FindingPartnerStaffByAdmin {
+    partner_id: string,
+    agency_id: string,
+    staff_id: string,
+    username: string,
+    fullname: string ,
+    date_of_birth: string, 
+    email: string,
+    phone_number: string,
+    province: string,
+    district: string,
+    town: string,
+    position: string,
+    bin: string,
+    bank: string,
+}
+
+interface UpdatingPartnerStaffCondition {
+    staff_id: string,
+}
+
+interface UpdatingPartnerStaffInfo {
+    fullname: string,
+    username: string,
+    date_of_birth: string, 
+    email: string,
+    phone_number: string,
+    province: string,
+    district: string,
+    town: string,
+    detail_address: string,
+    position: string,
+    bin: string,
+    bank: string,
+}
+
+interface DeletingPartnerStaffCondition {
+    staff_id: string,
+}
+
+interface CheckingExistPartnerStaffCondition {
+    cccd: string,
+}
+
+
+interface UpdatingPartnerLicenseImg {
+    license_before: Buffer,
+    license_after: Buffer,
+}
+
+interface UpdatingPartnerStaffAvatarInfo {
+    avatarFile: Buffer
+}
+
+class PartnerStaffOperation {
+    private baseUrl: string;
+
+    constructor() {
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staff";
+    }
+
+    async create(info: CreatingPartnerStaff) {
         try {
-            const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_contract?business_id=${condition.business_id}`, info , {
+            const response = await axios.post(`${this.baseUrl}/create`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error) {
+            console.log("Error creating partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async findByPartnerStaff(condition: FindingByPartnerStaff) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/search`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error) {
+            console.log("Error finding partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async findByPartner(conditions: FindingByPartner) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/search`, conditions, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error) {
+            console.log("Error finding partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async findByAdmin(conditions: FindingPartnerStaffByAdmin) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/search`, conditions, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error) {
+            console.log("Error finding partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async updatePartnerStaff(info: UpdatingPartnerStaffInfo, condition: UpdatingPartnerStaffCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/update?staff_id=${condition.staff_id}`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error) {
+            console.log("Error updating partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async checkExist(condition: CheckingExistPartnerStaffCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/check?cccd=${condition.cccd}`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error) {
+            console.log("Error checking exist partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async remove(condition: DeletingPartnerStaffCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/delete?staff_id=${condition.staff_id}`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error) {
+            console.log("Error deleting business: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async updatePassword(info: UpdatingPasswordsInfo) {
+        try {
+            const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_password`, info , {
                 withCredentials: true,
             });
             
@@ -1260,12 +1487,51 @@ class BusinessOperation {
             return { error: data.error, data: data.data, message: data.message };
         } 
         catch (error) {
-            console.log("Error update staff contract: ", error.response.data);
+            console.log("Error update password: ", error.response.data);
             return error.response.data;
         }    
     }
 
+    async updatePartnerStaffAvatar(info: UpdatingPartnerStaffAvatarInfo, condition: UpdatingPartnerStaffCondition) {
+        try {      
+          // Tạo FormData object và thêm hình ảnh vào đó
+          const formData = new FormData();
+          formData.append('avatar', info.avatarFile);
 
+          const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_avatar?staff_id=${condition.staff_id}`, formData , {
+            withCredentials: true,
+        });
+      
+          console.log('Image uploaded successfully:', response.data);
+          return response.data; // Trả về dữ liệu phản hồi từ máy chủ
+
+        } catch (error) {
+          console.error('Error uploading image:', error);
+          throw error; // Ném lỗi để xử lý bên ngoài
+        }
+    }
+    
+    async updatePartnerStaffLicense(info: UpdatingPartnerLicenseImg, condition: UpdatingPartnerStaffCondition) {
+        try {
+          // Tạo FormData object và thêm hình ảnh vào đó
+          const formData = new FormData();
+
+          formData.append('license_before', info.license_before);
+          formData.append('license_after', info.license_after);
+
+          // Gửi yêu cầu POST để tải lên hình ảnh
+          const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_licenses?staff_id=${condition.staff_id}`, formData , {
+            withCredentials: true,
+        });
+      
+          console.log('Image uploaded successfully:', response.data);
+          return response.data; // Trả về dữ liệu phản hồi từ máy chủ
+
+        } catch (error) {
+          console.error('Error uploading image:', error);
+          throw error; // Ném lỗi để xử lý bên ngoài
+        }
+    }
 }
 
 export {
@@ -1276,5 +1542,6 @@ export {
     TransportPartnersOperation,
     StaffOperation,
     Vehicle,
-    BusinessOperation
+    BusinessOperation,
+    PartnerStaffOperation
 }

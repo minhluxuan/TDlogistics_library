@@ -36,8 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
+exports.PartnerStaffOperation = exports.BusinessOperation = exports.Vehicle = exports.StaffOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
+var form_data_1 = require("form-data");
 var UsersAuthenticate = /** @class */ (function () {
     function UsersAuthenticate() {
         this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
@@ -813,3 +814,682 @@ var Vehicle = /** @class */ (function () {
     };
     return Vehicle;
 }());
+exports.Vehicle = Vehicle;
+;
+;
+;
+var StaffOperation = /** @class */ (function () {
+    function StaffOperation() {
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staff";
+        // this.baseUrl = "http://localhost:5000/api/v1/staff";
+    }
+    StaffOperation.prototype.findByStaff = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_32;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "search?staff_id=").concat(condition.staff_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_32 = _a.sent();
+                        console.log("Error get one staff: ", error_32.response.data);
+                        return [2 /*return*/, error_32.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    StaffOperation.prototype.findByAdmin = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_33;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_33 = _a.sent();
+                        console.log("Error get one staff: ", error_33.response.data);
+                        return [2 /*return*/, error_33.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    StaffOperation.prototype.create = function (info) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_34;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_34 = _a.sent();
+                        console.log("Error create new staff: ", error_34.response.data);
+                        return [2 /*return*/, error_34.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    StaffOperation.prototype.update = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_35;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?staff_id=").concat(condition.staff_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_35 = _a.sent();
+                        console.log("Error create new staff: ", error_35.response.data);
+                        return [2 /*return*/, error_35.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    StaffOperation.prototype.deleteStaff = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_36;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/delete?staff_id=").concat(condition.staff_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_36 = _a.sent();
+                        console.log("Error deleting staff: ", error_36.response.data);
+                        return [2 /*return*/, error_36.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    StaffOperation.prototype.updateAvatar = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var formData, response, error_37;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        formData = new form_data_1.default();
+                        formData.append('avatar', info.avatarFile);
+                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_avatar?staff_id=").concat(condition.staff_id), formData, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        console.log('Image uploaded successfully:', response.data);
+                        return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
+                    case 2:
+                        error_37 = _a.sent();
+                        console.error('Error uploading image:', error_37);
+                        throw error_37; // Ném lỗi để xử lý bên ngoài
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    StaffOperation.prototype.updatePassword = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_38;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_password?staff_id=").concat(condition.staff_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_38 = _a.sent();
+                        console.log("Error update password: ", error_38.response.data);
+                        return [2 /*return*/, error_38.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return StaffOperation;
+}());
+exports.StaffOperation = StaffOperation;
+var BusinessOperation = /** @class */ (function () {
+    function BusinessOperation() {
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/business";
+    }
+    BusinessOperation.prototype.createByAdmin = function (info) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_39;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_39 = _a.sent();
+                        console.log("Error creating new business: ", error_39.response.data);
+                        return [2 /*return*/, error_39.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.createByAgency = function (info) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_40;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_40 = _a.sent();
+                        console.log("Error creating new business: ", error_40.response.data);
+                        return [2 /*return*/, error_40.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.findByBusiness = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_41;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search?business_id=").concat(condition.business_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_41 = _a.sent();
+                        console.log("Error finding business: ", error_41.response.data);
+                        return [2 /*return*/, error_41.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.findByAdmin = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_42;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_42 = _a.sent();
+                        console.log("Error finding business: ", error_42.response.data);
+                        return [2 /*return*/, error_42.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.findByRepresentorByBusiness = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_43;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_representor"), condition, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_43 = _a.sent();
+                        console.log("Error finding representor: ", error_43.response.data);
+                        return [2 /*return*/, error_43.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.findByRepresentorByAdmin = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_44;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_representor"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_44 = _a.sent();
+                        console.log("Error finding representor: ", error_44.response.data);
+                        return [2 /*return*/, error_44.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.updateBusiness = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_45;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/update?business_id=").concat(condition.business_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_45 = _a.sent();
+                        console.log("Error updating business: ", error_45.response.data);
+                        return [2 /*return*/, error_45.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.updateBusinessRepresentor = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_46;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/update_business_representor?business_id=").concat(condition.business_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_46 = _a.sent();
+                        console.log("Error updating business: ", error_46.response.data);
+                        return [2 /*return*/, error_46.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.checkExist = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_47;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/check?tax_number=").concat(condition.tax_number), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_47 = _a.sent();
+                        console.log("Error checking exist business: ", error_47.response.data);
+                        return [2 /*return*/, error_47.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.removeBusiness = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_48;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/delete?business_id=").concat(condition.business_id, "&agency_id=").concat(condition.agency_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_48 = _a.sent();
+                        console.log("Error deleting business: ", error_48.response.data);
+                        return [2 /*return*/, error_48.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BusinessOperation.prototype.updateContract = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var formData, response, error_49;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        formData = new form_data_1.default();
+                        formData.append('contract', info.contractFile);
+                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_contract?business_id=").concat(condition.business_id), formData, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        console.log('File uploaded successfully:', response.data);
+                        return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
+                    case 2:
+                        error_49 = _a.sent();
+                        console.error('Error uploading file:', error_49);
+                        throw error_49; // Ném lỗi để xử lý bên ngoài
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return BusinessOperation;
+}());
+exports.BusinessOperation = BusinessOperation;
+var PartnerStaffOperation = /** @class */ (function () {
+    function PartnerStaffOperation() {
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staff";
+    }
+    PartnerStaffOperation.prototype.create = function (info) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_50;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_50 = _a.sent();
+                        console.log("Error creating partner staff: ", error_50.response.data);
+                        return [2 /*return*/, error_50.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.findByPartnerStaff = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_51;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_51 = _a.sent();
+                        console.log("Error finding partner staff: ", error_51.response.data);
+                        return [2 /*return*/, error_51.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.findByPartner = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_52;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_52 = _a.sent();
+                        console.log("Error finding partner staff: ", error_52.response.data);
+                        return [2 /*return*/, error_52.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.findByAdmin = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_53;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_53 = _a.sent();
+                        console.log("Error finding partner staff: ", error_53.response.data);
+                        return [2 /*return*/, error_53.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.updatePartnerStaff = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_54;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/update?staff_id=").concat(condition.staff_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_54 = _a.sent();
+                        console.log("Error updating partner staff: ", error_54.response.data);
+                        return [2 /*return*/, error_54.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.checkExist = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_55;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/check?cccd=").concat(condition.cccd), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_55 = _a.sent();
+                        console.log("Error checking exist partner staff: ", error_55.response.data);
+                        return [2 /*return*/, error_55.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.remove = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_56;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/delete?staff_id=").concat(condition.staff_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_56 = _a.sent();
+                        console.log("Error deleting business: ", error_56.response.data);
+                        return [2 /*return*/, error_56.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.updatePassword = function (info) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_57;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_password"), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_57 = _a.sent();
+                        console.log("Error update password: ", error_57.response.data);
+                        return [2 /*return*/, error_57.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.updatePartnerStaffAvatar = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var formData, response, error_58;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        formData = new form_data_1.default();
+                        formData.append('avatar', info.avatarFile);
+                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_avatar?staff_id=").concat(condition.staff_id), formData, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        console.log('Image uploaded successfully:', response.data);
+                        return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
+                    case 2:
+                        error_58 = _a.sent();
+                        console.error('Error uploading image:', error_58);
+                        throw error_58; // Ném lỗi để xử lý bên ngoài
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.updatePartnerStaffLicense = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var formData, response, error_59;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        formData = new form_data_1.default();
+                        formData.append('license_before', info.license_before);
+                        formData.append('license_after', info.license_after);
+                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_licenses?staff_id=").concat(condition.staff_id), formData, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        console.log('Image uploaded successfully:', response.data);
+                        return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
+                    case 2:
+                        error_59 = _a.sent();
+                        console.error('Error uploading image:', error_59);
+                        throw error_59; // Ném lỗi để xử lý bên ngoài
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return PartnerStaffOperation;
+}());
+exports.PartnerStaffOperation = PartnerStaffOperation;
