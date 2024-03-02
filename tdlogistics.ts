@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import fs from "fs";
-import FormData from "form-data";
+import * as FormData from "form-data";
 class UsersAuthenticate {
     private baseUrl: string;
     constructor() {
@@ -872,6 +871,10 @@ interface UpdatingPasswordsInfo {
     confirm_password: string
 };
 
+interface FindingAvatarCondition {
+    staff_id: string,
+}
+
 class StaffOperation {
     private baseUrl: string;
 
@@ -988,6 +991,21 @@ class StaffOperation {
             return error.response.data;
         }    
     }
+
+    async findAvatar (conditions: FindingAvatarCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/get_avatar`, conditions, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error) {
+            console.log("Error finding partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    } 
+
 
 }
 
@@ -1128,6 +1146,10 @@ interface DeletingBusinessCondition {
 
 interface UpdatingContractInfo {
     contractFile: Buffer,
+}
+
+interface FindingContractCondition {
+    business_id: string,
 }
 
 class BusinessOperation {
@@ -1298,6 +1320,22 @@ class BusinessOperation {
             throw error; // Ném lỗi để xử lý bên ngoài
           } 
     }
+
+    async findContract(conditions: FindingContractCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/get_contract`, conditions, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error) {
+            console.log("Error finding partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    } 
+
+
 }
 
 interface CreatingPartnerStaff {
@@ -1394,6 +1432,10 @@ interface UpdatingPartnerLicenseImg {
 interface UpdatingPartnerStaffAvatarInfo {
     avatarFile: Buffer
 }
+
+interface FindingPartnerAvatarAndLicenseCondition {
+    staff_id: string
+};
 
 class PartnerStaffOperation {
     private baseUrl: string;
@@ -1557,6 +1599,48 @@ class PartnerStaffOperation {
           throw error; // Ném lỗi để xử lý bên ngoài
         }
     }
+
+    async findPartnerStaffAvatar(conditions: FindingPartnerAvatarAndLicenseCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/get_avatar`, conditions, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error) {
+            console.log("Error finding partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    } 
+
+    async findPartnerStaffLicenseBefore(conditions: FindingPartnerAvatarAndLicenseCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/get_license_before`, conditions, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error) {
+            console.log("Error finding partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    } 
+
+    async findPartnerStaffLicenseAfter(conditions: FindingPartnerAvatarAndLicenseCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/get_license_after`, conditions, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error) {
+            console.log("Error finding partner staff: ", error.response.data);
+            return error.response.data;
+        }
+    } 
 }
 
 export {

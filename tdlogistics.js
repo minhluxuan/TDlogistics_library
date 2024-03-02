@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PartnerStaffOperation = exports.BusinessOperation = exports.Vehicle = exports.StaffOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
-var form_data_1 = require("form-data");
+var FormData = require("form-data");
 var UsersAuthenticate = /** @class */ (function () {
     function UsersAuthenticate() {
         this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
@@ -854,35 +854,12 @@ var StaffOperation = /** @class */ (function () {
     }
     StaffOperation.prototype.findByStaff = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_32;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "search?staff_id=").concat(condition.staff_id), {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _a.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
-                    case 2:
-                        error_32 = _a.sent();
-                        console.log("Error get one staff: ", error_32.response.data);
-                        return [2 /*return*/, error_32.response.data];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    StaffOperation.prototype.findByAdmin = function (conditions) {
-        return __awaiter(this, void 0, void 0, function () {
             var response, data, error_33;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "search?staff_id=").concat(condition.staff_id), {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -898,14 +875,14 @@ var StaffOperation = /** @class */ (function () {
             });
         });
     };
-    StaffOperation.prototype.create = function (info) {
+    StaffOperation.prototype.findByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_34;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -914,21 +891,21 @@ var StaffOperation = /** @class */ (function () {
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_34 = _a.sent();
-                        console.log("Error create new staff: ", error_34.response.data);
+                        console.log("Error get one staff: ", error_34.response.data);
                         return [2 /*return*/, error_34.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    StaffOperation.prototype.update = function (info, condition) {
+    StaffOperation.prototype.create = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_35;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?staff_id=").concat(condition.staff_id), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -944,9 +921,32 @@ var StaffOperation = /** @class */ (function () {
             });
         });
     };
-    StaffOperation.prototype.deleteStaff = function (condition) {
+    StaffOperation.prototype.update = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_36;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?staff_id=").concat(condition.staff_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_36 = _a.sent();
+                        console.log("Error create new staff: ", error_36.response.data);
+                        return [2 /*return*/, error_36.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    StaffOperation.prototype.deleteStaff = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_37;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -959,9 +959,9 @@ var StaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_36 = _a.sent();
-                        console.log("Error deleting staff: ", error_36.response.data);
-                        return [2 /*return*/, error_36.response.data];
+                        error_37 = _a.sent();
+                        console.log("Error deleting staff: ", error_37.response.data);
+                        return [2 /*return*/, error_37.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -969,12 +969,12 @@ var StaffOperation = /** @class */ (function () {
     };
     StaffOperation.prototype.updateAvatar = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, error_37;
+            var formData, response, error_38;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        formData = new form_data_1.default();
+                        formData = new FormData();
                         formData.append('avatar', info.avatarFile);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_avatar?staff_id=").concat(condition.staff_id), formData, {
                                 withCredentials: true,
@@ -984,9 +984,9 @@ var StaffOperation = /** @class */ (function () {
                         console.log('Image uploaded successfully:', response.data);
                         return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
                     case 2:
-                        error_37 = _a.sent();
-                        console.error('Error uploading image:', error_37);
-                        throw error_37; // Ném lỗi để xử lý bên ngoài
+                        error_38 = _a.sent();
+                        console.error('Error uploading image:', error_38);
+                        throw error_38; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -994,7 +994,7 @@ var StaffOperation = /** @class */ (function () {
     };
     StaffOperation.prototype.updatePassword = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_38;
+            var response, data, error_39;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1007,9 +1007,32 @@ var StaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_38 = _a.sent();
-                        console.log("Error update password: ", error_38.response.data);
-                        return [2 /*return*/, error_38.response.data];
+                        error_39 = _a.sent();
+                        console.log("Error update password: ", error_39.response.data);
+                        return [2 /*return*/, error_39.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    StaffOperation.prototype.findAvatar = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_40;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_avatar"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_40 = _a.sent();
+                        console.log("Error finding partner staff: ", error_40.response.data);
+                        return [2 /*return*/, error_40.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1025,7 +1048,7 @@ var BusinessOperation = /** @class */ (function () {
     }
     BusinessOperation.prototype.createByAdmin = function (info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_39;
+            var response, data, error_41;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1038,9 +1061,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_39 = _a.sent();
-                        console.log("Error creating new business: ", error_39.response.data);
-                        return [2 /*return*/, error_39.response.data];
+                        error_41 = _a.sent();
+                        console.log("Error creating new business: ", error_41.response.data);
+                        return [2 /*return*/, error_41.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1048,7 +1071,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.createByAgency = function (info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_40;
+            var response, data, error_42;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1061,9 +1084,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_40 = _a.sent();
-                        console.log("Error creating new business: ", error_40.response.data);
-                        return [2 /*return*/, error_40.response.data];
+                        error_42 = _a.sent();
+                        console.log("Error creating new business: ", error_42.response.data);
+                        return [2 /*return*/, error_42.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1071,7 +1094,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.findByBusiness = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_41;
+            var response, data, error_43;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1084,9 +1107,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_41 = _a.sent();
-                        console.log("Error finding business: ", error_41.response.data);
-                        return [2 /*return*/, error_41.response.data];
+                        error_43 = _a.sent();
+                        console.log("Error finding business: ", error_43.response.data);
+                        return [2 /*return*/, error_43.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1094,7 +1117,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.findByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_42;
+            var response, data, error_44;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1107,9 +1130,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_42 = _a.sent();
-                        console.log("Error finding business: ", error_42.response.data);
-                        return [2 /*return*/, error_42.response.data];
+                        error_44 = _a.sent();
+                        console.log("Error finding business: ", error_44.response.data);
+                        return [2 /*return*/, error_44.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1117,7 +1140,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.findByRepresentorByBusiness = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_43;
+            var response, data, error_45;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1130,9 +1153,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_43 = _a.sent();
-                        console.log("Error finding representor: ", error_43.response.data);
-                        return [2 /*return*/, error_43.response.data];
+                        error_45 = _a.sent();
+                        console.log("Error finding representor: ", error_45.response.data);
+                        return [2 /*return*/, error_45.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1140,7 +1163,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.findByRepresentorByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_44;
+            var response, data, error_46;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1153,9 +1176,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_44 = _a.sent();
-                        console.log("Error finding representor: ", error_44.response.data);
-                        return [2 /*return*/, error_44.response.data];
+                        error_46 = _a.sent();
+                        console.log("Error finding representor: ", error_46.response.data);
+                        return [2 /*return*/, error_46.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1163,7 +1186,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.updateBusiness = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_45;
+            var response, data, error_47;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1176,9 +1199,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_45 = _a.sent();
-                        console.log("Error updating business: ", error_45.response.data);
-                        return [2 /*return*/, error_45.response.data];
+                        error_47 = _a.sent();
+                        console.log("Error updating business: ", error_47.response.data);
+                        return [2 /*return*/, error_47.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1186,7 +1209,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.updateBusinessRepresentor = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_46;
+            var response, data, error_48;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1199,9 +1222,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_46 = _a.sent();
-                        console.log("Error updating business: ", error_46.response.data);
-                        return [2 /*return*/, error_46.response.data];
+                        error_48 = _a.sent();
+                        console.log("Error updating business: ", error_48.response.data);
+                        return [2 /*return*/, error_48.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1209,7 +1232,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.checkExist = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_47;
+            var response, data, error_49;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1222,9 +1245,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_47 = _a.sent();
-                        console.log("Error checking exist business: ", error_47.response.data);
-                        return [2 /*return*/, error_47.response.data];
+                        error_49 = _a.sent();
+                        console.log("Error checking exist business: ", error_49.response.data);
+                        return [2 /*return*/, error_49.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1232,7 +1255,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.removeBusiness = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_48;
+            var response, data, error_50;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1245,9 +1268,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_48 = _a.sent();
-                        console.log("Error deleting business: ", error_48.response.data);
-                        return [2 /*return*/, error_48.response.data];
+                        error_50 = _a.sent();
+                        console.log("Error deleting business: ", error_50.response.data);
+                        return [2 /*return*/, error_50.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1255,12 +1278,12 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.updateContract = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, error_49;
+            var formData, response, error_51;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        formData = new form_data_1.default();
+                        formData = new FormData();
                         formData.append('contract', info.contractFile);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_contract?business_id=").concat(condition.business_id), formData, {
                                 withCredentials: true,
@@ -1270,76 +1293,22 @@ var BusinessOperation = /** @class */ (function () {
                         console.log('File uploaded successfully:', response.data);
                         return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
                     case 2:
-                        error_49 = _a.sent();
-                        console.error('Error uploading file:', error_49);
-                        throw error_49; // Ném lỗi để xử lý bên ngoài
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    return BusinessOperation;
-}());
-exports.BusinessOperation = BusinessOperation;
-var PartnerStaffOperation = /** @class */ (function () {
-    function PartnerStaffOperation() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staffs";
-        this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
-    }
-    PartnerStaffOperation.prototype.create = function (info) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_50;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _a.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
-                    case 2:
-                        error_50 = _a.sent();
-                        console.log("Error creating partner staff: ", error_50.response.data);
-                        return [2 /*return*/, error_50.response.data];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    PartnerStaffOperation.prototype.findByPartnerStaff = function (condition) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_51;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _a.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
-                    case 2:
                         error_51 = _a.sent();
-                        console.log("Error finding partner staff: ", error_51.response.data);
-                        return [2 /*return*/, error_51.response.data];
+                        console.error('Error uploading file:', error_51);
+                        throw error_51; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    PartnerStaffOperation.prototype.findByPartner = function (conditions) {
+    BusinessOperation.prototype.findContract = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_52;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_contract"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1355,9 +1324,64 @@ var PartnerStaffOperation = /** @class */ (function () {
             });
         });
     };
-    PartnerStaffOperation.prototype.findByAdmin = function (conditions) {
+    return BusinessOperation;
+}());
+exports.BusinessOperation = BusinessOperation;
+;
+var PartnerStaffOperation = /** @class */ (function () {
+    function PartnerStaffOperation() {
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staffs";
+        this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
+    }
+    PartnerStaffOperation.prototype.create = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_53;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_53 = _a.sent();
+                        console.log("Error creating partner staff: ", error_53.response.data);
+                        return [2 /*return*/, error_53.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.findByPartnerStaff = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_54;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_54 = _a.sent();
+                        console.log("Error finding partner staff: ", error_54.response.data);
+                        return [2 /*return*/, error_54.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.findByPartner = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_55;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1370,9 +1394,32 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_53 = _a.sent();
-                        console.log("Error finding partner staff: ", error_53.response.data);
-                        return [2 /*return*/, error_53.response.data];
+                        error_55 = _a.sent();
+                        console.log("Error finding partner staff: ", error_55.response.data);
+                        return [2 /*return*/, error_55.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.findByAdmin = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_56;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_56 = _a.sent();
+                        console.log("Error finding partner staff: ", error_56.response.data);
+                        return [2 /*return*/, error_56.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1380,7 +1427,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     PartnerStaffOperation.prototype.updatePartnerStaff = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_54;
+            var response, data, error_57;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1393,9 +1440,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_54 = _a.sent();
-                        console.log("Error updating partner staff: ", error_54.response.data);
-                        return [2 /*return*/, error_54.response.data];
+                        error_57 = _a.sent();
+                        console.log("Error updating partner staff: ", error_57.response.data);
+                        return [2 /*return*/, error_57.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1403,7 +1450,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     PartnerStaffOperation.prototype.checkExist = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_55;
+            var response, data, error_58;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1416,9 +1463,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_55 = _a.sent();
-                        console.log("Error checking exist partner staff: ", error_55.response.data);
-                        return [2 /*return*/, error_55.response.data];
+                        error_58 = _a.sent();
+                        console.log("Error checking exist partner staff: ", error_58.response.data);
+                        return [2 /*return*/, error_58.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1426,7 +1473,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     PartnerStaffOperation.prototype.remove = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_56;
+            var response, data, error_59;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1439,9 +1486,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_56 = _a.sent();
-                        console.log("Error deleting business: ", error_56.response.data);
-                        return [2 /*return*/, error_56.response.data];
+                        error_59 = _a.sent();
+                        console.log("Error deleting business: ", error_59.response.data);
+                        return [2 /*return*/, error_59.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1449,7 +1496,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     PartnerStaffOperation.prototype.updatePassword = function (info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_57;
+            var response, data, error_60;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1462,9 +1509,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_57 = _a.sent();
-                        console.log("Error update password: ", error_57.response.data);
-                        return [2 /*return*/, error_57.response.data];
+                        error_60 = _a.sent();
+                        console.log("Error update password: ", error_60.response.data);
+                        return [2 /*return*/, error_60.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1472,12 +1519,12 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     PartnerStaffOperation.prototype.updatePartnerStaffAvatar = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, error_58;
+            var formData, response, error_61;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        formData = new form_data_1.default();
+                        formData = new FormData();
                         formData.append('avatar', info.avatarFile);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_avatar?staff_id=").concat(condition.staff_id), formData, {
                                 withCredentials: true,
@@ -1487,9 +1534,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         console.log('Image uploaded successfully:', response.data);
                         return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
                     case 2:
-                        error_58 = _a.sent();
-                        console.error('Error uploading image:', error_58);
-                        throw error_58; // Ném lỗi để xử lý bên ngoài
+                        error_61 = _a.sent();
+                        console.error('Error uploading image:', error_61);
+                        throw error_61; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1497,12 +1544,12 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     PartnerStaffOperation.prototype.updatePartnerStaffLicense = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, error_59;
+            var formData, response, error_62;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        formData = new form_data_1.default();
+                        formData = new FormData();
                         formData.append('license_before', info.license_before);
                         formData.append('license_after', info.license_after);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_licenses?staff_id=").concat(condition.staff_id), formData, {
@@ -1513,9 +1560,78 @@ var PartnerStaffOperation = /** @class */ (function () {
                         console.log('Image uploaded successfully:', response.data);
                         return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
                     case 2:
-                        error_59 = _a.sent();
-                        console.error('Error uploading image:', error_59);
-                        throw error_59; // Ném lỗi để xử lý bên ngoài
+                        error_62 = _a.sent();
+                        console.error('Error uploading image:', error_62);
+                        throw error_62; // Ném lỗi để xử lý bên ngoài
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.findPartnerStaffAvatar = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_63;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_avatar"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_63 = _a.sent();
+                        console.log("Error finding partner staff: ", error_63.response.data);
+                        return [2 /*return*/, error_63.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.findPartnerStaffLicenseBefore = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_64;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_license_before"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_64 = _a.sent();
+                        console.log("Error finding partner staff: ", error_64.response.data);
+                        return [2 /*return*/, error_64.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PartnerStaffOperation.prototype.findPartnerStaffLicenseAfter = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_65;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_license_after"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_65 = _a.sent();
+                        console.log("Error finding partner staff: ", error_65.response.data);
+                        return [2 /*return*/, error_65.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
