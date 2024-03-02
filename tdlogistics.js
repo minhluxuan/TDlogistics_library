@@ -287,6 +287,35 @@ var UsersOperation = /** @class */ (function () {
     return UsersOperation;
 }());
 exports.UsersOperation = UsersOperation;
+var StaffsOperation = /** @class */ (function () {
+    function StaffsOperation() {
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
+    }
+    StaffsOperation.prototype.getAuthenticatedStaffInfo = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_10;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_info"), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_10 = _a.sent();
+                        console.log("Error get authenticated staff information: ", error_10.response.data);
+                        return [2 /*return*/, error_10.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return StaffsOperation;
+}());
 var AgencyOperation = /** @class */ (function () {
     function AgencyOperation() {
         this.baseUrl = "https://tdlogistics.govt.hu/api/v1/agencies";
@@ -294,7 +323,7 @@ var AgencyOperation = /** @class */ (function () {
     }
     AgencyOperation.prototype.checkExist = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_10;
+            var response, data, error_11;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -307,9 +336,9 @@ var AgencyOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_10 = _a.sent();
-                        console.log("Error checking exist agency: ", error_10.response.data);
-                        return [2 /*return*/, error_10.response.data];
+                        error_11 = _a.sent();
+                        console.log("Error checking exist agency: ", error_11.response.data);
+                        return [2 /*return*/, error_11.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -317,7 +346,7 @@ var AgencyOperation = /** @class */ (function () {
     };
     AgencyOperation.prototype.create = function (info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_11;
+            var response, data, error_12;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -330,38 +359,15 @@ var AgencyOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_11 = _a.sent();
-                        console.log("Error creating agency: ", error_11.response.data);
-                        return [2 /*return*/, error_11.response.data];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    AgencyOperation.prototype.findByAgency = function (conditions) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_12;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _a.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
-                    case 2:
                         error_12 = _a.sent();
-                        console.log("Error finding agency: ", error_12.response.data);
+                        console.log("Error creating agency: ", error_12.response.data);
                         return [2 /*return*/, error_12.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    AgencyOperation.prototype.findByAdmin = function (conditions) {
+    AgencyOperation.prototype.findByAgency = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_13;
             return __generator(this, function (_a) {
@@ -384,14 +390,14 @@ var AgencyOperation = /** @class */ (function () {
             });
         });
     };
-    AgencyOperation.prototype.update = function (info, condition) {
+    AgencyOperation.prototype.findByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_14;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?agency_id=").concat(condition.agency_id), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -407,14 +413,14 @@ var AgencyOperation = /** @class */ (function () {
             });
         });
     };
-    AgencyOperation.prototype.delete = function (condition) {
+    AgencyOperation.prototype.update = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_15;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?agency_id=").concat(condition.agency_id), {
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?agency_id=").concat(condition.agency_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -430,6 +436,29 @@ var AgencyOperation = /** @class */ (function () {
             });
         });
     };
+    AgencyOperation.prototype.delete = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_16;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?agency_id=").concat(condition.agency_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_16 = _a.sent();
+                        console.log("Error finding agency: ", error_16.response.data);
+                        return [2 /*return*/, error_16.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return AgencyOperation;
 }());
 exports.AgencyOperation = AgencyOperation;
@@ -438,29 +467,6 @@ var TransportPartnersOperation = /** @class */ (function () {
         this.baseUrl = "https://tdlogistics.govt.hu/api/v1/transport_partners";
     }
     TransportPartnersOperation.prototype.createByAdmin = function (info) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_16;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _a.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
-                    case 2:
-                        error_16 = _a.sent();
-                        console.log("Error creating new transport partner: ", error_16.response.data);
-                        return [2 /*return*/, error_16.response.data];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TransportPartnersOperation.prototype.createByAgency = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_17;
             return __generator(this, function (_a) {
@@ -483,37 +489,37 @@ var TransportPartnersOperation = /** @class */ (function () {
             });
         });
     };
-    TransportPartnersOperation.prototype.findByTransportPartner = function (condition) {
+    TransportPartnersOperation.prototype.createByAgency = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_18;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_18 = _a.sent();
-                        console.log("Error finding transport partner: ", error_18.response.data);
+                        console.log("Error creating new transport partner: ", error_18.response.data);
                         return [2 /*return*/, error_18.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    TransportPartnersOperation.prototype.findByAdmin = function (conditions) {
+    TransportPartnersOperation.prototype.findByTransportPartner = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_19;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -529,9 +535,32 @@ var TransportPartnersOperation = /** @class */ (function () {
             });
         });
     };
-    TransportPartnersOperation.prototype.update = function (info, condition) {
+    TransportPartnersOperation.prototype.findByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_20;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_20 = _a.sent();
+                        console.log("Error finding transport partner: ", error_20.response.data);
+                        return [2 /*return*/, error_20.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TransportPartnersOperation.prototype.update = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_21;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -544,9 +573,9 @@ var TransportPartnersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_20 = _a.sent();
-                        console.log("Error updating transport partner: ", error_20.response.data);
-                        return [2 /*return*/, error_20.response.data];
+                        error_21 = _a.sent();
+                        console.log("Error updating transport partner: ", error_21.response.data);
+                        return [2 /*return*/, error_21.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -554,7 +583,7 @@ var TransportPartnersOperation = /** @class */ (function () {
     };
     TransportPartnersOperation.prototype.remove = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_21;
+            var response, data, error_22;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -567,9 +596,9 @@ var TransportPartnersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_21 = _a.sent();
-                        console.log("Error deleting transport partner: ", error_21.response.data);
-                        return [2 /*return*/, error_21.response.data];
+                        error_22 = _a.sent();
+                        console.log("Error deleting transport partner: ", error_22.response.data);
+                        return [2 /*return*/, error_22.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -584,7 +613,7 @@ var Vehicle = /** @class */ (function () {
     }
     Vehicle.prototype.checkExist = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_22;
+            var response, data, error_23;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -597,38 +626,15 @@ var Vehicle = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_22 = _a.sent();
-                        console.log("Error checking exist vehicle: ", error_22.response.data);
-                        return [2 /*return*/, error_22.response.data];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    Vehicle.prototype.createByAgency = function (info) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_23;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _a.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
-                    case 2:
                         error_23 = _a.sent();
-                        console.log("Error creating new vehicle: ", error_23.response.data);
+                        console.log("Error checking exist vehicle: ", error_23.response.data);
                         return [2 /*return*/, error_23.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    Vehicle.prototype.createByAdmin = function (info) {
+    Vehicle.prototype.createByAgency = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_24;
             return __generator(this, function (_a) {
@@ -651,14 +657,14 @@ var Vehicle = /** @class */ (function () {
             });
         });
     };
-    Vehicle.prototype.findByStaff = function (condition) {
+    Vehicle.prototype.createByAdmin = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_25;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search?staff_id=").concat(condition.staff_id), {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -667,21 +673,21 @@ var Vehicle = /** @class */ (function () {
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_25 = _a.sent();
-                        console.log("Error finding vehicle: ", error_25.response.data);
+                        console.log("Error creating new vehicle: ", error_25.response.data);
                         return [2 /*return*/, error_25.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    Vehicle.prototype.findByAdmin = function (conditions) {
+    Vehicle.prototype.findByStaff = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_26;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search?staff_id=").concat(condition.staff_id), {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -697,14 +703,14 @@ var Vehicle = /** @class */ (function () {
             });
         });
     };
-    Vehicle.prototype.getOrders = function (condition) {
+    Vehicle.prototype.findByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_27;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_order_ids?vehicle_id=").concat(condition.vehicle_id), {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -713,21 +719,21 @@ var Vehicle = /** @class */ (function () {
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_27 = _a.sent();
-                        console.log("Error getting orders contained by vehicle: ", error_27.response.data);
+                        console.log("Error finding vehicle: ", error_27.response.data);
                         return [2 /*return*/, error_27.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    Vehicle.prototype.update = function (info, condition) {
+    Vehicle.prototype.getOrders = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_28;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/update?vehicle_id=").concat(condition.vehicle_id), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_order_ids?vehicle_id=").concat(condition.vehicle_id), {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -743,9 +749,32 @@ var Vehicle = /** @class */ (function () {
             });
         });
     };
-    Vehicle.prototype.addOrders = function (info, condition) {
+    Vehicle.prototype.update = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_29;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/update?vehicle_id=").concat(condition.vehicle_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_29 = _a.sent();
+                        console.log("Error getting orders contained by vehicle: ", error_29.response.data);
+                        return [2 /*return*/, error_29.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Vehicle.prototype.addOrders = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_30;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -758,9 +787,9 @@ var Vehicle = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_29 = _a.sent();
-                        console.log("Error adding orders to vehicle: ", error_29.response.data);
-                        return [2 /*return*/, error_29.response.data];
+                        error_30 = _a.sent();
+                        console.log("Error adding orders to vehicle: ", error_30.response.data);
+                        return [2 /*return*/, error_30.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -768,7 +797,7 @@ var Vehicle = /** @class */ (function () {
     };
     Vehicle.prototype.deleteOrders = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_30;
+            var response, data, error_31;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -781,9 +810,9 @@ var Vehicle = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_30 = _a.sent();
-                        console.log("Error deleting orders from vehicle: ", error_30.response.data);
-                        return [2 /*return*/, error_30.response.data];
+                        error_31 = _a.sent();
+                        console.log("Error deleting orders from vehicle: ", error_31.response.data);
+                        return [2 /*return*/, error_31.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -791,7 +820,7 @@ var Vehicle = /** @class */ (function () {
     };
     Vehicle.prototype.deleteVehicle = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_31;
+            var response, data, error_32;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -804,9 +833,9 @@ var Vehicle = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_31 = _a.sent();
-                        console.log("Error deleting vehicle: ", error_31.response.data);
-                        return [2 /*return*/, error_31.response.data];
+                        error_32 = _a.sent();
+                        console.log("Error deleting vehicle: ", error_32.response.data);
+                        return [2 /*return*/, error_32.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
