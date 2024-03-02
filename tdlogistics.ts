@@ -194,6 +194,27 @@ class UsersOperation {
     }
 }
 
+class StaffsOperation {
+    private baseUrl: string;
+    constructor() {
+        this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
+    }
+
+    async getAuthenticatedStaffInfo() {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/get_info`, {
+                withCredentials: true,
+            });
+            
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error) {
+            console.log("Error get authenticated staff information: ", error.response.data);
+            return error.response.data;
+        }
+    }
+}
+
 interface CheckingExistAgencyCondition {
     agency_id: string,
 }
@@ -784,5 +805,4 @@ export {
     UsersOperation,
     AgencyOperation,
     TransportPartnersOperation,
-
 }
