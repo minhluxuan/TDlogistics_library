@@ -195,28 +195,6 @@ class UsersOperation {
     }
 }
 
-class StaffsOperation {
-    private baseUrl: string;
-    constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
-        this.baseUrl = "https://localhost:5000/api/v1/staffs";
-    }
-
-    async getAuthenticatedStaffInfo() {
-        try {
-            const response: AxiosResponse = await axios.post(`${this.baseUrl}/get_info`, {
-                withCredentials: true,
-            });
-            
-            const data = response.data;
-            return { error: data.error, data: data.data, message: data.message };
-        } catch (error) {
-            console.log("Error get authenticated staff information: ", error.response.data);
-            return error.response.data;
-        }
-    }
-}
-
 interface CheckingExistAgencyCondition {
     agency_id: string,
 }
@@ -570,7 +548,7 @@ class TransportPartnersOperation {
 
     async remove(condition: DeletingTransportPartnerCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/delete?transport_partner_id=${condition.transport_partner_id}`, {
+            const response = await axios.delete(`${this.baseUrl}/delete?transport_partner_id=${condition.transport_partner_id}`, {
                 withCredentials: true,
             });
 
@@ -894,7 +872,7 @@ interface FindingAvatarCondition {
     staff_id: string,
 }
   
-class StaffOperation {
+class StaffsOperation {
 	private baseUrl: string;
 
 	constructor() {
@@ -1506,6 +1484,22 @@ class PartnerStaffOperation {
 		this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
 	}
 
+	// ROLE: PARTNER_DRIVER, PARTNER_SHIPPER
+	async getAuthenticatedPartnerStaffInfo() {
+		try {
+			const response = await axios.get(`${this.baseUrl}/get_info`, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, data: data.data, message: data.message };
+		} catch (error) {
+			console.log("Error getting authenticated partner staff information: ", error.response.data);
+			return error.response.data;
+		}
+	}
+
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
 	async create(info: CreatingPartnerStaffInfo) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/create`, info, {
@@ -1520,6 +1514,7 @@ class PartnerStaffOperation {
 		}
 	}
 
+	// ROLE: PARTNER_DRIVER, PARTNER_SHIPPER
 	async findByPartnerStaff(condition: FindingPartnerStaffByPartnerStaffCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/search`, condition, {
@@ -1534,6 +1529,7 @@ class PartnerStaffOperation {
 		}
 	}
 
+	// ROLE: TRANSPORT_PARTNER_REPRESENTOR
 	async findByPartner(conditions: FindingPartnerStaffsByPartnerCondtions) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/search`, conditions, {
@@ -1548,6 +1544,7 @@ class PartnerStaffOperation {
 		}
 	}
 
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, TELLER, COMPLAINTS_SOLVER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, AGENCY_TELLER, AGENCY_COMPLAINTS_SOLVER 
 	async findByAdmin(conditions: FindingPartnerStaffsByAdminConditions) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/search`, conditions, {
@@ -1562,6 +1559,7 @@ class PartnerStaffOperation {
 		}
 	}
 
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
 	async updatePartnerStaff(info: UpdatingPartnerStaffInfo, condition: UpdatingPartnerStaffCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/update?staff_id=${condition.staff_id}`, info, {
@@ -1576,6 +1574,7 @@ class PartnerStaffOperation {
 		}
 	}
 
+	// ROLE: any
 	async checkExist(condition: CheckingExistPartnerStaffCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/check?cccd=${condition.cccd}`, {
@@ -1590,7 +1589,8 @@ class PartnerStaffOperation {
 		}
 	}
 
-	async remove(condition: DeletingPartnerStaffCondition) {
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
+	async deletePartnerStaff(condition: DeletingPartnerStaffCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/delete?staff_id=${condition.staff_id}`, {
 				withCredentials: true,
@@ -1604,6 +1604,7 @@ class PartnerStaffOperation {
 		}
 	}
 
+	// ROLE: PARTNER_DRIVER, PARTNER_SHIPPER
 	async updatePassword(info: UpdatingPasswordsInfo) {
 		try {
 			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_password`, info , {
@@ -1619,6 +1620,7 @@ class PartnerStaffOperation {
 		}    
 	}
 
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
 	async updatePartnerStaffAvatar(info: UpdatingPartnerStaffAvatarInfo, condition: UpdatingPartnerStaffCondition) {
 		try {      
 			// Tạo FormData object và thêm hình ảnh vào đó
@@ -1638,6 +1640,7 @@ class PartnerStaffOperation {
 		}
 	}
 	
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
 	async updatePartnerStaffLicense(info: UpdatingPartnerLicenseImg, condition: UpdatingPartnerStaffCondition) {
 		try {
 			// Tạo FormData object và thêm hình ảnh vào đó
@@ -1660,9 +1663,10 @@ class PartnerStaffOperation {
 		}
 	}
 
-	async findPartnerStaffAvatar(conditions: FindingPartnerAvatarAndLicenseCondition) {
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
+	async findPartnerStaffAvatar(condition: FindingPartnerAvatarAndLicenseCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_avatar`, conditions, {
+			const response = await axios.post(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
 				withCredentials: true,
 			});
 
@@ -1674,9 +1678,10 @@ class PartnerStaffOperation {
 		}
 	} 
 
-	async findPartnerStaffLicenseBefore(conditions: FindingPartnerAvatarAndLicenseCondition) {
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
+	async findPartnerStaffLicenseBefore(condition: FindingPartnerAvatarAndLicenseCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_license_before`, conditions, {
+			const response = await axios.post(`${this.baseUrl}/get_license_before?staff_id=${condition.staff_id}`, {
 				withCredentials: true,
 			});
 
@@ -1688,9 +1693,10 @@ class PartnerStaffOperation {
 		}
 	} 
 
-	async findPartnerStaffLicenseAfter(conditions: FindingPartnerAvatarAndLicenseCondition) {
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
+	async findPartnerStaffLicenseAfter(condition: FindingPartnerAvatarAndLicenseCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_license_after`, conditions, {
+			const response = await axios.post(`${this.baseUrl}/get_license_after?staff_id=${condition.staff_id}`, {
 				withCredentials: true,
 			});
 
@@ -1709,7 +1715,7 @@ export {
 	UsersOperation,
 	AgencyOperation,
 	TransportPartnersOperation,
-	StaffOperation,
+	StaffsOperation,
 	Vehicle,
 	BusinessOperation,
 	PartnerStaffOperation
