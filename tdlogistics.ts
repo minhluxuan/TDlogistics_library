@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import FormData from "form-data";
+const FormData = require("form-data");
 
 class UsersAuthenticate {
     private baseUrl: string;

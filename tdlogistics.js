@@ -36,9 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.Vehicle = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
+exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.Vehicle = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
-var form_data_1 = require("form-data");
+var FormData = require("form-data");
 var UsersAuthenticate = /** @class */ (function () {
     function UsersAuthenticate() {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
@@ -839,7 +839,7 @@ var StaffsOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                        return [2 /*return*/, { error: data.error, data: data.info, message: data.message }];
                     case 2:
                         error_32 = _a.sent();
                         console.log("Error get authenticated staff information: ", error_32.response.data);
@@ -1001,7 +1001,7 @@ var StaffsOperation = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        formData = new form_data_1.default();
+                        formData = new FormData();
                         formData.append('avatar', info.avatarFile);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_avatar?staff_id=").concat(condition.staff_id), formData, {
                                 withCredentials: true,
@@ -1313,7 +1313,7 @@ var BusinessOperation = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        formData = new form_data_1.default();
+                        formData = new FormData();
                         formData.append('contract', info.contractFile);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_contract?business_id=").concat(condition.business_id), formData, {
                                 withCredentials: true,
@@ -1587,7 +1587,7 @@ var PartnerStaffOperation = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        formData = new form_data_1.default();
+                        formData = new FormData();
                         formData.append('avatar', info.avatarFile);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_avatar?staff_id=").concat(condition.staff_id), formData, {
                                 withCredentials: true,
@@ -1613,7 +1613,7 @@ var PartnerStaffOperation = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        formData = new form_data_1.default();
+                        formData = new FormData();
                         formData.append('license_before', info.license_before);
                         formData.append('license_after', info.license_after);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_licenses?staff_id=").concat(condition.staff_id), formData, {
@@ -2007,3 +2007,79 @@ var ShipmentsOperation = /** @class */ (function () {
     return ShipmentsOperation;
 }());
 exports.ShipmentsOperation = ShipmentsOperation;
+var OrdersOperation = /** @class */ (function () {
+    function OrdersOperation() {
+        this.baseUrl = "http://localhost:5000/api/v1/orders";
+    }
+    OrdersOperation.prototype.get = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_80;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_80 = _a.sent();
+                        console.log("Error getting orders: ", error_80.response.data);
+                        return [2 /*return*/, error_80.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    OrdersOperation.prototype.checkExist = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_81;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/check?order_id=").concat(condition.order_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, exist: data.exist, message: data.message }];
+                    case 2:
+                        error_81 = _a.sent();
+                        console.log("Error checking exist order: ", error_81.response.data);
+                        return [2 /*return*/, error_81.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    OrdersOperation.prototype.update = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_82;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?order_id=").concat(condition.order_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_82 = _a.sent();
+                        console.log("Error updating order: ", error_82.response.data);
+                        return [2 /*return*/, error_82.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return OrdersOperation;
+}());
+exports.OrdersOperation = OrdersOperation;
