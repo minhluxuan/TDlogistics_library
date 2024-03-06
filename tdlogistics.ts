@@ -888,7 +888,7 @@ class StaffsOperation {
             });
             
             const data = response.data;
-            return { error: data.error, data: data.data, message: data.message };
+            return { error: data.error, data: data.info, message: data.message };
         } catch (error: any) {
             console.log("Error get authenticated staff information: ", error.response.data);
             return error.response.data;
