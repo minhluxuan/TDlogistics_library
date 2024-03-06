@@ -1770,6 +1770,95 @@ class ShippersOperation {
 	}
 }
 
+//Shipment Operation
+interface CreatingShipmentInfo {
+    transport_partner_id: string
+}
+
+interface UpdatingShipmentConditions {
+    shipment_id: string
+}
+
+interface UpdatingShipmentInfo {
+    mass: number
+}
+
+interface FindingShipmentConditions {
+    shipment_id: string,
+    tranport_partner_id: string,
+    staff_id: string
+}
+
+interface DecomposingShipmentInfo {
+    order_ids: object
+}
+
+interface OperatingWithOrderInfo {
+    order_ids: object
+}
+
+interface ShipmentIDInfo {
+    shipment_id: string
+}
+
+interface UndertakingShipmentInfo {
+    shipment_id: string,
+    status_code: number
+}
+
+class ShipmentsOperation {
+    private baseUrl: string;
+	constructor() {
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/shipments";
+		this.baseUrl = "http://localhost:5000/api/v1/shipments";
+	}
+
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
+	async create(info: CreatingShipmentInfo) {
+		try {
+			const response = await axios.post(`${this.baseUrl}/create`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		}
+	}
+
+    async addOrdersToShipment(info: OperatingWithOrderInfo) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/add_orders`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		}
+    }
+
+    async deleteOrderFromShipment(info: OperatingWithOrderInfo) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/remove_orders`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		}
+    }
+
+    
+}
+
 export {
 	UsersAuthenticate,
 	StaffsAuthenticate,
