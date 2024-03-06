@@ -534,7 +534,7 @@ class TransportPartnersOperation {
 
     async update(info: UpdatingTransportPartnerInfo, condition: UpdatingTransportPartnerCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/update?transport_partner_id=${condition.transport_partner_id}`, info, {
+            const response = await axios.put(`${this.baseUrl}/update?transport_partner_id=${condition.transport_partner_id}`, info, {
                 withCredentials: true,
             });
 
@@ -883,7 +883,7 @@ class StaffsOperation {
 	// ROLE: any
 	async getAuthenticatedStaffInfo() {
         try {
-            const response: AxiosResponse = await axios.post(`${this.baseUrl}/get_info`, {
+            const response: AxiosResponse = await axios.get(`${this.baseUrl}/get_info`, {
                 withCredentials: true,
             });
             
@@ -1770,6 +1770,177 @@ class ShippersOperation {
 	}
 }
 
+//Shipment Operation
+interface CreatingShipmentInfo {
+    transport_partner_id: string
+}
+
+interface FindingShipmentConditions {
+    shipment_id: string,
+    tranport_partner_id: string,
+    staff_id: string
+}
+
+interface DecomposingShipmentInfo {
+    order_ids: object
+}
+
+interface OperatingWithOrderInfo {
+    order_ids: object
+}
+
+interface ShipmentID {
+    shipment_id: string
+}
+
+interface UndertakingShipmentInfo {
+    shipment_id: string,
+    status_code: number
+}
+
+class ShipmentsOperation {
+    private baseUrl: string;
+	constructor() {
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/shipments";
+		this.baseUrl = "http://localhost:5000/api/v1/shipments";
+	}
+
+    // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
+	async create(info: CreatingShipmentInfo) {
+		try {
+			const response = await axios.post(`${this.baseUrl}/create`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		}
+	}
+
+    // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
+    async addOrdersToShipment(condition: ShipmentID, info: OperatingWithOrderInfo) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/add_orders?shipment_id=${condition.shipment_id}`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		}
+    }
+
+    // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
+    async deleteOrderFromShipment(condition: ShipmentID, info: OperatingWithOrderInfo) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/remove_orders?shipment_id=${condition.shipment_id}`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		}
+    }
+
+    // ROLE: AGENCY_MANAGER, AGENCY_TELLER
+    async confirmCreate(condition: ShipmentID) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/confirm_create`, condition, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		}  
+    }
+
+    // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
+    async get(condition: FindingShipmentConditions) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/get`, condition, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		} 
+    }
+
+    // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
+    async delete(condition: ShipmentID) {
+        try {
+			const response = await axios.delete(`${this.baseUrl}/delete?shipment_id=${condition.shipment_id}`,{
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		} 
+    }
+
+    // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
+    async decompose(condition: ShipmentID, info: DecomposingShipmentInfo) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/decompose?shipment_id=${condition.shipment_id}`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		} 
+    }
+
+    // ROLE: AGENCY_MANAGER, AGENCY_TELLER
+    async receive(condition: ShipmentID) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/receive`, condition, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		} 
+    }
+    
+    // ROLE: SHIPPER, AGENCY_SHIPPER, PARTNER_SHIPPER
+    async undertake(info: UndertakingShipmentInfo) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/undertake`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error creating partner staff: ", error.response.data);
+			return error.response.data;
+		}
+    }
+}
+
 export {
 	UsersAuthenticate,
 	StaffsAuthenticate,
@@ -1781,4 +1952,5 @@ export {
 	BusinessOperation,
 	PartnerStaffOperation,
 	ShippersOperation,
+    ShipmentsOperation,
 }
