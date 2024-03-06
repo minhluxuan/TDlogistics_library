@@ -1941,6 +1941,87 @@ class ShipmentsOperation {
     }
 }
 
+interface CheckingExistOrderCondition {
+    order_id: string,
+}
+
+interface GettingOrdersConditions {
+    name_receiver: string,
+    phone_receiver: string,
+    province_source: string,
+    district_source: string,
+    ward_source: string,
+    province_dest: string,
+    district_dest: string,
+    ward_dest: string,
+    service_type: string,
+}
+
+interface UpdatingOrderCondition {
+    order_id: string,
+}
+
+interface UpdatingOrderInfo {
+    mass: number,
+    height: number,
+    width: number,
+    length: number,
+    long_source: number,
+    lat_source: number,
+    long_destination: number,
+    lat_destination: number,
+    COD: number,
+}
+
+class OrdersOperation {
+    private baseUrl: string;
+    constructor() {
+        this.baseUrl = "http://localhost:5000/api/v1/orders";
+    }
+
+    async get(conditions: GettingOrdersConditions) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/search`, conditions, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error: any) {
+            console.log("Error getting orders: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async checkExist(condition: CheckingExistOrderCondition) {
+        try {
+            const response: AxiosResponse = await axios.get(`${this.baseUrl}/check?order_id=${condition.order_id}`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, exist: data.exist, message: data.message };
+        } catch (error: any) {
+            console.log("Error checking exist order: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async update(info: UpdatingOrderInfo, condition: UpdatingOrderCondition) {
+        try {
+            const response: AxiosResponse = await axios.put(`${this.baseUrl}/update?order_id=${condition.order_id}`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error updating order: ", error.response.data);
+            return error.response.data;
+        }
+    }
+}
+
 export {
 	UsersAuthenticate,
 	StaffsAuthenticate,
@@ -1953,4 +2034,5 @@ export {
 	PartnerStaffOperation,
 	ShippersOperation,
     ShipmentsOperation,
+    OrdersOperation,
 }
