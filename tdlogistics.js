@@ -38,21 +38,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.Vehicle = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
-var socket_io_client_1 = require("socket.io-client");
 var FormData = require("form-data");
-var socket = (0, socket_io_client_1.io)("http://localhost:5000");
-socket.on("connect", function () {
-    console.log("Connected to server.");
-});
-socket.on("notifyError", function (message) {
-    // showing custome notification on UI
-});
-socket.on("notifySuccessCreatedNewOrder", function (message) {
-    // showing custome notification on UI
-});
-socket.on("notifyFailCreatedNewOrder", function (message) {
-    // showing custome notification on UI
-});
+// const socket = io("http://localhost:5000");
+// socket.on("connect", () => {
+//     console.log("Connected to server.");
+// });
+// socket.on("notifyError", message => {
+//     // showing custome notification on UI
+// });
+// socket.on("notifySuccessCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
+// socket.on("notifyFailCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
 var UsersAuthenticate = /** @class */ (function () {
     function UsersAuthenticate() {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
@@ -1935,7 +1934,7 @@ var ShipmentsOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_76 = _a.sent();
                         console.log("Error creating partner staff: ", error_76.response.data);
@@ -2094,19 +2093,13 @@ var OrdersOperation = /** @class */ (function () {
             });
         });
     };
-    OrdersOperation.prototype.create = function (info) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                try {
-                    socket.emit("notifyNewOrderFromUser", info);
-                }
-                catch (error) {
-                    console.log("Error creating new order: ", error);
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
+    // async create(info: CreatingOrderInformation) {
+    //     try {
+    //         socket.emit("notifyNewOrderFromUser", info)
+    //     } catch (error: any) {
+    //         console.log("Error creating new order: ", error);
+    //     }
+    // }
     OrdersOperation.prototype.update = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_83;
