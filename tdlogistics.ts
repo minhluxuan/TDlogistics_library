@@ -1805,13 +1805,13 @@ class ShippersOperation {
 
 //Shipment Operation
 interface CreatingShipmentInfo {
-    transport_partner_id: string
+    transport_partner_id?: string
 }
 
 interface FindingShipmentConditions {
-    shipment_id: string,
-    tranport_partner_id: string,
-    staff_id: string
+    shipment_id?: string,
+    tranport_partner_id?: string,
+    staff_id?: string
 }
 
 interface DecomposingShipmentInfo {
@@ -1853,6 +1853,20 @@ class ShipmentsOperation {
 		}
 	}
 
+    async getOrdersFromShipment(condition: ShipmentID) {
+        try {
+			const response = await axios.post(`${this.baseUrl}/get_orders?shipment_id=${condition.shipment_id}`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error getting orders from shipment: ", error.response.data);
+			return error.response.data;
+		}
+    }
+
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     async addOrdersToShipment(condition: ShipmentID, info: OperatingWithOrderInfo) {
         try {
@@ -1863,7 +1877,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error adding orders to shipment: ", error.response.data);
 			return error.response.data;
 		}
     }
@@ -1878,7 +1892,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error deleting order from shipment: ", error.response.data);
 			return error.response.data;
 		}
     }
@@ -1893,7 +1907,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error confirming creat shipment: ", error.response.data);
 			return error.response.data;
 		}  
     }
@@ -1908,7 +1922,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error getting shipments: ", error.response.data);
 			return error.response.data;
 		} 
     }
@@ -1923,7 +1937,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error deleting shipment: ", error.response.data);
 			return error.response.data;
 		} 
     }
@@ -1938,7 +1952,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error decomposing shipment: ", error.response.data);
 			return error.response.data;
 		} 
     }
@@ -1953,7 +1967,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error receiving shipment: ", error.response.data);
 			return error.response.data;
 		} 
     }
@@ -1968,7 +1982,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error undertaking shipment: ", error.response.data);
 			return error.response.data;
 		}
     }
