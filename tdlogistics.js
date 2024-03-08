@@ -1848,10 +1848,33 @@ var ShipmentsOperation = /** @class */ (function () {
             });
         });
     };
+    ShipmentsOperation.prototype.getOrdersFromShipment = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_73;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_orders?shipment_id=").concat(condition.shipment_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_73 = _a.sent();
+                        console.log("Error getting orders from shipment: ", error_73.response.data);
+                        return [2 /*return*/, error_73.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.addOrdersToShipment = function (condition, info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_73;
+            var response, data, error_74;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1864,9 +1887,9 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_73 = _a.sent();
-                        console.log("Error creating partner staff: ", error_73.response.data);
-                        return [2 /*return*/, error_73.response.data];
+                        error_74 = _a.sent();
+                        console.log("Error adding orders to shipment: ", error_74.response.data);
+                        return [2 /*return*/, error_74.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1875,7 +1898,7 @@ var ShipmentsOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.deleteOrderFromShipment = function (condition, info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_74;
+            var response, data, error_75;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1888,9 +1911,9 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_74 = _a.sent();
-                        console.log("Error creating partner staff: ", error_74.response.data);
-                        return [2 /*return*/, error_74.response.data];
+                        error_75 = _a.sent();
+                        console.log("Error deleting order from shipment: ", error_75.response.data);
+                        return [2 /*return*/, error_75.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1899,7 +1922,7 @@ var ShipmentsOperation = /** @class */ (function () {
     // ROLE: AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.confirmCreate = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_75;
+            var response, data, error_76;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1912,9 +1935,9 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_75 = _a.sent();
-                        console.log("Error creating partner staff: ", error_75.response.data);
-                        return [2 /*return*/, error_75.response.data];
+                        error_76 = _a.sent();
+                        console.log("Error confirming creat shipment: ", error_76.response.data);
+                        return [2 /*return*/, error_76.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1923,7 +1946,7 @@ var ShipmentsOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.get = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_76;
+            var response, data, error_77;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1936,9 +1959,9 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_76 = _a.sent();
-                        console.log("Error creating partner staff: ", error_76.response.data);
-                        return [2 /*return*/, error_76.response.data];
+                        error_77 = _a.sent();
+                        console.log("Error getting shipments: ", error_77.response.data);
+                        return [2 /*return*/, error_77.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1947,7 +1970,7 @@ var ShipmentsOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.delete = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_77;
+            var response, data, error_78;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1960,9 +1983,9 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_77 = _a.sent();
-                        console.log("Error creating partner staff: ", error_77.response.data);
-                        return [2 /*return*/, error_77.response.data];
+                        error_78 = _a.sent();
+                        console.log("Error deleting shipment: ", error_78.response.data);
+                        return [2 /*return*/, error_78.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1971,7 +1994,7 @@ var ShipmentsOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.decompose = function (condition, info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_78;
+            var response, data, error_79;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1984,9 +2007,9 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_78 = _a.sent();
-                        console.log("Error creating partner staff: ", error_78.response.data);
-                        return [2 /*return*/, error_78.response.data];
+                        error_79 = _a.sent();
+                        console.log("Error decomposing shipment: ", error_79.response.data);
+                        return [2 /*return*/, error_79.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1995,7 +2018,7 @@ var ShipmentsOperation = /** @class */ (function () {
     // ROLE: AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.receive = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_79;
+            var response, data, error_80;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2008,9 +2031,9 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_79 = _a.sent();
-                        console.log("Error creating partner staff: ", error_79.response.data);
-                        return [2 /*return*/, error_79.response.data];
+                        error_80 = _a.sent();
+                        console.log("Error receiving shipment: ", error_80.response.data);
+                        return [2 /*return*/, error_80.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2019,7 +2042,7 @@ var ShipmentsOperation = /** @class */ (function () {
     // ROLE: SHIPPER, AGENCY_SHIPPER, PARTNER_SHIPPER
     ShipmentsOperation.prototype.undertake = function (info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_80;
+            var response, data, error_81;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2032,9 +2055,9 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_80 = _a.sent();
-                        console.log("Error creating partner staff: ", error_80.response.data);
-                        return [2 /*return*/, error_80.response.data];
+                        error_81 = _a.sent();
+                        console.log("Error undertaking shipment: ", error_81.response.data);
+                        return [2 /*return*/, error_81.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2049,7 +2072,7 @@ var OrdersOperation = /** @class */ (function () {
     }
     OrdersOperation.prototype.get = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_81;
+            var response, data, error_82;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2062,9 +2085,9 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_81 = _a.sent();
-                        console.log("Error getting orders: ", error_81.response.data);
-                        return [2 /*return*/, error_81.response.data];
+                        error_82 = _a.sent();
+                        console.log("Error getting orders: ", error_82.response.data);
+                        return [2 /*return*/, error_82.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2072,7 +2095,7 @@ var OrdersOperation = /** @class */ (function () {
     };
     OrdersOperation.prototype.checkExist = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_82;
+            var response, data, error_83;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2085,9 +2108,9 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, exist: data.exist, message: data.message }];
                     case 2:
-                        error_82 = _a.sent();
-                        console.log("Error checking exist order: ", error_82.response.data);
-                        return [2 /*return*/, error_82.response.data];
+                        error_83 = _a.sent();
+                        console.log("Error checking exist order: ", error_83.response.data);
+                        return [2 /*return*/, error_83.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2102,7 +2125,7 @@ var OrdersOperation = /** @class */ (function () {
     // }
     OrdersOperation.prototype.update = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_83;
+            var response, data, error_84;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2115,9 +2138,9 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_83 = _a.sent();
-                        console.log("Error updating order: ", error_83.response.data);
-                        return [2 /*return*/, error_83.response.data];
+                        error_84 = _a.sent();
+                        console.log("Error updating order: ", error_84.response.data);
+                        return [2 /*return*/, error_84.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2125,7 +2148,7 @@ var OrdersOperation = /** @class */ (function () {
     };
     OrdersOperation.prototype.cancel = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_84;
+            var response, data, error_85;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2138,9 +2161,9 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_84 = _a.sent();
-                        console.log("Error canceling order: ", error_84.response.data);
-                        return [2 /*return*/, error_84.response.data];
+                        error_85 = _a.sent();
+                        console.log("Error canceling order: ", error_85.response.data);
+                        return [2 /*return*/, error_85.response.data];
                     case 3: return [2 /*return*/];
                 }
             });

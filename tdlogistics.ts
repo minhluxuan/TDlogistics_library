@@ -1855,7 +1855,7 @@ class ShipmentsOperation {
 
     async getOrdersFromShipment(condition: ShipmentID) {
         try {
-			const response = await axios.post(`${this.baseUrl}/get_orders?shipment_id=${condition.shipment_id}`, info, {
+			const response = await axios.post(`${this.baseUrl}/get_orders?shipment_id=${condition.shipment_id}`, {
 				withCredentials: true,
 			});
 
