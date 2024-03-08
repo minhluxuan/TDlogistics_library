@@ -2,23 +2,23 @@ import axios, { AxiosResponse } from "axios";
 import { io } from 'socket.io-client';
 const FormData = require("form-data");
 
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
 
-socket.on("connect", () => {
-    console.log("Connected to server.");
-});
+// socket.on("connect", () => {
+//     console.log("Connected to server.");
+// });
 
-socket.on("notifyError", message => {
-    // showing custome notification on UI
-});
+// socket.on("notifyError", message => {
+//     // showing custome notification on UI
+// });
 
-socket.on("notifySuccessCreatedNewOrder", message => {
-    // showing custome notification on UI
-});
+// socket.on("notifySuccessCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
 
-socket.on("notifyFailCreatedNewOrder", message => {
-    // showing custome notification on UI
-});
+// socket.on("notifyFailCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
 
 class UsersAuthenticate {
     private baseUrl: string;
@@ -2067,13 +2067,13 @@ class OrdersOperation {
         }
     }
 
-    async create(info: CreatingOrderInformation) {
-        try {
-            socket.emit("notifyNewOrderFromUser", info)
-        } catch (error: any) {
-            console.log("Error creating new order: ", error);
-        }
-    }
+    // async create(info: CreatingOrderInformation) {
+    //     try {
+    //         socket.emit("notifyNewOrderFromUser", info)
+    //     } catch (error: any) {
+    //         console.log("Error creating new order: ", error);
+    //     }
+    // }
 
     async update(info: UpdatingOrderInfo, condition: UpdatingOrderCondition) {
         try {
