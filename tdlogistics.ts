@@ -1,5 +1,24 @@
 import axios, { AxiosResponse } from "axios";
+import { io } from 'socket.io-client';
 const FormData = require("form-data");
+
+const socket = io("http://localhost:5000");
+
+socket.on("connect", () => {
+    console.log("Connected to server.");
+});
+
+socket.on("notifyError", message => {
+    // showing custome notification on UI
+});
+
+socket.on("notifySuccessCreatedNewOrder", message => {
+    // showing custome notification on UI
+});
+
+socket.on("notifyFailCreatedNewOrder", message => {
+    // showing custome notification on UI
+});
 
 class UsersAuthenticate {
     private baseUrl: string;
@@ -1011,6 +1030,20 @@ class StaffsOperation {
 		}   
 	}
 
+    async logout() {
+        try {
+            const response: AxiosResponse = await axios.get(`${this.baseUrl}/logout`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error logging out: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
 	// ROLE: any. But one staff can just change his/her own password.
 	// So that, the staff_id in session must be the same with the staff_id in the query. 
 	async updatePassword(info: UpdatingPasswordsInfo, condition: UpdatingStaffCondition) {
@@ -1957,6 +1990,29 @@ interface GettingOrdersConditions {
     service_type: string,
 }
 
+interface CreatingOrderInformation {
+    name_receiver: string,
+    phone_receiver: string,
+    mass: string,
+    height: string,
+    width: string,
+    length: string,
+    province_source: string,
+    district_source: string,
+    ward_source: string,
+    detail_source: string,
+    province_dest: string,
+    district_dest: string,
+    ward_dest: string,
+    detail_dest: string,
+    long_source: number,
+    lat_source: number,
+    long_destination: number,
+    lat_destination: number,
+    COD: number,
+    service_type: number,
+}
+
 interface UpdatingOrderCondition {
     order_id: string,
 }
@@ -1971,6 +2027,10 @@ interface UpdatingOrderInfo {
     long_destination: number,
     lat_destination: number,
     COD: number,
+}
+
+interface CancelingOrderCondition {
+    order_id: string,
 }
 
 class OrdersOperation {
@@ -2007,6 +2067,14 @@ class OrdersOperation {
         }
     }
 
+    async create(info: CreatingOrderInformation) {
+        try {
+            socket.emit("notifyNewOrderFromUser", info)
+        } catch (error: any) {
+            console.log("Error creating new order: ", error);
+        }
+    }
+
     async update(info: UpdatingOrderInfo, condition: UpdatingOrderCondition) {
         try {
             const response: AxiosResponse = await axios.put(`${this.baseUrl}/update?order_id=${condition.order_id}`, info, {
@@ -2017,6 +2085,20 @@ class OrdersOperation {
             return { error: data.error, message: data.message };
         } catch (error: any) {
             console.log("Error updating order: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async cancel(condition: CancelingOrderCondition) {
+        try {
+            const response: AxiosResponse = await axios.delete(`${this.baseUrl}/cancel?order_id=${condition.order_id}`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error canceling order: ", error.response.data);
             return error.response.data;
         }
     }
