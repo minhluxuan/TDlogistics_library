@@ -1906,7 +1906,7 @@ class ShipmentsOperation {
 			});
 
 			const data = response.data;
-			return { error: data.error, message: data.message };
+			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
 			console.log("Error creating partner staff: ", error.response.data);
 			return error.response.data;
