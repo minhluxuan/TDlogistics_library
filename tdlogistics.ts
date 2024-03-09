@@ -953,7 +953,7 @@ class StaffsOperation {
 			});
 			
 			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
+			return { error: data.error, message: data.message };
 		} 
 		catch (error: any) {
 			console.log("Error create new staff: ", error.response.data);
@@ -969,7 +969,7 @@ class StaffsOperation {
 			});
 			
 			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
+			return { error: data.error, message: data.message };
 		} 
 		catch (error: any) {
 			console.log("Error create new staff: ", error.response.data);
@@ -985,7 +985,7 @@ class StaffsOperation {
 			});
 			
 			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
+			return { error: data.error, message: data.message };
 		} 
 		catch (error: any) {
 			console.log("Error create new staff: ", error.response.data);
