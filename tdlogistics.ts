@@ -801,8 +801,7 @@ class Vehicle {
 }
 
 interface CreatingStaffByAgencyInfo {
-	agency_id: string,
-    fullname: string,
+	fullname: string,
     username: string,
     password: string,
     date_of_birth: string,
@@ -820,6 +819,7 @@ interface CreatingStaffByAgencyInfo {
 }
 
 interface CreatingStaffByAdminInfo {
+    agency_id: string,
     fullname: string,
     username: string,
     password: string,
