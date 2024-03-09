@@ -996,7 +996,7 @@ class StaffsOperation {
 	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
 	async deleteStaff(condition: DeletingStaffCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/delete?staff_id=${condition.staff_id}`, {
+			const response = await axios.delete(`${this.baseUrl}/delete?staff_id=${condition.staff_id}`, {
 				withCredentials: true,
 			});
 

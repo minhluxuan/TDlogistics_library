@@ -990,7 +990,7 @@ var StaffsOperation = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/delete?staff_id=").concat(condition.staff_id), {
+                        return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?staff_id=").concat(condition.staff_id), {
                                 withCredentials: true,
                             })];
                     case 1:
