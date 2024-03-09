@@ -665,7 +665,7 @@ class Vehicle {
             });
 
             const data = response.data;
-            return { error: data.error, message: data.message };
+            return { error: data.error, existed: data.existed, message: data.message };
         } catch (error: any) {
             console.log("Error checking exist vehicle: ", error.response.data);
             return error.response.data;
@@ -810,7 +810,7 @@ interface CreatingStaffByAgencyInfo {
     phone_number: string,
     role: string,
     position: string,
-    salary: string, 
+    salary: number, 
     paid_salary: number,
     province: string,
     district: string,
@@ -829,7 +829,7 @@ interface CreatingStaffByAdminInfo {
     phone_number: string,
     role: string,
     position: string,
-    salary: string, 
+    salary: number, 
     paid_salary: number,
     province: string,
     district: string,
@@ -862,7 +862,7 @@ interface UpdatingStaffInfo {
     email: string,
     phone_number: string,
     role: string,
-    salary: string, 
+    salary: number, 
     paid_salary: string, 
     province: string,
     district: string,
@@ -1350,7 +1350,7 @@ class BusinessOperation {
 			});
 
 			const data = response.data;
-			return { error: data.error, message: data.message };
+			return { error: data.error, existed: data.existed, message: data.message };
 		} catch (error: any) {
 			console.log("Error checking exist business: ", error.response.data);
 			return error.response.data;
@@ -1615,7 +1615,7 @@ class PartnerStaffOperation {
 			});
 
 			const data = response.data;
-			return { error: data.error, message: data.message };
+			return { error: data.error, existed: data.existed, message: data.message };
 		} catch (error: any) {
 			console.log("Error checking exist partner staff: ", error.response.data);
 			return error.response.data;
@@ -2074,7 +2074,7 @@ class OrdersOperation {
             });
 
             const data = response.data;
-            return { error: data.error, exist: data.exist, message: data.message };
+            return { error: data.error, exist: data.existed, message: data.message };
         } catch (error: any) {
             console.log("Error checking exist order: ", error.response.data);
             return error.response.data;
