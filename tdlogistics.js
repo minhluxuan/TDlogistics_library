@@ -610,7 +610,7 @@ var Vehicle = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
                         error_22 = _a.sent();
                         console.log("Error checking exist vehicle: ", error_22.response.data);
@@ -924,7 +924,7 @@ var StaffsOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_35 = _a.sent();
                         console.log("Error create new staff: ", error_35.response.data);
@@ -948,7 +948,7 @@ var StaffsOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_36 = _a.sent();
                         console.log("Error create new staff: ", error_36.response.data);
@@ -972,7 +972,7 @@ var StaffsOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_37 = _a.sent();
                         console.log("Error create new staff: ", error_37.response.data);
@@ -1309,7 +1309,7 @@ var BusinessOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
                         error_51 = _a.sent();
                         console.log("Error checking exist business: ", error_51.response.data);
@@ -1557,7 +1557,7 @@ var PartnerStaffOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
                         error_61 = _a.sent();
                         console.log("Error checking exist partner staff: ", error_61.response.data);
@@ -2106,7 +2106,7 @@ var OrdersOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, exist: data.exist, message: data.message }];
+                        return [2 /*return*/, { error: data.error, exist: data.existed, message: data.message }];
                     case 2:
                         error_83 = _a.sent();
                         console.log("Error checking exist order: ", error_83.response.data);
