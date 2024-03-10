@@ -730,7 +730,7 @@ class VehicleOperation {
 
     async getShipment(condition: GettingShipmentsContainedByVehicleCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/get_shipments?vehicle_id=${condition.vehicle_id}`, {
+            const response = await axios.get(`${this.baseUrl}/get_shipments?vehicle_id=${condition.vehicle_id}`, {
                 withCredentials: true,
             });
 
@@ -745,7 +745,7 @@ class VehicleOperation {
 
     async update(info: UpdatingVehicleInfo, condition: UpdatingVehicleCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/update?vehicle_id=${condition.vehicle_id}`, info, {
+            const response = await axios.put(`${this.baseUrl}/update?vehicle_id=${condition.vehicle_id}`, info, {
                 withCredentials: true,
             });
 
@@ -759,7 +759,7 @@ class VehicleOperation {
 
     async addShipments(info: AddingShipmentsToVehicleInfo, condition: AddingShipmentsToVehicleCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/add_shipments?vehicle_id=${condition.vehicle_id}`, info, {
+            const response = await axios.patch(`${this.baseUrl}/add_shipments?vehicle_id=${condition.vehicle_id}`, info, {
                 withCredentials: true,
             });
 
@@ -773,7 +773,7 @@ class VehicleOperation {
 
     async deleteShipments(info: DeletingShipmentsFromVehicleInfo, condition: DeletingShipmentsFromVehicleCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/delete_shipments?vehicle_id=${condition.vehicle_id}`, info, {
+            const response = await axios.patch(`${this.baseUrl}/delete_shipments?vehicle_id=${condition.vehicle_id}`, info, {
                 withCredentials: true,
             });
 
@@ -787,7 +787,7 @@ class VehicleOperation {
 
     async deleteVehicle(condition: DeletingVehicleCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/delete?vehicle_id=${condition.vehicle_id}`, {
+            const response = await axios.delete(`${this.baseUrl}/delete?vehicle_id=${condition.vehicle_id}`, {
                 withCredentials: true,
             });
 
