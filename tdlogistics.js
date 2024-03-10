@@ -40,7 +40,9 @@ exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation
 var axios_1 = require("axios");
 var socket_io_client_1 = require("socket.io-client");
 var FormData = require("form-data");
-var socket = (0, socket_io_client_1.io)("http://localhost:5000");
+var socket = (0, socket_io_client_1.io)("http://localhost:5000", {
+    withCredentials: true,
+});
 socket.on("connect", function () {
     console.log("Connected to server.");
 });

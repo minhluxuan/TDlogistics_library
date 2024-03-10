@@ -2,7 +2,9 @@ import axios, { AxiosResponse } from "axios";
 import { io } from 'socket.io-client';
 const FormData = require("form-data");
 
-const socket = io("http://localhost:5000");
+const socket = io("http://localhost:5000", {
+    withCredentials: true,
+});
 
 socket.on("connect", () => {
     console.log("Connected to server.");
@@ -622,7 +624,6 @@ export interface UpdatingVehicleInfo {
     transport_partner_id: string,
     staff_id: string,
     type: string,
-    license_plate: string,
     max_load: number,
 }
 
