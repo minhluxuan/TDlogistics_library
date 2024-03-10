@@ -2,23 +2,23 @@ import axios, { AxiosResponse } from "axios";
 import { io } from 'socket.io-client';
 const FormData = require("form-data");
 
-// const socket = io("http://localhost:5000");
+const socket = io("http://localhost:5000");
 
-// socket.on("connect", () => {
-//     console.log("Connected to server.");
-// });
+socket.on("connect", () => {
+    console.log("Connected to server.");
+});
 
-// socket.on("notifyError", message => {
-//     // showing custome notification on UI
-// });
+socket.on("notifyError", message => {
+    // showing custome notification on UI
+});
 
-// socket.on("notifySuccessCreatedNewOrder", message => {
-//     // showing custome notification on UI
-// });
+socket.on("notifySuccessCreatedNewOrder", message => {
+    // showing custome notification on UI
+});
 
-// socket.on("notifyFailCreatedNewOrder", message => {
-//     // showing custome notification on UI
-// });
+socket.on("notifyFailCreatedNewOrder", message => {
+    // showing custome notification on UI
+});
 
 class UsersAuthenticate {
     private baseUrl: string;
@@ -123,29 +123,29 @@ class StaffsAuthenticate {
     }
 }
 
-interface CreatingUserInfo {
+export interface CreatingUserInfo {
     fullname: string,
     phone_number: string,
     email: string,
 }
 
-interface FindingUserByUserCondition {
+export interface FindingUserByUserCondition {
     phone_number: string,
 }
 
-interface FindingUserByAdminConditions {
+export interface FindingUserByAdminConditions {
     user_id: string,
     fullname: string,
     phone_number: string,
     email: string,
 }
 
-interface UpdatingUserInfo {
+export interface UpdatingUserInfo {
     fullname: string,
     email: string,
 }
 
-interface UpdatingUserCondition {
+export interface UpdatingUserCondition {
     user_id: string,
 }
 
@@ -214,11 +214,11 @@ class UsersOperation {
     }
 }
 
-interface CheckingExistAgencyCondition {
+export interface CheckingExistAgencyCondition {
     agency_id: string,
 }
 
-interface CreatingAgencyInfo {
+export interface CreatingAgencyInfo {
     username: string,
     user_password: string,
     user_fullname: string,
@@ -253,11 +253,11 @@ interface CreatingAgencyInfo {
     bank: string,
 }
 
-interface FindingAgencyByAgencyInfo {
+export interface FindingAgencyByAgencyInfo {
     agencyId: string,
 }
 
-interface FindingAgencyByAdminInfo {
+export interface FindingAgencyByAdminInfo {
     agency_id: string,
     agency_name: string,
     level: string,
@@ -270,7 +270,7 @@ interface FindingAgencyByAdminInfo {
     bank: string,
 }
 
-interface UpdatingAgencyInfo {
+export interface UpdatingAgencyInfo {
     agency_name: string,
     province: string,
     district: string,
@@ -286,11 +286,11 @@ interface UpdatingAgencyInfo {
     bank: string,
 }
 
-interface UpdatingAgencyCondition {
+export interface UpdatingAgencyCondition {
     agency_id: string,
 }
 
-interface DeletingAgencyCondition {
+export interface DeletingAgencyCondition {
     agency_id: string,
 }
 
@@ -386,7 +386,7 @@ class AgencyOperation {
     }
 }
 
-interface CreatingTransportPartnerByAdminInfo {
+export interface CreatingTransportPartnerByAdminInfo {
     // Representor information
     username: string,
     user_password: string,
@@ -417,7 +417,7 @@ interface CreatingTransportPartnerByAdminInfo {
     bank: string,
 }
 
-interface CreatingTransportPartnerByAgencyInfo {
+export interface CreatingTransportPartnerByAgencyInfo {
     // Representor information
     username: string,
     user_password: string,
@@ -447,11 +447,11 @@ interface CreatingTransportPartnerByAgencyInfo {
     bank: string,
 }
 
-interface FindingTransportPartnerByTransportPartnerCondition {
+export interface FindingTransportPartnerByTransportPartnerCondition {
     transport_partner_id: string,
 }
 
-interface FindingTransportPartnerByAdminConditions {
+export interface FindingTransportPartnerByAdminConditions {
     transport_partner_id: string,
     tax_code: string,
     transport_partner_name: string,
@@ -465,7 +465,7 @@ interface FindingTransportPartnerByAdminConditions {
     bank: string,
 }
 
-interface UpdatingTransportPartnerInfo {
+export interface UpdatingTransportPartnerInfo {
     tax_code: string,
     transport_partner_name: string,
     province: string,
@@ -479,11 +479,11 @@ interface UpdatingTransportPartnerInfo {
     debit: string,
 }
 
-interface UpdatingTransportPartnerCondition {
+export interface UpdatingTransportPartnerCondition {
     transport_partner_id: string,
 }
 
-interface DeletingTransportPartnerCondition {
+export interface DeletingTransportPartnerCondition {
     transport_partner_id: string,
 }
 
@@ -580,11 +580,11 @@ class TransportPartnersOperation {
     }
 }
 
-interface CheckingExistVehicleCondition {
+export interface CheckingExistVehicleCondition {
     vehicle_id: string,
 }
 
-interface CreatingVehicleByAdminInfo {
+export interface CreatingVehicleByAdminInfo {
     agency_id: string,
     transport_partner_id: string,
     staff_id: string,
@@ -593,7 +593,7 @@ interface CreatingVehicleByAdminInfo {
     max_load: number,
 }
 
-interface CreatingVehicleByAgencyInfo {
+export interface CreatingVehicleByAgencyInfo {
     transport_partner_id: string,
     staff_id: string,
     type: string,
@@ -601,11 +601,11 @@ interface CreatingVehicleByAgencyInfo {
     max_load: number,
 }
 
-interface FindingVehicleByStaffCondition {
+export interface FindingVehicleByStaffCondition {
     staff_id: string,
 }
 
-interface FindingVehicleByAdminConditions {
+export interface FindingVehicleByAdminConditions {
     vehicle_id: string,
     transport_partner_id: string,
     staff_id: string,
@@ -614,11 +614,11 @@ interface FindingVehicleByAdminConditions {
     mass: number,
 }
 
-interface GettingShipmentsContainedByVehicleCondition {
+export interface GettingShipmentsContainedByVehicleCondition {
     vehicle_id: string,
 }
 
-interface UpdatingVehicleInfo {
+export interface UpdatingVehicleInfo {
     transport_partner_id: string,
     staff_id: string,
     type: string,
@@ -626,27 +626,27 @@ interface UpdatingVehicleInfo {
     max_load: number,
 }
 
-interface UpdatingVehicleCondition {
+export interface UpdatingVehicleCondition {
     vehicle_id: string,
 }
 
-interface AddingShipmentsToVehicleInfo {
+export interface AddingShipmentsToVehicleInfo {
     order_ids: Object,
 }
 
-interface AddingShipmentsToVehicleCondition {
+export interface AddingShipmentsToVehicleCondition {
     vehicle_id: string,
 }
 
-interface DeletingShipmentsFromVehicleInfo {
+export interface DeletingShipmentsFromVehicleInfo {
     order_ids: Object,
 }
 
-interface DeletingShipmentsFromVehicleCondition {
+export interface DeletingShipmentsFromVehicleCondition {
     vehicle_id: string,
 }
 
-interface DeletingVehicleCondition {
+export interface DeletingVehicleCondition {
     vehicle_id: string,
 }
 
@@ -800,7 +800,7 @@ class VehicleOperation {
     }
 }
 
-interface CreatingStaffByAgencyInfo {
+export interface CreatingStaffByAgencyInfo {
 	fullname: string,
     username: string,
     password: string,
@@ -818,7 +818,7 @@ interface CreatingStaffByAgencyInfo {
     detail_address: string,
 }
 
-interface CreatingStaffByAdminInfo {
+export interface CreatingStaffByAdminInfo {
     agency_id: string,
     fullname: string,
     username: string,
@@ -837,11 +837,11 @@ interface CreatingStaffByAdminInfo {
     detail_address: string,
 }
   
-interface FindingStaffByStaffCondition {
+export interface FindingStaffByStaffCondition {
     staff_id: string,
 }
   
-interface FindingStaffByAdminConditions {
+export interface FindingStaffByAdminConditions {
     staff_id: string,
     fullname: string,
     username: string,
@@ -855,7 +855,7 @@ interface FindingStaffByAdminConditions {
     town: string,
 }
   
-interface UpdatingStaffInfo {
+export interface UpdatingStaffInfo {
     fullname: string,
     username: string,
     date_of_birth: string, 
@@ -870,24 +870,24 @@ interface UpdatingStaffInfo {
     detail_address: string,
 }
   
-interface UpdatingStaffCondition {
+export interface UpdatingStaffCondition {
     staff_id: string,
 }
   
-interface DeletingStaffCondition {
+export interface DeletingStaffCondition {
     staff_id: string,
 };
   
-interface UpdatingAvatarStaffInfo {
+export interface UpdatingAvatarStaffInfo {
     avatarFile: Buffer,
 };
   
-interface UpdatingPasswordsInfo {
+export interface UpdatingPasswordsInfo {
     new_password: string,
     confirm_password: string
 };
   
-interface FindingAvatarCondition {
+export interface FindingAvatarCondition {
     staff_id: string,
 }
   
@@ -1077,7 +1077,7 @@ class StaffsOperation {
 	}
 }
   
-interface CreateBusinessByAgencyInfo {
+export interface CreateBusinessByAgencyInfo {
 	// Representor information
     user_fullname: string,
     user_phone_number: string,
@@ -1106,7 +1106,7 @@ interface CreateBusinessByAgencyInfo {
     bank: string,
 }
   
-interface CreateBusinessByAdminInfo {
+export interface CreateBusinessByAdminInfo {
 	// Representor information
     username: string,
     password: string,
@@ -1136,11 +1136,11 @@ interface CreateBusinessByAdminInfo {
     bank: string,
 }
   
-interface FindingBusinessByBusinessCondition {
+export interface FindingBusinessByBusinessCondition {
     business_id: string,
 }
   
-interface FindingBusinessByAdminCondition {
+export interface FindingBusinessByAdminCondition {
 	business_id: string,
 	agency_id: string,
 	username: string,
@@ -1155,11 +1155,11 @@ interface FindingBusinessByAdminCondition {
 	bank: string,
 }
   
-interface FindingRepresentorByBusinessCondition {
+export interface FindingRepresentorByBusinessCondition {
     business_id: string,
 }
   
-interface FindingRepresentorByAdminCondition {
+export interface FindingRepresentorByAdminCondition {
 	agency_id:string,
 	business_id: string,
 	fullname: string,
@@ -1174,15 +1174,15 @@ interface FindingRepresentorByAdminCondition {
 	bank: string,
 }
   
-interface CheckingExistBusinessCondition {
+export interface CheckingExistBusinessCondition {
     tax_number: string,
 }
   
-interface UpdatingBusinessCondition {
+export interface UpdatingBusinessCondition {
     business_id: string,
 }
   
-interface UpdatingBusinessInfo {
+export interface UpdatingBusinessInfo {
 	business_name: string,
 	email: string,
 	phone_number: string,
@@ -1195,7 +1195,7 @@ interface UpdatingBusinessInfo {
 	bank: string,
 }
   
-interface UpdatingBusinessRepresentorInfo {
+export interface UpdatingBusinessRepresentorInfo {
 	fullname: string,
 	phone_number: string,
 	email: string,
@@ -1209,16 +1209,16 @@ interface UpdatingBusinessRepresentorInfo {
 	bank: string,
 }
   
-interface DeletingBusinessCondition {
+export interface DeletingBusinessCondition {
 	business_id: string,
 	agency_id: string,
 }
   
-interface UpdatingContractInfo {
+export interface UpdatingContractInfo {
     contractFile: Buffer,
 }
   
-interface FindingContractCondition {
+export interface FindingContractCondition {
     business_id: string,
 }
   
@@ -1406,7 +1406,7 @@ class BusinessOperation {
 	}
 }
 
-interface CreatingPartnerStaffInfo {
+export interface CreatingPartnerStaffInfo {
 	partner_id: string,
 	username: string,
 	password: string,
@@ -1425,11 +1425,11 @@ interface CreatingPartnerStaffInfo {
 	bank: string,
 }
 
-interface FindingPartnerStaffByPartnerStaffCondition {
+export interface FindingPartnerStaffByPartnerStaffCondition {
 	staff_id: string,
 }
 
-interface FindingPartnerStaffsByPartnerCondtions {
+export interface FindingPartnerStaffsByPartnerCondtions {
 	partner_id: string,
 	agency_id: string,
 	staff_id: string,
@@ -1447,7 +1447,7 @@ interface FindingPartnerStaffsByPartnerCondtions {
 	bank: string,
 }
 
-interface FindingPartnerStaffsByAdminConditions {
+export interface FindingPartnerStaffsByAdminConditions {
 	partner_id: string,
 	agency_id: string,
 	staff_id: string,
@@ -1464,11 +1464,11 @@ interface FindingPartnerStaffsByAdminConditions {
 	bank: string,
 }
 
-interface UpdatingPartnerStaffCondition {
+export interface UpdatingPartnerStaffCondition {
 	staff_id: string,
 }
 
-interface UpdatingPartnerStaffInfo {
+export interface UpdatingPartnerStaffInfo {
 	fullname: string,
 	username: string,
 	date_of_birth: string, 
@@ -1483,11 +1483,11 @@ interface UpdatingPartnerStaffInfo {
 	bank: string,
 }
 
-interface DeletingPartnerStaffCondition {
+export interface DeletingPartnerStaffCondition {
 	staff_id: string,
 }
 
-interface CheckingExistPartnerStaffCondition {
+export interface CheckingExistPartnerStaffCondition {
 	username: string,
 	email: string,
 	phone_number: string,
@@ -1496,16 +1496,16 @@ interface CheckingExistPartnerStaffCondition {
 }
 
 
-interface UpdatingPartnerLicenseImg {
+export interface UpdatingPartnerLicenseImg {
 	license_before: Buffer,
 	license_after: Buffer,
 }
 
-interface UpdatingPartnerStaffAvatarInfo {
+export interface UpdatingPartnerStaffAvatarInfo {
 	avatarFile: Buffer
 }
 
-interface FindingPartnerAvatarAndLicenseCondition {
+export interface FindingPartnerAvatarAndLicenseCondition {
 	staff_id: string
 };
   
@@ -1742,15 +1742,15 @@ class PartnerStaffOperation {
 	} 
 }
   
-interface GettingTasksCondition {
+export interface GettingTasksCondition {
 	option: number,
 }
 
-interface ConfirmingCompletedTaskInfo {
+export interface ConfirmingCompletedTaskInfo {
 	id: number,
 }
 
-interface GettingHistoryInfo {
+export interface GettingHistoryInfo {
 	option: number,
 }
 
@@ -1804,29 +1804,29 @@ class ShippersOperation {
 }
 
 //Shipment Operation
-interface CreatingShipmentInfo {
+export interface CreatingShipmentInfo {
     transport_partner_id?: string
 }
 
-interface FindingShipmentConditions {
+export interface FindingShipmentConditions {
     shipment_id?: string,
     tranport_partner_id?: string,
     staff_id?: string
 }
 
-interface DecomposingShipmentInfo {
+export interface DecomposingShipmentInfo {
     order_ids: object
 }
 
-interface OperatingWithOrderInfo {
+export interface OperatingWithOrderInfo {
     order_ids: object
 }
 
-interface ShipmentID {
+export interface ShipmentID {
     shipment_id: string
 }
 
-interface UndertakingShipmentInfo {
+export interface UndertakingShipmentInfo {
     shipment_id: string,
     status_code: number
 }
@@ -1988,11 +1988,11 @@ class ShipmentsOperation {
     }
 }
 
-interface CheckingExistOrderCondition {
+export interface CheckingExistOrderCondition {
     order_id: string,
 }
 
-interface GettingOrdersConditions {
+export interface GettingOrdersConditions {
     name_receiver: string,
     phone_receiver: string,
     province_source: string,
@@ -2004,7 +2004,7 @@ interface GettingOrdersConditions {
     service_type: string,
 }
 
-interface CreatingOrderInformation {
+export interface CreatingOrderInformation {
     name_receiver: string,
     phone_receiver: string,
     mass: string,
@@ -2027,23 +2027,19 @@ interface CreatingOrderInformation {
     service_type: number,
 }
 
-interface UpdatingOrderCondition {
+export interface UpdatingOrderCondition {
     order_id: string,
 }
 
-interface UpdatingOrderInfo {
+export interface UpdatingOrderInfo {
     mass: number,
     height: number,
     width: number,
     length: number,
-    long_source: number,
-    lat_source: number,
-    long_destination: number,
-    lat_destination: number,
     COD: number,
 }
 
-interface CancelingOrderCondition {
+export interface CancelingOrderCondition {
     order_id: string,
 }
 
@@ -2081,13 +2077,13 @@ class OrdersOperation {
         }
     }
 
-    // async create(info: CreatingOrderInformation) {
-    //     try {
-    //         socket.emit("notifyNewOrderFromUser", info)
-    //     } catch (error: any) {
-    //         console.log("Error creating new order: ", error.response.data);
-    //     }
-    // }
+    async create(info: CreatingOrderInformation) {
+        try {
+            socket.emit("notifyNewOrderFromUser", info)
+        } catch (error: any) {
+            console.log("Error creating new order: ", error.response.data);
+        }
+    }
 
     async update(info: UpdatingOrderInfo, condition: UpdatingOrderCondition) {
         try {
@@ -2118,26 +2114,26 @@ class OrdersOperation {
     }
 }
 
-interface GettingTasksCondition {
+export interface GettingTasksCondition {
     task: string,
     priority: number,
     deadline: string,
     completed: boolean,
 }
 
-interface CreatingNewTaskInfo {
+export interface CreatingNewTaskInfo {
     task: string,
     priority: number,
     deadline: string,
 }
 
-interface UpdatingTaskInfo {
+export interface UpdatingTaskInfo {
     task: string,
     priority: number,
     completed: boolean,
 }
 
-interface TaskId {
+export interface TaskId {
     id: number,
 }
 
