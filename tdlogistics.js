@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.Vehicle = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
+exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.VehicleOperation = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
 var FormData = require("form-data");
 // const socket = io("http://localhost:5000");
@@ -592,12 +592,12 @@ var TransportPartnersOperation = /** @class */ (function () {
     return TransportPartnersOperation;
 }());
 exports.TransportPartnersOperation = TransportPartnersOperation;
-var Vehicle = /** @class */ (function () {
-    function Vehicle() {
+var VehicleOperation = /** @class */ (function () {
+    function VehicleOperation() {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/vehicles";
         this.baseUrl = "http://localhost:5000/api/v1/vehicles";
     }
-    Vehicle.prototype.checkExist = function (condition) {
+    VehicleOperation.prototype.checkExist = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_22;
             return __generator(this, function (_a) {
@@ -620,7 +620,7 @@ var Vehicle = /** @class */ (function () {
             });
         });
     };
-    Vehicle.prototype.createByAgency = function (info) {
+    VehicleOperation.prototype.createByAgency = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_23;
             return __generator(this, function (_a) {
@@ -643,7 +643,7 @@ var Vehicle = /** @class */ (function () {
             });
         });
     };
-    Vehicle.prototype.createByAdmin = function (info) {
+    VehicleOperation.prototype.createByAdmin = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_24;
             return __generator(this, function (_a) {
@@ -666,7 +666,7 @@ var Vehicle = /** @class */ (function () {
             });
         });
     };
-    Vehicle.prototype.findByStaff = function (condition) {
+    VehicleOperation.prototype.findByStaff = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_25;
             return __generator(this, function (_a) {
@@ -689,7 +689,7 @@ var Vehicle = /** @class */ (function () {
             });
         });
     };
-    Vehicle.prototype.findByAdmin = function (conditions) {
+    VehicleOperation.prototype.findByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_26;
             return __generator(this, function (_a) {
@@ -712,14 +712,14 @@ var Vehicle = /** @class */ (function () {
             });
         });
     };
-    Vehicle.prototype.getOrders = function (condition) {
+    VehicleOperation.prototype.getShipment = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_27;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_order_ids?vehicle_id=").concat(condition.vehicle_id), {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_shipments?vehicle_id=").concat(condition.vehicle_id), {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -728,14 +728,14 @@ var Vehicle = /** @class */ (function () {
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_27 = _a.sent();
-                        console.log("Error getting orders contained by vehicle: ", error_27.response.data);
+                        console.log("Error getting shipments contained by vehicle: ", error_27.response.data);
                         return [2 /*return*/, error_27.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    Vehicle.prototype.update = function (info, condition) {
+    VehicleOperation.prototype.update = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_28;
             return __generator(this, function (_a) {
@@ -751,21 +751,21 @@ var Vehicle = /** @class */ (function () {
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_28 = _a.sent();
-                        console.log("Error getting orders contained by vehicle: ", error_28.response.data);
+                        console.log("Error updating vehicle: ", error_28.response.data);
                         return [2 /*return*/, error_28.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    Vehicle.prototype.addOrders = function (info, condition) {
+    VehicleOperation.prototype.addShipments = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_29;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/add_orders?vehicle_id=").concat(condition.vehicle_id), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/add_shipments?vehicle_id=").concat(condition.vehicle_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -774,21 +774,21 @@ var Vehicle = /** @class */ (function () {
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_29 = _a.sent();
-                        console.log("Error adding orders to vehicle: ", error_29.response.data);
+                        console.log("Error adding shipments to vehicle: ", error_29.response.data);
                         return [2 /*return*/, error_29.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    Vehicle.prototype.deleteOrders = function (info, condition) {
+    VehicleOperation.prototype.deleteShipments = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_30;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/delete_orders?vehicle_id=").concat(condition.vehicle_id), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/delete_shipments?vehicle_id=").concat(condition.vehicle_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -797,14 +797,14 @@ var Vehicle = /** @class */ (function () {
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_30 = _a.sent();
-                        console.log("Error deleting orders from vehicle: ", error_30.response.data);
+                        console.log("Error deleting shipments from vehicle: ", error_30.response.data);
                         return [2 /*return*/, error_30.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
-    Vehicle.prototype.deleteVehicle = function (condition) {
+    VehicleOperation.prototype.deleteVehicle = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_31;
             return __generator(this, function (_a) {
@@ -827,9 +827,9 @@ var Vehicle = /** @class */ (function () {
             });
         });
     };
-    return Vehicle;
+    return VehicleOperation;
 }());
-exports.Vehicle = Vehicle;
+exports.VehicleOperation = VehicleOperation;
 ;
 ;
 ;

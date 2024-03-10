@@ -614,7 +614,7 @@ interface FindingVehicleByAdminConditions {
     mass: number,
 }
 
-interface GettingOrdersContainedByVehicleCondition {
+interface GettingShipmentsContainedByVehicleCondition {
     vehicle_id: string,
 }
 
@@ -630,19 +630,19 @@ interface UpdatingVehicleCondition {
     vehicle_id: string,
 }
 
-interface AddingOrdersToVehicleInfo {
+interface AddingShipmentsToVehicleInfo {
     order_ids: Object,
 }
 
-interface AddingOrdersToVehicleCondition {
+interface AddingShipmentsToVehicleCondition {
     vehicle_id: string,
 }
 
-interface DeletingOrdersFromVehicleInfo {
+interface DeletingShipmentsFromVehicleInfo {
     order_ids: Object,
 }
 
-interface DeletingOrdersFromVehicleCondition {
+interface DeletingShipmentsFromVehicleCondition {
     vehicle_id: string,
 }
 
@@ -650,7 +650,7 @@ interface DeletingVehicleCondition {
     vehicle_id: string,
 }
 
-class Vehicle {
+class VehicleOperation {
     private baseUrl: string;
 
     constructor() {
@@ -728,16 +728,16 @@ class Vehicle {
         }
     }
 
-    async getOrders(condition: GettingOrdersContainedByVehicleCondition) {
+    async getShipment(condition: GettingShipmentsContainedByVehicleCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/search_order_ids?vehicle_id=${condition.vehicle_id}`, {
+            const response = await axios.post(`${this.baseUrl}/get_shipments?vehicle_id=${condition.vehicle_id}`, {
                 withCredentials: true,
             });
 
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error getting orders contained by vehicle: ", error.response.data);
+            console.log("Error getting shipments contained by vehicle: ", error.response.data);
             return error.response.data;
         }
     }
@@ -752,35 +752,35 @@ class Vehicle {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error getting orders contained by vehicle: ", error.response.data);
+            console.log("Error updating vehicle: ", error.response.data);
             return error.response.data;
         }
     }
 
-    async addOrders(info: AddingOrdersToVehicleInfo, condition: AddingOrdersToVehicleCondition) {
+    async addShipments(info: AddingShipmentsToVehicleInfo, condition: AddingShipmentsToVehicleCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/add_orders?vehicle_id=${condition.vehicle_id}`, info, {
+            const response = await axios.post(`${this.baseUrl}/add_shipments?vehicle_id=${condition.vehicle_id}`, info, {
                 withCredentials: true,
             });
 
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error adding orders to vehicle: ", error.response.data);
+            console.log("Error adding shipments to vehicle: ", error.response.data);
             return error.response.data;
         }
     }
 
-    async deleteOrders(info: DeletingOrdersFromVehicleInfo, condition: DeletingOrdersFromVehicleCondition) {
+    async deleteShipments(info: DeletingShipmentsFromVehicleInfo, condition: DeletingShipmentsFromVehicleCondition) {
         try {
-            const response = await axios.post(`${this.baseUrl}/delete_orders?vehicle_id=${condition.vehicle_id}`, info, {
+            const response = await axios.post(`${this.baseUrl}/delete_shipments?vehicle_id=${condition.vehicle_id}`, info, {
                 withCredentials: true,
             });
 
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error deleting orders from vehicle: ", error.response.data);
+            console.log("Error deleting shipments from vehicle: ", error.response.data);
             return error.response.data;
         }
     }
@@ -2211,7 +2211,7 @@ export {
 	AgencyOperation,
 	TransportPartnersOperation,
 	StaffsOperation,
-	Vehicle,
+	VehicleOperation,
 	BusinessOperation,
 	PartnerStaffOperation,
 	ShippersOperation,
