@@ -679,7 +679,7 @@ var Vehicle = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_25 = _a.sent();
                         console.log("Error finding vehicle: ", error_25);
@@ -702,7 +702,7 @@ var Vehicle = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_26 = _a.sent();
                         console.log("Error finding vehicle: ", error_26);
@@ -725,7 +725,7 @@ var Vehicle = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_27 = _a.sent();
                         console.log("Error getting orders contained by vehicle: ", error_27);
