@@ -594,8 +594,8 @@ var TransportPartnersOperation = /** @class */ (function () {
 exports.TransportPartnersOperation = TransportPartnersOperation;
 var Vehicle = /** @class */ (function () {
     function Vehicle() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/vehicle";
-        this.baseUrl = "http://localhost:5000/api/v1/vehicle";
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/vehicles";
+        this.baseUrl = "http://localhost:5000/api/v1/vehicles";
     }
     Vehicle.prototype.checkExist = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
