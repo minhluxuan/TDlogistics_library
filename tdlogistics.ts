@@ -590,7 +590,7 @@ interface CreatingVehicleByAdminInfo {
     staff_id: string,
     type: string,
     license_plate: string,
-    max_load: string,
+    max_load: number,
 }
 
 interface CreatingVehicleByAgencyInfo {
@@ -598,7 +598,7 @@ interface CreatingVehicleByAgencyInfo {
     staff_id: string,
     type: string,
     license_plate: string,
-    max_load: string,
+    max_load: number,
 }
 
 interface FindingVehicleByStaffCondition {
@@ -611,7 +611,7 @@ interface FindingVehicleByAdminConditions {
     staff_id: string,
     type: string,
     license_plate: string,
-    mass: string,
+    mass: number,
 }
 
 interface GettingOrdersContainedByVehicleCondition {
@@ -623,7 +623,7 @@ interface UpdatingVehicleInfo {
     staff_id: string,
     type: string,
     license_plate: string,
-    max_load: string,
+    max_load: number,
 }
 
 interface UpdatingVehicleCondition {
