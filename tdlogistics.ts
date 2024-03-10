@@ -1855,7 +1855,7 @@ class ShipmentsOperation {
 
     async getOrdersFromShipment(condition: ShipmentID) {
         try {
-			const response = await axios.post(`${this.baseUrl}/get_orders?shipment_id=${condition.shipment_id}`, {
+			const response = await axios.get(`${this.baseUrl}/get_orders?shipment_id=${condition.shipment_id}`, {
 				withCredentials: true,
 			});
 
@@ -2118,6 +2118,92 @@ class OrdersOperation {
     }
 }
 
+interface GettingTasksCondition {
+    task: string,
+    priority: number,
+    deadline: string,
+    completed: boolean,
+}
+
+interface CreatingNewTaskInfo {
+    task: string,
+    priority: number,
+    deadline: string,
+}
+
+interface UpdatingTaskInfo {
+    task: string,
+    priority: number,
+    completed: boolean,
+}
+
+interface TaskId {
+    id: number,
+}
+
+class ScheduleOperation {
+    private baseUrl: string;
+    constructor() {
+        this.baseUrl = "http://localhost:5000/api/v1/schedules";
+    }
+
+    async get(conditions: GettingTasksCondition) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/search`, conditions, {
+                withCredentials: true
+            });
+
+            const data = response.data;
+            return { error: data, data: data.data, message: data.message }
+        } catch (error: any) {
+            console.log("Error getting tasks: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async create(info: CreatingNewTaskInfo) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/create`, info, {
+                withCredentials: true
+            });
+
+            const data = response.data;
+            return { error: data, message: data.message }
+        } catch (error: any) {
+            console.log("Error creating new tasks: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async update(info: UpdatingTaskInfo, condition: TaskId) {
+        try {
+            const response: AxiosResponse = await axios.put(`${this.baseUrl}/update?id=${condition.id}`, info, {
+                withCredentials: true
+            });
+
+            const data = response.data;
+            return { error: data, message: data.message }
+        } catch (error: any) {
+            console.log("Error updating tasks: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async deleteTask(condition: TaskId) {
+        try {
+            const response: AxiosResponse = await axios.delete(`${this.baseUrl}/delete?id=${condition.id}`, {
+                withCredentials: true
+            });
+
+            const data = response.data;
+            return { error: data, message: data.message }
+        } catch (error: any) {
+            console.log("Error deleting tasks: ", error.response.data);
+            return error.response.data;
+        }
+    }
+}
+
 export {
 	UsersAuthenticate,
 	StaffsAuthenticate,
@@ -2131,4 +2217,5 @@ export {
 	ShippersOperation,
     ShipmentsOperation,
     OrdersOperation,
+    ScheduleOperation,
 }

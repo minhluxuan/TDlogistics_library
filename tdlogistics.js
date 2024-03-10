@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.Vehicle = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
+exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.Vehicle = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
 var FormData = require("form-data");
 // const socket = io("http://localhost:5000");
@@ -1855,7 +1855,7 @@ var ShipmentsOperation = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_orders?shipment_id=").concat(condition.shipment_id), {
+                        return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_orders?shipment_id=").concat(condition.shipment_id), {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -2172,3 +2172,102 @@ var OrdersOperation = /** @class */ (function () {
     return OrdersOperation;
 }());
 exports.OrdersOperation = OrdersOperation;
+var ScheduleOperation = /** @class */ (function () {
+    function ScheduleOperation() {
+        this.baseUrl = "http://localhost:5000/api/v1/schedules";
+    }
+    ScheduleOperation.prototype.get = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_86;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data, data: data.data, message: data.message }];
+                    case 2:
+                        error_86 = _a.sent();
+                        console.log("Error getting tasks: ", error_86.response.data);
+                        return [2 /*return*/, error_86.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ScheduleOperation.prototype.create = function (info) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_87;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                                withCredentials: true
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data, message: data.message }];
+                    case 2:
+                        error_87 = _a.sent();
+                        console.log("Error creating new tasks: ", error_87.response.data);
+                        return [2 /*return*/, error_87.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ScheduleOperation.prototype.update = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_88;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?id=").concat(condition.id), info, {
+                                withCredentials: true
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data, message: data.message }];
+                    case 2:
+                        error_88 = _a.sent();
+                        console.log("Error updating tasks: ", error_88.response.data);
+                        return [2 /*return*/, error_88.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ScheduleOperation.prototype.deleteTask = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_89;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?id=").concat(condition.id), {
+                                withCredentials: true
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data, message: data.message }];
+                    case 2:
+                        error_89 = _a.sent();
+                        console.log("Error deleting tasks: ", error_89.response.data);
+                        return [2 /*return*/, error_89.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return ScheduleOperation;
+}());
+exports.ScheduleOperation = ScheduleOperation;
