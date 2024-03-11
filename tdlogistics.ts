@@ -2016,16 +2016,16 @@ export interface GettingOrdersConditions {
     province_dest: string,
     district_dest: string,
     ward_dest: string,
-    service_type: string,
+    service_type: number,
 }
 
 export interface CreatingOrderInformation {
     name_receiver: string,
     phone_number_receiver: string,
-    mass: string,
-    height: string,
-    width: string,
-    length: string,
+    mass: number,
+    height: number,
+    width: number,
+    length: number,
     province_source: string,
     district_source: string,
     ward_source: string,
