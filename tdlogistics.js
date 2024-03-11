@@ -774,7 +774,7 @@ var VehicleOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, info: data.info, message: data.message }];
                     case 2:
                         error_29 = _a.sent();
                         console.log("Error adding shipments to vehicle: ", error_29.response.data);
@@ -797,7 +797,7 @@ var VehicleOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, info: data.info, message: data.message }];
                     case 2:
                         error_30 = _a.sent();
                         console.log("Error deleting shipments from vehicle: ", error_30.response.data);

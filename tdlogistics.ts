@@ -765,7 +765,7 @@ class VehicleOperation {
             });
 
             const data = response.data;
-            return { error: data.error, message: data.message };
+            return { error: data.error, info: data.info, message: data.message };
         } catch (error: any) {
             console.log("Error adding shipments to vehicle: ", error.response.data);
             return error.response.data;
@@ -779,7 +779,7 @@ class VehicleOperation {
             });
 
             const data = response.data;
-            return { error: data.error, message: data.message };
+            return { error: data.error, info: data.info, message: data.message };
         } catch (error: any) {
             console.log("Error deleting shipments from vehicle: ", error.response.data);
             return error.response.data;
