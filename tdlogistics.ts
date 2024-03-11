@@ -2021,7 +2021,7 @@ export interface GettingOrdersConditions {
 
 export interface CreatingOrderInformation {
     name_receiver: string,
-    phone_receiver: string,
+    phone_number_receiver: string,
     mass: string,
     height: string,
     width: string,
