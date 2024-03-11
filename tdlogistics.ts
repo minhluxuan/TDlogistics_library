@@ -632,7 +632,7 @@ export interface UpdatingVehicleCondition {
 }
 
 export interface AddingShipmentsToVehicleInfo {
-    order_ids: Object,
+    shipment_ids: Object,
 }
 
 export interface AddingShipmentsToVehicleCondition {
@@ -640,7 +640,7 @@ export interface AddingShipmentsToVehicleCondition {
 }
 
 export interface DeletingShipmentsFromVehicleInfo {
-    order_ids: Object,
+    shipment_ids: Object,
 }
 
 export interface DeletingShipmentsFromVehicleCondition {
@@ -1839,6 +1839,20 @@ class ShipmentsOperation {
 		this.baseUrl = "http://localhost:5000/api/v1/shipments";
 	}
 
+    async check(condition: ShipmentID) {
+        try {
+			const response = await axios.get(`${this.baseUrl}/check?shipment_id=${condition.shipment_id}`, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, existed: data.existed, message: data.message };
+		} catch (error: any) {
+			console.log("Error checking exist shipment: ", error.response.data);
+			return error.response.data;
+		}
+    }
+
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
 	async create(info: CreatingShipmentInfo) {
 		try {
@@ -1849,7 +1863,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error creating shipment: ", error.response.data);
 			return error.response.data;
 		}
 	}
