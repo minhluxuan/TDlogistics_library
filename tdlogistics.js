@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.VehicleOperation = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
+exports.AdministrativeOperation = exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.VehicleOperation = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
 var socket_io_client_1 = require("socket.io-client");
 var FormData = require("form-data");
@@ -2303,3 +2303,33 @@ var ScheduleOperation = /** @class */ (function () {
     return ScheduleOperation;
 }());
 exports.ScheduleOperation = ScheduleOperation;
+var AdministrativeOperation = /** @class */ (function () {
+    function AdministrativeOperation() {
+        this.baseUrl = "http://localhost:5000/api/v1/administrative";
+    }
+    AdministrativeOperation.prototype.get = function (conditions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_91;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data, data: data.data, message: data.message }];
+                    case 2:
+                        error_91 = _a.sent();
+                        console.log("Error getting tasks: ", error_91.response.data);
+                        return [2 /*return*/, error_91.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return AdministrativeOperation;
+}());
+exports.AdministrativeOperation = AdministrativeOperation;
