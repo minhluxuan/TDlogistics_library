@@ -38,23 +38,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.VehicleOperation = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
-var socket_io_client_1 = require("socket.io-client");
 var FormData = require("form-data");
-var socket = (0, socket_io_client_1.io)("http://localhost:5000", {
-    withCredentials: true,
-});
-socket.on("connect", function () {
-    console.log("Connected to server.");
-});
-socket.on("notifyError", function (message) {
-    // showing custome notification on UI
-});
-socket.on("notifySuccessCreatedNewOrder", function (message) {
-    // showing custome notification on UI
-});
-socket.on("notifyFailCreatedNewOrder", function (message) {
-    // showing custome notification on UI
-});
+// const socket = io("http://localhost:5000", {
+//     withCredentials: true,
+// });
+// socket.on("connect", () => {
+//     console.log("Connected to server.");
+// });
+// socket.on("notifyError", message => {
+//     // showing custome notification on UI
+// });
+// socket.on("notifySuccessCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
+// socket.on("notifyFailCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
 var UsersAuthenticate = /** @class */ (function () {
     function UsersAuthenticate() {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
@@ -2141,14 +2140,14 @@ var OrdersOperation = /** @class */ (function () {
             });
         });
     };
-    OrdersOperation.prototype.create = function (info) {
+    OrdersOperation.prototype.create = function (socket, info) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 try {
                     socket.emit("notifyNewOrderFromUser", info);
                 }
                 catch (error) {
-                    console.log("Error creating new order: ", error.response.data);
+                    console.log("Error creating new order: ", error);
                 }
                 return [2 /*return*/];
             });

@@ -2095,7 +2095,7 @@ class OrdersOperation {
         try {
             socket.emit("notifyNewOrderFromUser", info)
         } catch (error: any) {
-            console.log("Error creating new order: ", error.response.data);
+            console.log("Error creating new order: ", error);
         }
     }
 
