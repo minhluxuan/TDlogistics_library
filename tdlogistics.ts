@@ -2214,6 +2214,33 @@ class ScheduleOperation {
     }
 }
 
+export interface AdministrativeInfo {
+    province?: string,
+    district?: string,
+    ward?: string
+}
+
+class AdministrativeOperation {
+    private baseUrl: string;
+    constructor() {
+        this.baseUrl = "http://localhost:5000/api/v1/administrative";
+    }
+
+    async get(conditions: AdministrativeInfo) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/search`, conditions, {
+                withCredentials: true
+            });
+
+            const data = response.data;
+            return { error: data, data: data.data, message: data.message }
+        } catch (error: any) {
+            console.log("Error getting tasks: ", error.response.data);
+            return error.response.data;
+        }
+    }
+}
+
 export {
 	UsersAuthenticate,
 	StaffsAuthenticate,
@@ -2228,4 +2255,5 @@ export {
     ShipmentsOperation,
     OrdersOperation,
     ScheduleOperation,
+    AdministrativeOperation,
 }
