@@ -1392,16 +1392,16 @@ class BusinessOperation {
 			} 
 	}
 
-	async findContract(conditions: FindingContractCondition) {
+	async findContract(condition: FindingContractCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_contract`, conditions, {
+			const response = await axios.get(`${this.baseUrl}/get_contract?business_id=${condition.business_id}`, {
 				withCredentials: true,
 			});
 
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
+			console.log("Error finding contract: ", error.response.data);
 			return error.response.data;
 		}
 	}
