@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import FormData from "form-data";
+import FormData = require("form-data") ;
 
 class UsersAuthenticate {
     private baseUrl: string;
@@ -468,6 +468,10 @@ interface DeletingTransportPartnerCondition {
     transport_partner_id: string,
 }
 
+interface FindingContractPartnerCondition {
+    transport_partner_id: string,
+}
+
 class TransportPartnersOperation {
     private baseUrl: string;
 
@@ -559,6 +563,20 @@ class TransportPartnersOperation {
             return error.response.data;
         }
     }
+
+    async findContract(conditions: FindingContractPartnerCondition) {
+		try {
+			const response = await axios.post(`${this.baseUrl}/get_contract`, conditions, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, data: data.data, message: data.message };
+		} catch (error: any) {
+			console.log("Error finding partner staff: ", error.response.data);
+			return error.response.data;
+		}
+	}
 }
 
 interface CheckingExistVehicleCondition {
@@ -1475,7 +1493,7 @@ interface UpdatingPartnerStaffAvatarInfo {
 interface FindingPartnerAvatarAndLicenseCondition {
 	staff_id: string
 };
-  
+
 class PartnerStaffOperation {
 	private baseUrl: string;
 
