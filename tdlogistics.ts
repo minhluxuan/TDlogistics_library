@@ -1062,18 +1062,20 @@ class StaffsOperation {
 	}
 
 	// ROLE: any.
-	async findAvatar (condition: FindingAvatarCondition) {
+	async getAvatar (condition: FindingAvatarCondition) {
 		try {
-			const response: AxiosResponse = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
-				withCredentials: true,
-			});
-
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
-		}
+            const response = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
+                responseType: 'arraybuffer',
+            });
+    
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const imgUrl = URL.createObjectURL(blob);
+    
+            return imgUrl;
+        } catch (error) {
+            console.error("Error getting avatar: ", error);
+            throw error;
+        }
 	}
 }
   
@@ -1393,16 +1395,18 @@ class BusinessOperation {
 
 	async findContract(condition: FindingContractCondition) {
 		try {
-			const response = await axios.get(`${this.baseUrl}/get_contract?business_id=${condition.business_id}`, {
-				withCredentials: true,
-			});
+            const response = await axios.get(`${this.baseUrl}/get_contract?business_id=${condition.business_id}`, {
+                responseType: 'arraybuffer',
+            });
 
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding contract: ", error.response.data);
-			return error.response.data;
-		}
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const fileUrl = URL.createObjectURL(blob);
+    
+            return fileUrl;
+        } catch (error) {
+            console.error("Error getting contract: ", error);
+            throw error;
+        }
 	}
 }
 
@@ -1699,46 +1703,52 @@ class PartnerStaffOperation {
 	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
 	async findPartnerStaffAvatar(condition: FindingPartnerAvatarAndLicenseCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
-				withCredentials: true,
-			});
+            const response = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
+                responseType: 'arraybuffer',
+            });
 
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
-		}
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const fileUrl = URL.createObjectURL(blob);
+    
+            return fileUrl;
+        } catch (error) {
+            console.error("Error getting avatar: ", error);
+            throw error;
+        }
 	} 
 
 	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
 	async findPartnerStaffLicenseBefore(condition: FindingPartnerAvatarAndLicenseCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_license_before?staff_id=${condition.staff_id}`, {
-				withCredentials: true,
-			});
+            const response = await axios.get(`${this.baseUrl}/get_license_before?staff_id=${condition.staff_id}`, {
+                responseType: 'arraybuffer',
+            });
 
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
-		}
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const fileUrl = URL.createObjectURL(blob);
+    
+            return fileUrl;
+        } catch (error) {
+            console.error("Error getting license front: ", error);
+            throw error;
+        }
 	} 
 
 	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
 	async findPartnerStaffLicenseAfter(condition: FindingPartnerAvatarAndLicenseCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_license_after?staff_id=${condition.staff_id}`, {
-				withCredentials: true,
-			});
+            const response = await axios.get(`${this.baseUrl}/get_license_after?staff_id=${condition.staff_id}`, {
+                responseType: 'arraybuffer',
+            });
 
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
-		}
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const fileUrl = URL.createObjectURL(blob);
+    
+            return fileUrl;
+        } catch (error) {
+            console.error("Error getting license after: ", error);
+            throw error;
+        }
 	} 
 }
   
@@ -2058,7 +2068,7 @@ export interface CancelingOrderCondition {
 }
 
 export interface UploadingOrderFileCondition {
-    file: Buffer,
+    file: File,
 }
 
 class OrdersOperation {
@@ -2101,6 +2111,9 @@ class OrdersOperation {
             formData.append("file", info.file);
 
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/check_file_format`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
                 withCredentials: true,
             });
 
@@ -2126,6 +2139,9 @@ class OrdersOperation {
             formData.append("file", info.file);
 
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_by_file`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
                 withCredentials: true,
             });
 
