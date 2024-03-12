@@ -632,7 +632,7 @@ export interface UpdatingVehicleCondition {
 }
 
 export interface AddingShipmentsToVehicleInfo {
-    order_ids: Object,
+    shipment_ids: Object,
 }
 
 export interface AddingShipmentsToVehicleCondition {
@@ -640,7 +640,7 @@ export interface AddingShipmentsToVehicleCondition {
 }
 
 export interface DeletingShipmentsFromVehicleInfo {
-    order_ids: Object,
+    shipment_ids: Object,
 }
 
 export interface DeletingShipmentsFromVehicleCondition {
@@ -765,7 +765,7 @@ class VehicleOperation {
             });
 
             const data = response.data;
-            return { error: data.error, message: data.message };
+            return { error: data.error, info: data.info, message: data.message };
         } catch (error: any) {
             console.log("Error adding shipments to vehicle: ", error.response.data);
             return error.response.data;
@@ -779,7 +779,7 @@ class VehicleOperation {
             });
 
             const data = response.data;
-            return { error: data.error, message: data.message };
+            return { error: data.error, info: data.info, message: data.message };
         } catch (error: any) {
             console.log("Error deleting shipments from vehicle: ", error.response.data);
             return error.response.data;
@@ -1392,16 +1392,16 @@ class BusinessOperation {
 			} 
 	}
 
-	async findContract(conditions: FindingContractCondition) {
+	async findContract(condition: FindingContractCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_contract`, conditions, {
+			const response = await axios.get(`${this.baseUrl}/get_contract?business_id=${condition.business_id}`, {
 				withCredentials: true,
 			});
 
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
+			console.log("Error finding contract: ", error.response.data);
 			return error.response.data;
 		}
 	}
@@ -1744,7 +1744,7 @@ class PartnerStaffOperation {
 }
   
 export interface GettingTasksCondition {
-	option: number,
+	option?: number,
 }
 
 export interface ConfirmingCompletedTaskInfo {
@@ -1752,7 +1752,7 @@ export interface ConfirmingCompletedTaskInfo {
 }
 
 export interface GettingHistoryInfo {
-	option: number,
+	option?: number,
 }
 
 class ShippersOperation {
@@ -1839,6 +1839,20 @@ class ShipmentsOperation {
 		this.baseUrl = "http://localhost:5000/api/v1/shipments";
 	}
 
+    async check(condition: ShipmentID) {
+        try {
+			const response = await axios.get(`${this.baseUrl}/check?shipment_id=${condition.shipment_id}`, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, existed: data.existed, message: data.message };
+		} catch (error: any) {
+			console.log("Error checking exist shipment: ", error.response.data);
+			return error.response.data;
+		}
+    }
+
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
 	async create(info: CreatingShipmentInfo) {
 		try {
@@ -1849,7 +1863,7 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
+			console.log("Error creating shipment: ", error.response.data);
 			return error.response.data;
 		}
 	}
@@ -1994,24 +2008,24 @@ export interface CheckingExistOrderCondition {
 }
 
 export interface GettingOrdersConditions {
-    name_receiver: string,
-    phone_receiver: string,
-    province_source: string,
-    district_source: string,
-    ward_source: string,
-    province_dest: string,
-    district_dest: string,
-    ward_dest: string,
-    service_type: string,
+    name_receiver?: string,
+    phone_receiver?: string,
+    province_source?: string,
+    district_source?: string,
+    ward_source?: string,
+    province_dest?: string,
+    district_dest?: string,
+    ward_dest?: string,
+    service_type?: number,
 }
 
 export interface CreatingOrderInformation {
     name_receiver: string,
-    phone_receiver: string,
-    mass: string,
-    height: string,
-    width: string,
-    length: string,
+    phone_number_receiver: string,
+    mass: number,
+    height: number,
+    width: number,
+    length: number,
     province_source: string,
     district_source: string,
     ward_source: string,
@@ -2116,10 +2130,10 @@ class OrdersOperation {
 }
 
 export interface GettingTasksCondition {
-    task: string,
-    priority: number,
-    deadline: string,
-    completed: boolean,
+    task?: string,
+    priority?: number,
+    deadline?: string,
+    completed?: boolean,
 }
 
 export interface CreatingNewTaskInfo {
