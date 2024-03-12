@@ -2057,6 +2057,10 @@ export interface CancelingOrderCondition {
     order_id: string,
 }
 
+export interface UploadingOrderFileCondition {
+    file: Buffer,
+}
+
 class OrdersOperation {
     private baseUrl: string;
     constructor() {
@@ -2091,11 +2095,45 @@ class OrdersOperation {
         }
     }
 
+    async checkFileFormat(info: UploadingOrderFileCondition) {
+        try {
+            const formData = new FormData();
+            formData.append("file", info.file);
+
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/check_file_format`, formData, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+			return { error: data.error, valid: data.valid, message: data.message };
+        } catch (error: any) {
+            console.error('Error checking file format:', error.response.data);
+			return error.response.data;
+        }
+    }
+
     async create(socket: any, info: CreatingOrderInformation) {
         try {
             socket.emit("notifyNewOrderFromUser", info)
         } catch (error: any) {
             console.log("Error creating new order: ", error);
+        }
+    }
+
+    async createByFile(info: UploadingOrderFileCondition) {
+        try {
+            const formData = new FormData();
+            formData.append("file", info.file);
+
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_by_file`, formData, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+			return { error: data.error, valid: data.valid, message: data.message };
+        } catch (error: any) {
+            console.error('Error creating orders by file:', error.response.data);
+			return error.response.data;
         }
     }
 
