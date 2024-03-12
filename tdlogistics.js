@@ -86,7 +86,7 @@ var UsersAuthenticate = /** @class */ (function () {
             });
         });
     };
-    UsersAuthenticate.prototype.verifyOTP = function (phoneNumber, email, otp) {
+    UsersAuthenticate.prototype.verifyOTP = function (phoneNumber, otp) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_2;
             return __generator(this, function (_a) {
@@ -95,7 +95,6 @@ var UsersAuthenticate = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/verify_otp"), {
                                 phone_number: phoneNumber,
-                                email: email,
                                 otp: otp,
                             }, {
                                 withCredentials: true,
@@ -204,7 +203,7 @@ var StaffsAuthenticate = /** @class */ (function () {
 }());
 exports.StaffsAuthenticate = StaffsAuthenticate;
 var UsersOperation = /** @class */ (function () {
-    function UsersOperation(phoneNumber) {
+    function UsersOperation() {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
         this.baseUrl = "http://localhost:5000/api/v1/users";
     }

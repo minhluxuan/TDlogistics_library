@@ -2,25 +2,25 @@ import axios, { AxiosResponse } from "axios";
 import { io } from 'socket.io-client';
 const FormData = require("form-data");
 
-const socket = io("http://localhost:5000", {
-    withCredentials: true,
-});
+// const socket = io("http://localhost:5000", {
+//     withCredentials: true,
+// });
 
-socket.on("connect", () => {
-    console.log("Connected to server.");
-});
+// socket.on("connect", () => {
+//     console.log("Connected to server.");
+// });
 
-socket.on("notifyError", message => {
-    // showing custome notification on UI
-});
+// socket.on("notifyError", message => {
+//     // showing custome notification on UI
+// });
 
-socket.on("notifySuccessCreatedNewOrder", message => {
-    // showing custome notification on UI
-});
+// socket.on("notifySuccessCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
 
-socket.on("notifyFailCreatedNewOrder", message => {
-    // showing custome notification on UI
-});
+// socket.on("notifyFailCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
 
 class UsersAuthenticate {
     private baseUrl: string;
@@ -46,11 +46,10 @@ class UsersAuthenticate {
         }
     }
 
-    async verifyOTP(phoneNumber: string, email: string, otp: string): Promise<any> {
+    async verifyOTP(phoneNumber: string, otp: string): Promise<any> {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/verify_otp`, {
                 phone_number: phoneNumber,
-                email: email,
                 otp: otp,
             }, {
                 withCredentials: true,
@@ -154,7 +153,7 @@ export interface UpdatingUserCondition {
 class UsersOperation {
     private baseUrl: string;
 
-    constructor(phoneNumber: string) {
+    constructor() {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
         this.baseUrl = "http://localhost:5000/api/v1/users";
     }
@@ -2092,7 +2091,7 @@ class OrdersOperation {
         }
     }
 
-    async create(info: CreatingOrderInformation) {
+    async create(socket: any, info: CreatingOrderInformation) {
         try {
             socket.emit("notifyNewOrderFromUser", info)
         } catch (error: any) {
@@ -2129,7 +2128,7 @@ class OrdersOperation {
     }
 }
 
-export interface GettingTasksCondition {
+export interface GettingTasksConditions {
     task?: string,
     priority?: number,
     deadline?: string,
@@ -2158,7 +2157,7 @@ class ScheduleOperation {
         this.baseUrl = "http://localhost:5000/api/v1/schedules";
     }
 
-    async get(conditions: GettingTasksCondition) {
+    async get(conditions: GettingTasksConditions) {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/search`, conditions, {
                 withCredentials: true
