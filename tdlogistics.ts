@@ -1744,7 +1744,7 @@ class PartnerStaffOperation {
 }
   
 export interface GettingTasksCondition {
-	option: number,
+	option?: number,
 }
 
 export interface ConfirmingCompletedTaskInfo {
@@ -1752,7 +1752,7 @@ export interface ConfirmingCompletedTaskInfo {
 }
 
 export interface GettingHistoryInfo {
-	option: number,
+	option?: number,
 }
 
 class ShippersOperation {
@@ -2008,15 +2008,15 @@ export interface CheckingExistOrderCondition {
 }
 
 export interface GettingOrdersConditions {
-    name_receiver: string,
-    phone_receiver: string,
-    province_source: string,
-    district_source: string,
-    ward_source: string,
-    province_dest: string,
-    district_dest: string,
-    ward_dest: string,
-    service_type: number,
+    name_receiver?: string,
+    phone_receiver?: string,
+    province_source?: string,
+    district_source?: string,
+    ward_source?: string,
+    province_dest?: string,
+    district_dest?: string,
+    ward_dest?: string,
+    service_type?: number,
 }
 
 export interface CreatingOrderInformation {
@@ -2130,10 +2130,10 @@ class OrdersOperation {
 }
 
 export interface GettingTasksCondition {
-    task: string,
-    priority: number,
-    deadline: string,
-    completed: boolean,
+    task?: string,
+    priority?: number,
+    deadline?: string,
+    completed?: boolean,
 }
 
 export interface CreatingNewTaskInfo {
