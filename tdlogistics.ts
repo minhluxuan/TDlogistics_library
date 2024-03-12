@@ -46,11 +46,10 @@ class UsersAuthenticate {
         }
     }
 
-    async verifyOTP(phoneNumber: string, email: string, otp: string): Promise<any> {
+    async verifyOTP(phoneNumber: string, otp: string): Promise<any> {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/verify_otp`, {
                 phone_number: phoneNumber,
-                email: email,
                 otp: otp,
             }, {
                 withCredentials: true,
@@ -154,7 +153,7 @@ export interface UpdatingUserCondition {
 class UsersOperation {
     private baseUrl: string;
 
-    constructor(phoneNumber: string) {
+    constructor() {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
         this.baseUrl = "http://localhost:5000/api/v1/users";
     }
