@@ -2129,7 +2129,7 @@ class OrdersOperation {
     }
 }
 
-export interface GettingTasksCondition {
+export interface GettingTasksConditions {
     task?: string,
     priority?: number,
     deadline?: string,
@@ -2158,7 +2158,7 @@ class ScheduleOperation {
         this.baseUrl = "http://localhost:5000/api/v1/schedules";
     }
 
-    async get(conditions: GettingTasksCondition) {
+    async get(conditions: GettingTasksConditions) {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/search`, conditions, {
                 withCredentials: true
