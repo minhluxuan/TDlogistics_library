@@ -1063,9 +1063,9 @@ class StaffsOperation {
 	}
 
 	// ROLE: any.
-	async findAvatar (conditions: FindingAvatarCondition) {
+	async findAvatar (condition: FindingAvatarCondition) {
 		try {
-			const response: AxiosResponse = await axios.post(`${this.baseUrl}/get_avatar`, conditions, {
+			const response: AxiosResponse = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
 				withCredentials: true,
 			});
 
