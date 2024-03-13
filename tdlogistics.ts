@@ -2028,7 +2028,7 @@ export interface GettingOrdersConditions {
     service_type?: number,
 }
 
-export interface CreatingOrderInformation {
+export interface CreatingOrderByUserInformation {
     name_receiver: string,
     phone_number_receiver: string,
     mass: number,
@@ -2048,7 +2048,32 @@ export interface CreatingOrderInformation {
     long_destination: number,
     lat_destination: number,
     COD: number,
-    service_type: number,
+    service_type: string,
+}
+
+export interface CreatingOrderByAdminAndAgencyInformation {
+    name_sender: string,
+    phone_number_sender: string,
+    name_receiver: string,
+    phone_number_receiver: string,
+    mass: number,
+    height: number,
+    width: number,
+    length: number,
+    province_source: string,
+    district_source: string,
+    ward_source: string,
+    detail_source: string,
+    province_dest: string,
+    district_dest: string,
+    ward_dest: string,
+    detail_dest: string,
+    long_source: number,
+    lat_source: number,
+    long_destination: number,
+    lat_destination: number,
+    COD: number,
+    service_type: string,
 }
 
 export interface UpdatingOrderCondition {
@@ -2077,8 +2102,8 @@ export interface CalculatingFeeInfo {
     ward_source: string,
     detail_source: string,
     province_dest: string,
-    province_district: string,
-    province_ward: string,
+    district_dest: string,
+    ward_dest: string,
     detail_dest: string,
     service_type: string,
     length: number,
@@ -2140,9 +2165,17 @@ class OrdersOperation {
         }
     }
 
-    async create(socket: any, info: CreatingOrderInformation) {
+    async createByUser(socket: any, info: CreatingOrderByUserInformation) {
         try {
-            socket.emit("notifyNewOrderFromUser", info)
+            socket.emit("notifyNewOrder", info)
+        } catch (error: any) {
+            console.log("Error creating new order: ", error);
+        }
+    }
+
+    async createByAdminAndAgency(socket: any, info: CreatingOrderByAdminAndAgencyInformation) {
+        try {
+            socket.emit("notifyNewOrder", info)
         } catch (error: any) {
             console.log("Error creating new order: ", error);
         }

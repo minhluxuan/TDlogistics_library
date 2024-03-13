@@ -2173,11 +2173,24 @@ var OrdersOperation = /** @class */ (function () {
             });
         });
     };
-    OrdersOperation.prototype.create = function (socket, info) {
+    OrdersOperation.prototype.createByUser = function (socket, info) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 try {
-                    socket.emit("notifyNewOrderFromUser", info);
+                    socket.emit("notifyNewOrder", info);
+                }
+                catch (error) {
+                    console.log("Error creating new order: ", error);
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    OrdersOperation.prototype.createByAdminAndAgency = function (socket, info) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                try {
+                    socket.emit("notifyNewOrder", info);
                 }
                 catch (error) {
                     console.log("Error creating new order: ", error);
