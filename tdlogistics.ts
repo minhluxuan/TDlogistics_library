@@ -2071,6 +2071,21 @@ export interface UploadingOrderFileCondition {
     file: File,
 }
 
+export interface CalculatingFeeInfo {
+    province_source: string,
+    district_source: string,
+    ward_source: string,
+    detail_source: string,
+    province_dest: string,
+    province_district: string,
+    province_ward: string,
+    detail_dest: string,
+    service_type: string,
+    length: number,
+    width: number,
+    height: number,
+}
+
 class OrdersOperation {
     private baseUrl: string;
     constructor() {
@@ -2146,7 +2161,7 @@ class OrdersOperation {
             });
 
             const data = response.data;
-			return { error: data.error, valid: data.valid, message: data.message };
+			return { error: data.error, message: data.message };
         } catch (error: any) {
             console.error('Error creating orders by file:', error.response.data);
 			return error.response.data;
@@ -2177,6 +2192,20 @@ class OrdersOperation {
             return { error: data.error, message: data.message };
         } catch (error: any) {
             console.log("Error canceling order: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async calculateFee(info: CalculatingFeeInfo) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/calculate_fee`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error: any) {
+            console.log("Error calculating fee: ", error.response.data);
             return error.response.data;
         }
     }
