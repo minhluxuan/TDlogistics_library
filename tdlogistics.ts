@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 const FormData = require("form-data");
 
 // const socket = io("http://localhost:5000", {
@@ -237,19 +237,19 @@ export interface CreatingAgencyInfo {
     user_salary: number,
 
     type: string,
-    level: string,
+    level: number,
     postal_code: string,
     agency_name: string,
     province: string,
     district: string,
     town: string,
     detail_address: string,
-    latitude: string,
-    longitude: string,
-    managed_wards: string,
+    latitude: number,
+    longitude: number,
+    managed_wards: string[],
     phone_number: string,
     email: string,
-    commission_rate: string,
+    commission_rate: number,
     bin: string,
     bank: string,
 }
