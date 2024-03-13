@@ -2119,9 +2119,32 @@ var OrdersOperation = /** @class */ (function () {
             });
         });
     };
-    OrdersOperation.prototype.checkExist = function (condition) {
+    OrdersOperation.prototype.calculatefee = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_84;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/calculatefee"), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_84 = _a.sent();
+                        console.log("Error getting orders: ", error_84.response.data);
+                        return [2 /*return*/, error_84.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    OrdersOperation.prototype.checkExist = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_85;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2134,9 +2157,9 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, exist: data.existed, message: data.message }];
                     case 2:
-                        error_84 = _a.sent();
-                        console.log("Error checking exist order: ", error_84.response.data);
-                        return [2 /*return*/, error_84.response.data];
+                        error_85 = _a.sent();
+                        console.log("Error checking exist order: ", error_85.response.data);
+                        return [2 /*return*/, error_85.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2157,7 +2180,7 @@ var OrdersOperation = /** @class */ (function () {
     };
     OrdersOperation.prototype.update = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_85;
+            var response, data, error_86;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2170,9 +2193,9 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_85 = _a.sent();
-                        console.log("Error updating order: ", error_85.response.data);
-                        return [2 /*return*/, error_85.response.data];
+                        error_86 = _a.sent();
+                        console.log("Error updating order: ", error_86.response.data);
+                        return [2 /*return*/, error_86.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2180,7 +2203,7 @@ var OrdersOperation = /** @class */ (function () {
     };
     OrdersOperation.prototype.cancel = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_86;
+            var response, data, error_87;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2193,9 +2216,9 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_86 = _a.sent();
-                        console.log("Error canceling order: ", error_86.response.data);
-                        return [2 /*return*/, error_86.response.data];
+                        error_87 = _a.sent();
+                        console.log("Error canceling order: ", error_87.response.data);
+                        return [2 /*return*/, error_87.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2210,7 +2233,7 @@ var ScheduleOperation = /** @class */ (function () {
     }
     ScheduleOperation.prototype.get = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_87;
+            var response, data, error_88;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2223,9 +2246,9 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, data: data.data, message: data.message }];
                     case 2:
-                        error_87 = _a.sent();
-                        console.log("Error getting tasks: ", error_87.response.data);
-                        return [2 /*return*/, error_87.response.data];
+                        error_88 = _a.sent();
+                        console.log("Error getting tasks: ", error_88.response.data);
+                        return [2 /*return*/, error_88.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2233,7 +2256,7 @@ var ScheduleOperation = /** @class */ (function () {
     };
     ScheduleOperation.prototype.create = function (info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_88;
+            var response, data, error_89;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2246,9 +2269,9 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_88 = _a.sent();
-                        console.log("Error creating new tasks: ", error_88.response.data);
-                        return [2 /*return*/, error_88.response.data];
+                        error_89 = _a.sent();
+                        console.log("Error creating new tasks: ", error_89.response.data);
+                        return [2 /*return*/, error_89.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2256,7 +2279,7 @@ var ScheduleOperation = /** @class */ (function () {
     };
     ScheduleOperation.prototype.update = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_89;
+            var response, data, error_90;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2269,9 +2292,9 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_89 = _a.sent();
-                        console.log("Error updating tasks: ", error_89.response.data);
-                        return [2 /*return*/, error_89.response.data];
+                        error_90 = _a.sent();
+                        console.log("Error updating tasks: ", error_90.response.data);
+                        return [2 /*return*/, error_90.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2279,7 +2302,7 @@ var ScheduleOperation = /** @class */ (function () {
     };
     ScheduleOperation.prototype.deleteTask = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_90;
+            var response, data, error_91;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2292,9 +2315,9 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_90 = _a.sent();
-                        console.log("Error deleting tasks: ", error_90.response.data);
-                        return [2 /*return*/, error_90.response.data];
+                        error_91 = _a.sent();
+                        console.log("Error deleting tasks: ", error_91.response.data);
+                        return [2 /*return*/, error_91.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2309,7 +2332,7 @@ var AdministrativeOperation = /** @class */ (function () {
     }
     AdministrativeOperation.prototype.get = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_91;
+            var response, data, error_92;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2322,9 +2345,9 @@ var AdministrativeOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, data: data.data, message: data.message }];
                     case 2:
-                        error_91 = _a.sent();
-                        console.log("Error getting tasks: ", error_91.response.data);
-                        return [2 /*return*/, error_91.response.data];
+                        error_92 = _a.sent();
+                        console.log("Error getting tasks: ", error_92.response.data);
+                        return [2 /*return*/, error_92.response.data];
                     case 3: return [2 /*return*/];
                 }
             });

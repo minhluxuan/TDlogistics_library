@@ -2058,6 +2058,22 @@ export interface CancelingOrderCondition {
     order_id: string,
 }
 
+export interface CalculatingFeeInfo {
+    mass: number,
+    height: number,
+    width: number,
+    length: number,
+    province_source: string,
+    district_source: string,
+    ward_source: string,
+    detail_source: string,
+    province_dest: string, 
+    district_dest: string,
+    ward_dest: string,
+    detail_dest: string,    
+    service_type: string //valid("HTT", "CPN", "TTK", "T60")
+}
+
 class OrdersOperation {
     private baseUrl: string;
     constructor() {
@@ -2067,6 +2083,20 @@ class OrdersOperation {
     async get(conditions: GettingOrdersConditions) {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/search`, conditions, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error: any) {
+            console.log("Error getting orders: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+    async calculatefee(info: CalculatingFeeInfo) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/calculatefee`, info, {
                 withCredentials: true,
             });
 
