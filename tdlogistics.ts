@@ -1,10 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-// import { io } from 'socket.io-client';
 const FormData = require("form-data");
-
-// const socket = io("http://localhost:5000", {
-//     withCredentials: true,
-// });
 
 // socket.on("connect", () => {
 //     console.log("Connected to server.");
@@ -2086,6 +2081,7 @@ export interface UpdatingOrderInfo {
     width: number,
     length: number,
     COD: number,
+    status_code: number,
 }
 
 export interface CancelingOrderCondition {
