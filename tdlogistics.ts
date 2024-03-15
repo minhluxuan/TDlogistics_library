@@ -925,7 +925,7 @@ export interface DeletingStaffCondition {
 };
   
 export interface UpdatingAvatarStaffInfo {
-    avatarFile: Buffer,
+    avatarFile: File,
 };
   
 export interface UpdatingPasswordsInfo {
@@ -1066,13 +1066,12 @@ class StaffsOperation {
 			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_avatar?staff_id=${condition.staff_id}`, formData , {
 				withCredentials: true,
 			});
-		
-			console.log('Image uploaded successfully:', response.data);
-			return response.data; // Trả về dữ liệu phản hồi từ máy chủ
 	
+			const data = response.data;
+            return { error: data.error, message: data.message };
 		} catch (error: any) {
 			console.error('Error uploading image:', error.response.data);
-			throw error; // Ném lỗi để xử lý bên ngoài
+			return error.response.data; // Ném lỗi để xử lý bên ngoài
 		}   
 	}
 
@@ -1119,9 +1118,9 @@ class StaffsOperation {
             const imgUrl = URL.createObjectURL(blob);
     
             return imgUrl;
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error getting avatar: ", error);
-            throw error;
+            return error.response.data;
         }
 	}
 }
@@ -1264,7 +1263,7 @@ export interface DeletingBusinessCondition {
 }
   
 export interface UpdatingContractInfo {
-    contractFile: Buffer,
+    contractFile: File,
 }
   
 export interface FindingContractCondition {
@@ -1431,12 +1430,11 @@ class BusinessOperation {
 				withCredentials: true,
 			});
 		
-			console.log('File uploaded successfully:', response.data);
-			return response.data; // Trả về dữ liệu phản hồi từ máy chủ
-	
+			const data = response.data;
+            return { error: data.error, message: data.message };
 			} catch (error: any) {
-			console.error('Error uploading file:', error.response.data);
-			throw error; // Ném lỗi để xử lý bên ngoài
+                console.error('Error uploading file:', error.response.data);
+                return error.response.data; // Ném lỗi để xử lý bên ngoài
 			} 
 	}
 
@@ -1450,9 +1448,9 @@ class BusinessOperation {
             const fileUrl = URL.createObjectURL(blob);
     
             return fileUrl;
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error getting contract: ", error);
-            throw error;
+            return error.response.data;
         }
 	}
 }
@@ -1548,12 +1546,12 @@ export interface CheckingExistPartnerStaffCondition {
 
 
 export interface UpdatingPartnerLicenseImg {
-	license_before: Buffer,
-	license_after: Buffer,
+	license_before: File,
+	license_after: File,
 }
 
 export interface UpdatingPartnerStaffAvatarInfo {
-	avatarFile: Buffer
+	avatarFile: File
 }
 
 export interface FindingPartnerAvatarAndLicenseCondition {
@@ -1712,15 +1710,14 @@ class PartnerStaffOperation {
 			formData.append('avatar', info.avatarFile);
 
 			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_avatar?staff_id=${condition.staff_id}`, formData , {
-			withCredentials: true,
-		});
+			    withCredentials: true,
+		    });
 		
-			console.log('Image uploaded successfully:', response.data);
-			return response.data; // Trả về dữ liệu phản hồi từ máy chủ
-
+            const data = response.data;
+            return { error: data.error, message: data.message };
 		} catch (error: any) {
 			console.error('Error uploading image:', error.response.data);
-			throw error; // Ném lỗi để xử lý bên ngoài
+			return error.response.data; // Ném lỗi để xử lý bên ngoài
 		}
 	}
 	
@@ -1735,15 +1732,14 @@ class PartnerStaffOperation {
 
 			// Gửi yêu cầu POST để tải lên hình ảnh
 			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_licenses?staff_id=${condition.staff_id}`, formData , {
-			withCredentials: true,
-		});
-		
-			console.log('Image uploaded successfully:', response.data);
-			return response.data; // Trả về dữ liệu phản hồi từ máy chủ
-
+                withCredentials: true,
+            });
+            
+            const data = response.data;
+            return { error: data.error, message: data.message };
 		} catch (error: any) {
 			console.error('Error uploading image:', error.response.data);
-			throw error; // Ném lỗi để xử lý bên ngoài
+			return error.response.data; // Ném lỗi để xử lý bên ngoài
 		}
 	}
 
@@ -1758,9 +1754,9 @@ class PartnerStaffOperation {
             const fileUrl = URL.createObjectURL(blob);
     
             return fileUrl;
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error getting avatar: ", error);
-            throw error;
+            return error.response.data;
         }
 	} 
 
@@ -1775,9 +1771,9 @@ class PartnerStaffOperation {
             const fileUrl = URL.createObjectURL(blob);
     
             return fileUrl;
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error getting license front: ", error);
-            throw error;
+            return error.response.data;
         }
 	} 
 
@@ -1792,9 +1788,9 @@ class PartnerStaffOperation {
             const fileUrl = URL.createObjectURL(blob);
     
             return fileUrl;
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error getting license after: ", error);
-            throw error;
+            return error.response.data;
         }
 	} 
 }
