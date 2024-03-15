@@ -122,7 +122,7 @@ class StaffsAuthenticate {
 class BusinessAuthenticate {
     private baseUrl: string;
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/business";
         this.baseUrl = "http://localhost:5000/api/v1/business";
     }
 
@@ -143,6 +143,31 @@ class BusinessAuthenticate {
         }
     }
 
+}
+
+class PartnerStaffAuthenticate {
+    private baseUrl: string;
+    constructor() {
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staffs";
+        this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
+    }
+
+    async login(username: string, password: string) : Promise<any> {
+        try {
+            const response = await axios.post(`${this.baseUrl}/login`, {
+                username: username,
+                password: password,
+            }, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, valid: data.valid, message: data.message };
+        } catch (error: any) {
+            console.log("Error logging in: ", error.response.data);
+            return error.response.data;
+        }
+    }
 }
 
 export interface CreatingUserInfo {
@@ -2398,6 +2423,7 @@ export {
 	UsersAuthenticate,
 	StaffsAuthenticate,
     BusinessAuthenticate,
+    PartnerStaffAuthenticate,
 	UsersOperation,
 	AgencyOperation,
 	TransportPartnersOperation,
