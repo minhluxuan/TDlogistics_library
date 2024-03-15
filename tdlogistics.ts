@@ -119,6 +119,57 @@ class StaffsAuthenticate {
     }
 }
 
+class BusinessAuthenticate {
+    private baseUrl: string;
+    constructor() {
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/business";
+        this.baseUrl = "http://localhost:5000/api/v1/business";
+    }
+
+    async login(username: string, password: string): Promise<any> {
+        try {
+            const response = await axios.post(`${this.baseUrl}/login`, {
+                username: username,
+                password: password,
+            }, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, valid: data.valid, message: data.message };
+        } catch (error: any) {
+            console.log("Error logging in: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
+}
+
+class PartnerStaffAuthenticate {
+    private baseUrl: string;
+    constructor() {
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staffs";
+        this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
+    }
+
+    async login(username: string, password: string) : Promise<any> {
+        try {
+            const response = await axios.post(`${this.baseUrl}/login`, {
+                username: username,
+                password: password,
+            }, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, valid: data.valid, message: data.message };
+        } catch (error: any) {
+            console.log("Error logging in: ", error.response.data);
+            return error.response.data;
+        }
+    }
+}
+
 export interface CreatingUserInfo {
     fullname: string,
     phone_number: string,
@@ -2124,6 +2175,20 @@ class OrdersOperation {
         }
     }
 
+    async calculatefee(info: CalculatingFeeInfo) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/calculatefee`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error: any) {
+            console.log("Error getting orders: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
     async checkExist(condition: CheckingExistOrderCondition) {
         try {
             const response: AxiosResponse = await axios.get(`${this.baseUrl}/check?order_id=${condition.order_id}`, {
@@ -2353,6 +2418,8 @@ class AdministrativeOperation {
 export {
 	UsersAuthenticate,
 	StaffsAuthenticate,
+    BusinessAuthenticate,
+    PartnerStaffAuthenticate,
 	UsersOperation,
 	AgencyOperation,
 	TransportPartnersOperation,
