@@ -1,26 +1,21 @@
 import axios, { AxiosResponse } from "axios";
-import { io } from 'socket.io-client';
 const FormData = require("form-data");
 
-const socket = io("http://localhost:5000", {
-    withCredentials: true,
-});
+// socket.on("connect", () => {
+//     console.log("Connected to server.");
+// });
 
-socket.on("connect", () => {
-    console.log("Connected to server.");
-});
+// socket.on("notifyError", message => {
+//     // showing custome notification on UI
+// });
 
-socket.on("notifyError", message => {
-    // showing custome notification on UI
-});
+// socket.on("notifySuccessCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
 
-socket.on("notifySuccessCreatedNewOrder", message => {
-    // showing custome notification on UI
-});
-
-socket.on("notifyFailCreatedNewOrder", message => {
-    // showing custome notification on UI
-});
+// socket.on("notifyFailCreatedNewOrder", message => {
+//     // showing custome notification on UI
+// });
 
 class UsersAuthenticate {
     private baseUrl: string;
@@ -46,11 +41,10 @@ class UsersAuthenticate {
         }
     }
 
-    async verifyOTP(phoneNumber: string, email: string, otp: string): Promise<any> {
+    async verifyOTP(phoneNumber: string, otp: string): Promise<any> {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/verify_otp`, {
                 phone_number: phoneNumber,
-                email: email,
                 otp: otp,
             }, {
                 withCredentials: true,
@@ -154,7 +148,7 @@ export interface UpdatingUserCondition {
 class UsersOperation {
     private baseUrl: string;
 
-    constructor(phoneNumber: string) {
+    constructor() {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
         this.baseUrl = "http://localhost:5000/api/v1/users";
     }
@@ -238,19 +232,19 @@ export interface CreatingAgencyInfo {
     user_salary: number,
 
     type: string,
-    level: string,
+    level: number,
     postal_code: string,
     agency_name: string,
     province: string,
     district: string,
     town: string,
     detail_address: string,
-    latitude: string,
-    longitude: string,
-    managed_wards: string,
+    latitude: number,
+    longitude: number,
+    managed_wards: string[],
     phone_number: string,
     email: string,
-    commission_rate: string,
+    commission_rate: number,
     bin: string,
     bank: string,
 }
@@ -1063,18 +1057,21 @@ class StaffsOperation {
 	}
 
 	// ROLE: any.
-	async findAvatar (condition: FindingAvatarCondition) {
+	async getAvatar (condition: FindingAvatarCondition) {
 		try {
-			const response: AxiosResponse = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
-				withCredentials: true,
-			});
-
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
-		}
+            const response = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
+                withCredentials: true,
+                responseType: 'arraybuffer',
+            });
+    
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const imgUrl = URL.createObjectURL(blob);
+    
+            return imgUrl;
+        } catch (error) {
+            console.error("Error getting avatar: ", error);
+            throw error;
+        }
 	}
 }
   
@@ -1394,16 +1391,18 @@ class BusinessOperation {
 
 	async findContract(condition: FindingContractCondition) {
 		try {
-			const response = await axios.get(`${this.baseUrl}/get_contract?business_id=${condition.business_id}`, {
-				withCredentials: true,
-			});
+            const response = await axios.get(`${this.baseUrl}/get_contract?business_id=${condition.business_id}`, {
+                responseType: 'arraybuffer',
+            });
 
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding contract: ", error.response.data);
-			return error.response.data;
-		}
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const fileUrl = URL.createObjectURL(blob);
+    
+            return fileUrl;
+        } catch (error) {
+            console.error("Error getting contract: ", error);
+            throw error;
+        }
 	}
 }
 
@@ -1700,46 +1699,52 @@ class PartnerStaffOperation {
 	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
 	async findPartnerStaffAvatar(condition: FindingPartnerAvatarAndLicenseCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
-				withCredentials: true,
-			});
+            const response = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
+                responseType: 'arraybuffer',
+            });
 
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
-		}
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const fileUrl = URL.createObjectURL(blob);
+    
+            return fileUrl;
+        } catch (error) {
+            console.error("Error getting avatar: ", error);
+            throw error;
+        }
 	} 
 
 	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
 	async findPartnerStaffLicenseBefore(condition: FindingPartnerAvatarAndLicenseCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_license_before?staff_id=${condition.staff_id}`, {
-				withCredentials: true,
-			});
+            const response = await axios.get(`${this.baseUrl}/get_license_before?staff_id=${condition.staff_id}`, {
+                responseType: 'arraybuffer',
+            });
 
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
-		}
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const fileUrl = URL.createObjectURL(blob);
+    
+            return fileUrl;
+        } catch (error) {
+            console.error("Error getting license front: ", error);
+            throw error;
+        }
 	} 
 
 	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
 	async findPartnerStaffLicenseAfter(condition: FindingPartnerAvatarAndLicenseCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/get_license_after?staff_id=${condition.staff_id}`, {
-				withCredentials: true,
-			});
+            const response = await axios.get(`${this.baseUrl}/get_license_after?staff_id=${condition.staff_id}`, {
+                responseType: 'arraybuffer',
+            });
 
-			const data = response.data;
-			return { error: data.error, data: data.data, message: data.message };
-		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
-		}
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const fileUrl = URL.createObjectURL(blob);
+    
+            return fileUrl;
+        } catch (error) {
+            console.error("Error getting license after: ", error);
+            throw error;
+        }
 	} 
 }
   
@@ -2019,7 +2024,7 @@ export interface GettingOrdersConditions {
     service_type?: number,
 }
 
-export interface CreatingOrderInformation {
+export interface CreatingOrderByUserInformation {
     name_receiver: string,
     phone_number_receiver: string,
     mass: number,
@@ -2039,7 +2044,32 @@ export interface CreatingOrderInformation {
     long_destination: number,
     lat_destination: number,
     COD: number,
-    service_type: number,
+    service_type: string,
+}
+
+export interface CreatingOrderByAdminAndAgencyInformation {
+    name_sender: string,
+    phone_number_sender: string,
+    name_receiver: string,
+    phone_number_receiver: string,
+    mass: number,
+    height: number,
+    width: number,
+    length: number,
+    province_source: string,
+    district_source: string,
+    ward_source: string,
+    detail_source: string,
+    province_dest: string,
+    district_dest: string,
+    ward_dest: string,
+    detail_dest: string,
+    long_source: number,
+    lat_source: number,
+    long_destination: number,
+    lat_destination: number,
+    COD: number,
+    service_type: string,
 }
 
 export interface UpdatingOrderCondition {
@@ -2052,26 +2082,30 @@ export interface UpdatingOrderInfo {
     width: number,
     length: number,
     COD: number,
+    status_code: number,
 }
 
 export interface CancelingOrderCondition {
     order_id: string,
 }
 
+export interface UploadingOrderFileCondition {
+    file: File,
+}
+
 export interface CalculatingFeeInfo {
-    mass: number,
-    height: number,
-    width: number,
-    length: number,
     province_source: string,
     district_source: string,
     ward_source: string,
     detail_source: string,
-    province_dest: string, 
+    province_dest: string,
     district_dest: string,
     ward_dest: string,
-    detail_dest: string,    
-    service_type: string //valid("HTT", "CPN", "TTK", "T60")
+    detail_dest: string,
+    service_type: string,
+    length: number,
+    width: number,
+    height: number,
 }
 
 class OrdersOperation {
@@ -2122,11 +2156,59 @@ class OrdersOperation {
         }
     }
 
-    async create(info: CreatingOrderInformation) {
+    async checkFileFormat(info: UploadingOrderFileCondition) {
         try {
-            socket.emit("notifyNewOrderFromUser", info)
+            const formData = new FormData();
+            formData.append("file", info.file);
+
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/check_file_format`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                withCredentials: true,
+            });
+
+            const data = response.data;
+			return { error: data.error, valid: data.valid, message: data.message };
         } catch (error: any) {
-            console.log("Error creating new order: ", error.response.data);
+            console.error('Error checking file format:', error.response.data);
+			return error.response.data;
+        }
+    }
+
+    async createByUser(socket: any, info: CreatingOrderByUserInformation) {
+        try {
+            socket.emit("notifyNewOrder", info)
+        } catch (error: any) {
+            console.log("Error creating new order: ", error);
+        }
+    }
+
+    async createByAdminAndAgency(socket: any, info: CreatingOrderByAdminAndAgencyInformation) {
+        try {
+            socket.emit("notifyNewOrder", info)
+        } catch (error: any) {
+            console.log("Error creating new order: ", error);
+        }
+    }
+
+    async createByFile(info: UploadingOrderFileCondition) {
+        try {
+            const formData = new FormData();
+            formData.append("file", info.file);
+
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_by_file`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                withCredentials: true,
+            });
+
+            const data = response.data;
+			return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.error('Error creating orders by file:', error.response.data);
+			return error.response.data;
         }
     }
 
@@ -2157,9 +2239,23 @@ class OrdersOperation {
             return error.response.data;
         }
     }
+
+    async calculateFee(info: CalculatingFeeInfo) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/calculate_fee`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error: any) {
+            console.log("Error calculating fee: ", error.response.data);
+            return error.response.data;
+        }
+    }
 }
 
-export interface GettingTasksCondition {
+export interface GettingTasksConditions {
     task?: string,
     priority?: number,
     deadline?: string,
@@ -2188,7 +2284,7 @@ class ScheduleOperation {
         this.baseUrl = "http://localhost:5000/api/v1/schedules";
     }
 
-    async get(conditions: GettingTasksCondition) {
+    async get(conditions: GettingTasksConditions) {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/search`, conditions, {
                 withCredentials: true
