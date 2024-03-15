@@ -1007,7 +1007,7 @@ var StaffsOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     StaffsOperation.prototype.updateAvatar = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, error_39;
+            var formData, response, data, error_39;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1019,12 +1019,12 @@ var StaffsOperation = /** @class */ (function () {
                             })];
                     case 1:
                         response = _a.sent();
-                        console.log('Image uploaded successfully:', response.data);
-                        return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_39 = _a.sent();
                         console.error('Error uploading image:', error_39.response.data);
-                        throw error_39; // Ném lỗi để xử lý bên ngoài
+                        return [2 /*return*/, error_39.response.data]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1098,7 +1098,7 @@ var StaffsOperation = /** @class */ (function () {
                     case 2:
                         error_42 = _a.sent();
                         console.error("Error getting avatar: ", error_42);
-                        throw error_42;
+                        return [2 /*return*/, error_42.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1344,7 +1344,7 @@ var BusinessOperation = /** @class */ (function () {
     };
     BusinessOperation.prototype.updateContract = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, error_53;
+            var formData, response, data, error_53;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1356,12 +1356,12 @@ var BusinessOperation = /** @class */ (function () {
                             })];
                     case 1:
                         response = _a.sent();
-                        console.log('File uploaded successfully:', response.data);
-                        return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_53 = _a.sent();
                         console.error('Error uploading file:', error_53.response.data);
-                        throw error_53; // Ném lỗi để xử lý bên ngoài
+                        return [2 /*return*/, error_53.response.data]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1385,7 +1385,7 @@ var BusinessOperation = /** @class */ (function () {
                     case 2:
                         error_54 = _a.sent();
                         console.error("Error getting contract: ", error_54);
-                        throw error_54;
+                        return [2 /*return*/, error_54.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1619,7 +1619,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.updatePartnerStaffAvatar = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, error_64;
+            var formData, response, data, error_64;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1631,12 +1631,12 @@ var PartnerStaffOperation = /** @class */ (function () {
                             })];
                     case 1:
                         response = _a.sent();
-                        console.log('Image uploaded successfully:', response.data);
-                        return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_64 = _a.sent();
                         console.error('Error uploading image:', error_64.response.data);
-                        throw error_64; // Ném lỗi để xử lý bên ngoài
+                        return [2 /*return*/, error_64.response.data]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1645,7 +1645,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.updatePartnerStaffLicense = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, error_65;
+            var formData, response, data, error_65;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1658,12 +1658,12 @@ var PartnerStaffOperation = /** @class */ (function () {
                             })];
                     case 1:
                         response = _a.sent();
-                        console.log('Image uploaded successfully:', response.data);
-                        return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_65 = _a.sent();
                         console.error('Error uploading image:', error_65.response.data);
-                        throw error_65; // Ném lỗi để xử lý bên ngoài
+                        return [2 /*return*/, error_65.response.data]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1688,7 +1688,7 @@ var PartnerStaffOperation = /** @class */ (function () {
                     case 2:
                         error_66 = _a.sent();
                         console.error("Error getting avatar: ", error_66);
-                        throw error_66;
+                        return [2 /*return*/, error_66.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1713,7 +1713,7 @@ var PartnerStaffOperation = /** @class */ (function () {
                     case 2:
                         error_67 = _a.sent();
                         console.error("Error getting license front: ", error_67);
-                        throw error_67;
+                        return [2 /*return*/, error_67.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1738,7 +1738,7 @@ var PartnerStaffOperation = /** @class */ (function () {
                     case 2:
                         error_68 = _a.sent();
                         console.error("Error getting license after: ", error_68);
-                        throw error_68;
+                        return [2 /*return*/, error_68.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
