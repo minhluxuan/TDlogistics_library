@@ -1087,6 +1087,7 @@ var StaffsOperation = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_avatar?staff_id=").concat(condition.staff_id), {
+                                withCredentials: true,
                                 responseType: 'arraybuffer',
                             })];
                     case 1:

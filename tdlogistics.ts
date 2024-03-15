@@ -1060,6 +1060,7 @@ class StaffsOperation {
 	async getAvatar (condition: FindingAvatarCondition) {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
+                withCredentials: true,
                 responseType: 'arraybuffer',
             });
     
