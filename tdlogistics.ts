@@ -340,6 +340,15 @@ export interface UpdatingAgencyCondition {
 export interface DeletingAgencyCondition {
     agency_id: string,
 }
+export interface UpdateAgencyCompanyInfo {
+    company_name: string,
+    tax_number: string,
+    business_number: string,
+}
+
+export interface UpLoadingLicenseInfo {
+    files : File[],
+}
 
 class AgencyOperation {
     private baseUrl: string;
@@ -418,6 +427,20 @@ class AgencyOperation {
         }
     }
 
+    async updateAgencyCompany(info: UpdateAgencyCompanyInfo, condition: UpdatingAgencyCondition) {
+        try {
+            const response: AxiosResponse = await axios.put(`${this.baseUrl}/update_agency_company?agency_id=${condition.agency_id}`, info, {
+                withCredentials: true,
+            });
+    
+            const data = response.data;
+            return { error: data.error, data: data.data, message: data.message };
+        } catch (error: any) {
+            console.log("Error finding agency: ", error.response.data);
+            return error.response.data;
+        }
+    }
+
     async delete(condition: DeletingAgencyCondition) {
         try {
             const response: AxiosResponse = await axios.delete(`${this.baseUrl}/delete?agency_id=${condition.agency_id}`, {
@@ -431,6 +454,46 @@ class AgencyOperation {
             return error.response.data;
         }
     }
+
+
+    async updateLicense(info: UpLoadingLicenseInfo) {
+        try {
+                const formData = new FormData();
+                info.files.forEach(file => {
+                    formData.append("files", file);
+                })
+
+                const response: AxiosResponse = await axios.post(`${this.baseUrl}/update_agency_company_license`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    withCredentials: true,
+                });
+
+                const data = response.data;
+                return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.error('Error creating orders by file:', error.response.data);
+			return error.response.data;
+        }
+    }
+
+	// ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
+	async findLicense(condition: CheckingExistAgencyCondition) {
+		try {
+            const response = await axios.get(`${this.baseUrl}/search_agency_company_license?staff_id=${condition.agency_id}`, {
+                responseType: 'arraybuffer',
+            });
+
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const fileUrl = URL.createObjectURL(blob);
+    
+            return fileUrl;
+        } catch (error: any) {
+            console.error("Error getting avatar: ", error);
+            return error.response.data;
+        }
+	} 
 }
 
 export interface CreatingTransportPartnerByAdminInfo {
