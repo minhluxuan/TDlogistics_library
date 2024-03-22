@@ -1075,7 +1075,7 @@ var StaffsOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     StaffsOperation.prototype.updateAvatar = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_39;
+            var formData, response, data, error_41;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1090,9 +1090,9 @@ var StaffsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_39 = _a.sent();
-                        console.error('Error uploading image:', error_39.response.data);
-                        return [2 /*return*/, error_39.response.data]; // Ném lỗi để xử lý bên ngoài
+                        error_41 = _a.sent();
+                        console.error('Error uploading image:', error_41.response.data);
+                        return [2 /*return*/, error_41.response.data]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1164,9 +1164,9 @@ var StaffsOperation = /** @class */ (function () {
                         imgUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, imgUrl];
                     case 2:
-                        error_42 = _a.sent();
-                        console.error("Error getting avatar: ", error_42);
-                        return [2 /*return*/, error_42.response.data];
+                        error_44 = _a.sent();
+                        console.error("Error getting avatar: ", error_44);
+                        return [2 /*return*/, error_44.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1180,6 +1180,7 @@ var BusinessOperation = /** @class */ (function () {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/business";
         this.baseUrl = "http://localhost:5000/api/v1/business";
     }
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER"
     BusinessOperation.prototype.createByAdmin = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_45;
@@ -1203,6 +1204,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER"
     BusinessOperation.prototype.createByAgency = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_46;
@@ -1226,6 +1228,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "BUSINESS"
     BusinessOperation.prototype.findByBusiness = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_47;
@@ -1249,6 +1252,8 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
     BusinessOperation.prototype.findByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_48;
@@ -1272,7 +1277,8 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    BusinessOperation.prototype.findByRepresentorByBusiness = function (condition) {
+    // BUSINESS
+    BusinessOperation.prototype.findRepresentorByBusiness = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_49;
             return __generator(this, function (_a) {
@@ -1295,7 +1301,9 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    BusinessOperation.prototype.findByRepresentorByAdmin = function (conditions) {
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
+    BusinessOperation.prototype.findRepresentorByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_50;
             return __generator(this, function (_a) {
@@ -1318,6 +1326,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.updateBusiness = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_51;
@@ -1341,6 +1350,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.updateBusinessRepresentor = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_52;
@@ -1364,6 +1374,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // any
     BusinessOperation.prototype.checkExist = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_53;
@@ -1387,6 +1398,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.removeBusiness = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_54;
@@ -1410,9 +1422,10 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.updateContract = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_53;
+            var formData, response, data, error_55;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1427,14 +1440,16 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_53 = _a.sent();
-                        console.error('Error uploading file:', error_53.response.data);
-                        return [2 /*return*/, error_53.response.data]; // Ném lỗi để xử lý bên ngoài
+                        error_55 = _a.sent();
+                        console.error('Error uploading file:', error_55.response.data);
+                        return [2 /*return*/, error_55.response.data]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER", "BUSINESS"
     BusinessOperation.prototype.findContract = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, blob, fileUrl, error_56;
@@ -1451,9 +1466,9 @@ var BusinessOperation = /** @class */ (function () {
                         fileUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, fileUrl];
                     case 2:
-                        error_54 = _a.sent();
-                        console.error("Error getting contract: ", error_54);
-                        return [2 /*return*/, error_54.response.data];
+                        error_56 = _a.sent();
+                        console.error("Error getting contract: ", error_56);
+                        return [2 /*return*/, error_56.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1687,7 +1702,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.updatePartnerStaffAvatar = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_64;
+            var formData, response, data, error_66;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1702,9 +1717,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_64 = _a.sent();
-                        console.error('Error uploading image:', error_64.response.data);
-                        return [2 /*return*/, error_64.response.data]; // Ném lỗi để xử lý bên ngoài
+                        error_66 = _a.sent();
+                        console.error('Error uploading image:', error_66.response.data);
+                        return [2 /*return*/, error_66.response.data]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1713,7 +1728,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.updatePartnerStaffLicense = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_65;
+            var formData, response, data, error_67;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1729,9 +1744,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_65 = _a.sent();
-                        console.error('Error uploading image:', error_65.response.data);
-                        return [2 /*return*/, error_65.response.data]; // Ném lỗi để xử lý bên ngoài
+                        error_67 = _a.sent();
+                        console.error('Error uploading image:', error_67.response.data);
+                        return [2 /*return*/, error_67.response.data]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1754,9 +1769,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         fileUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, fileUrl];
                     case 2:
-                        error_66 = _a.sent();
-                        console.error("Error getting avatar: ", error_66);
-                        return [2 /*return*/, error_66.response.data];
+                        error_68 = _a.sent();
+                        console.error("Error getting avatar: ", error_68);
+                        return [2 /*return*/, error_68.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1779,9 +1794,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         fileUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, fileUrl];
                     case 2:
-                        error_67 = _a.sent();
-                        console.error("Error getting license front: ", error_67);
-                        return [2 /*return*/, error_67.response.data];
+                        error_69 = _a.sent();
+                        console.error("Error getting license front: ", error_69);
+                        return [2 /*return*/, error_69.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1804,9 +1819,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         fileUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, fileUrl];
                     case 2:
-                        error_68 = _a.sent();
-                        console.error("Error getting license after: ", error_68);
-                        return [2 /*return*/, error_68.response.data];
+                        error_70 = _a.sent();
+                        console.error("Error getting license after: ", error_70);
+                        return [2 /*return*/, error_70.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
