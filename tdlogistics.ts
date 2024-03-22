@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 const FormData = require("form-data");
+import * as JSZip from 'jszip';
 
 // socket.on("connect", () => {
 //     console.log("Connected to server.");
@@ -2155,6 +2156,15 @@ export interface CalculatingFeeInfo {
     height: number,
 }
 
+export interface UpdatingOrderImageInfo {
+    files: FileList,
+};
+
+export interface UpdatingOrderImageCondition {
+    order_id: string,
+    type: string
+}
+
 class OrdersOperation {
     private baseUrl: string;
     constructor() {
@@ -2299,6 +2309,55 @@ class OrdersOperation {
             console.log("Error calculating fee: ", error.response.data);
             return error.response.data;
         }
+    }
+
+    async updateImage(info: UpdatingOrderImageInfo, condition: UpdatingOrderImageCondition) {
+        try {       
+			// Tạo FormData object và thêm hình ảnh vào đó
+			const formData = new FormData();
+            for (let i = 0; i < info.files.length; i++) {
+                formData.append('files', info.files[i]);
+            }
+			// Gửi yêu cầu POST để tải lên hình ảnh
+			const response: AxiosResponse = await axios.post(`${this.baseUrl}/update_images?order_id=${condition.order_id}&type=${condition.type}`, formData , {
+				withCredentials: true,
+			});
+		
+			console.log('Image uploaded successfully:', response.data);
+			return response.data; // Trả về dữ liệu phản hồi từ máy chủ
+	
+		} catch (error: any) {
+			console.error('Error uploading image:', error.response.data);
+			throw error; // Ném lỗi để xử lý bên ngoài
+		} 
+    }
+    //get_images
+    async getImage(condition: UpdatingOrderImageCondition) {
+        try {
+            
+            const response: AxiosResponse = await axios.get(`${this.baseUrl}/get_images?order_id=${condition.order_id}&type=${condition.type}`, {
+                responseType: 'arraybuffer', // Ensure response is treated as a binary buffer
+                withCredentials: true,
+            });
+            // const zip = new JSZip();
+            const zipFile = await JSZip.loadAsync(response.data);
+            const imageUrls: string[] = [];
+
+            // Extract each file from the ZIP archive and create object URLs
+            await Promise.all(
+                Object.keys(zipFile.files).map(async (filename) => {
+                    const file = zipFile.files[filename];
+                    const blob = await file.async('blob');
+                    const url = URL.createObjectURL(blob);
+                    imageUrls.push(url);
+                })
+            );
+
+            return imageUrls;
+        } catch (error: any) {
+			console.error('Error getting image:', error.message);
+			throw error; // Ném lỗi để xử lý bên ngoài
+		} 
     }
 }
 
