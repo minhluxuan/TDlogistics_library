@@ -1181,6 +1181,7 @@ var BusinessOperation = /** @class */ (function () {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/business";
         this.baseUrl = "http://localhost:5000/api/v1/business";
     }
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER"
     BusinessOperation.prototype.createByAdmin = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_45;
@@ -1204,6 +1205,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER"
     BusinessOperation.prototype.createByAgency = function (info) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_46;
@@ -1227,6 +1229,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "BUSINESS"
     BusinessOperation.prototype.findByBusiness = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_47;
@@ -1250,6 +1253,8 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
     BusinessOperation.prototype.findByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_48;
@@ -1273,7 +1278,8 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    BusinessOperation.prototype.findByRepresentorByBusiness = function (condition) {
+    // BUSINESS
+    BusinessOperation.prototype.findRepresentorByBusiness = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_49;
             return __generator(this, function (_a) {
@@ -1296,7 +1302,9 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    BusinessOperation.prototype.findByRepresentorByAdmin = function (conditions) {
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
+    BusinessOperation.prototype.findRepresentorByAdmin = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_50;
             return __generator(this, function (_a) {
@@ -1319,6 +1327,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.updateBusiness = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_51;
@@ -1342,6 +1351,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.updateBusinessRepresentor = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_52;
@@ -1365,6 +1375,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // any
     BusinessOperation.prototype.checkExist = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_53;
@@ -1388,6 +1399,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.removeBusiness = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_54;
@@ -1411,6 +1423,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.updateContract = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
             var formData, response, data, error_55;
@@ -1436,6 +1449,8 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER", "BUSINESS"
     BusinessOperation.prototype.findContract = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
             var response, blob, fileUrl, error_56;

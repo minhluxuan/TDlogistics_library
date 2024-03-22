@@ -1280,6 +1280,7 @@ class BusinessOperation {
 
 	}
 
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER"
 	async createByAdmin(info: CreateBusinessByAdminInfo) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/create`, info, {
@@ -1294,6 +1295,7 @@ class BusinessOperation {
 		}
 	}
 
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER"
 	async createByAgency(info: CreateBusinessByAgencyInfo) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/create`, info, {
@@ -1308,6 +1310,7 @@ class BusinessOperation {
 		}
 	}
 
+    // "BUSINESS"
 	async findByBusiness(condition: FindingBusinessByBusinessCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/search?business_id=${condition.business_id}`, {
@@ -1322,6 +1325,8 @@ class BusinessOperation {
 		}
 	}
 
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
 	async findByAdmin(conditions: FindingBusinessByAdminCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/search`, conditions, {
@@ -1336,7 +1341,8 @@ class BusinessOperation {
 		}
 	}
 
-	async findByRepresentorByBusiness(condition: FindingRepresentorByBusinessCondition) {
+    // BUSINESS
+	async findRepresentorByBusiness(condition: FindingRepresentorByBusinessCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/search_representor`, condition, {
 				withCredentials: true,
@@ -1350,7 +1356,9 @@ class BusinessOperation {
 		}
 	}
 
-	async findByRepresentorByAdmin(conditions: FindingRepresentorByAdminCondition) {
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
+	async findRepresentorByAdmin(conditions: FindingRepresentorByAdminCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/search_representor`, conditions, {
 				withCredentials: true,
@@ -1364,6 +1372,7 @@ class BusinessOperation {
 		}
 	}
 
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async updateBusiness(info: UpdatingBusinessInfo, condition: UpdatingBusinessCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/update?business_id=${condition.business_id}`, info, {
@@ -1378,6 +1387,7 @@ class BusinessOperation {
 		}
 	}
 
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async updateBusinessRepresentor(info: UpdatingBusinessRepresentorInfo, condition: UpdatingBusinessCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/update_business_representor?business_id=${condition.business_id}`, info, {
@@ -1392,6 +1402,7 @@ class BusinessOperation {
 		}
 	}
 
+    // any
 	async checkExist(condition: CheckingExistBusinessCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/check?tax_number=${condition.tax_number}`, {
@@ -1406,6 +1417,7 @@ class BusinessOperation {
 		}
 	}
 
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async removeBusiness(condition: DeletingBusinessCondition) {
 		try {
 			const response = await axios.post(`${this.baseUrl}/delete?business_id=${condition.business_id}&agency_id=${condition.agency_id}`, {
@@ -1420,6 +1432,7 @@ class BusinessOperation {
 		}
 	}
 
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async updateContract(info: UpdatingContractInfo, condition: UpdatingBusinessCondition) {
 		try {        
 			// Tạo FormData object 
@@ -1439,6 +1452,8 @@ class BusinessOperation {
 			} 
 	}
 
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER", "BUSINESS"
 	async findContract(condition: FindingContractCondition) {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_contract?business_id=${condition.business_id}`, {
