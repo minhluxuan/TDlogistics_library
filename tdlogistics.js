@@ -1893,7 +1893,7 @@ var ShippersOperation = /** @class */ (function () {
                     case 1:
                         response = _a.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_73 = _a.sent();
                         console.log("Error getting history: ", error_73.response.data);
