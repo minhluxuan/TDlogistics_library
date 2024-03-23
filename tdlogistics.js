@@ -1566,6 +1566,7 @@ var BusinessOperation = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_contract?business_id=").concat(condition.business_id), {
                                 responseType: 'arraybuffer',
+                                withCredentials: true,
                             })];
                     case 1:
                         response = _a.sent();

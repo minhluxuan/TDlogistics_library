@@ -1511,6 +1511,7 @@ class BusinessOperation {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_contract?business_id=${condition.business_id}`, {
                 responseType: 'arraybuffer',
+                withCredentials: true,
             });
 
             const blob = new Blob([response.data], { type: response.headers['content-type'] });
