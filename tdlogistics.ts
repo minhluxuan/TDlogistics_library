@@ -196,8 +196,8 @@ export interface FindingUserByAdminConditions {
 }
 
 export interface UpdatingUserInfo {
-    fullname: string,
-    email: string,
+    fullname?: string,
+    email?: string,
 }
 
 export interface UpdatingUserCondition {
@@ -330,19 +330,19 @@ export interface FindingAgencyByAdminInfo {
 }
 
 export interface UpdatingAgencyInfo {
-    agency_name: string,
-    province: string,
-    district: string,
-    town: string,
-    detail_address: string,
-    latitude: string,
-    longitude: string,
-    email: string,
-    phone_number: string,
-    revenue: string,
-    commission_rate: string,
-    bin: string,
-    bank: string,
+    agency_name?: string,
+    province?: string,
+    district?: string,
+    town?: string,
+    detail_address?: string,
+    latitude?: string,
+    longitude?: string,
+    email?: string,
+    phone_number?: string,
+    revenue?: string,
+    commission_rate?: string,
+    bin?: string,
+    bank?: string,
 }
 
 export interface UpdatingAgencyCondition {
@@ -531,17 +531,17 @@ export interface FindingTransportPartnerByAdminConditions {
 }
 
 export interface UpdatingTransportPartnerInfo {
-    tax_code: string,
-    transport_partner_name: string,
-    province: string,
-    district: string,
-    town: string,
-    detail_address: string,
-    phone_number: string,
-    email: string,
-    bin: string,
-    bank: string,
-    debit: string,
+    tax_code?: string,
+    transport_partner_name?: string,
+    province?: string,
+    district?: string,
+    town?: string,
+    detail_address?: string,
+    phone_number?: string,
+    email?: string,
+    bin?: string,
+    bank?: string,
+    debit?: string,
 }
 
 export interface UpdatingTransportPartnerCondition {
@@ -690,10 +690,10 @@ export interface GettingShipmentsContainedByVehicleCondition {
 }
 
 export interface UpdatingVehicleInfo {
-    transport_partner_id: string,
-    staff_id: string,
-    type: string,
-    max_load: number,
+    transport_partner_id?: string,
+    staff_id?: string,
+    type?: string,
+    max_load?: number,
 }
 
 export interface UpdatingVehicleCondition {
@@ -936,18 +936,18 @@ export interface FindingStaffByAdminConditions {
 }
   
 export interface UpdatingStaffInfo {
-    fullname: string,
-    username: string,
-    date_of_birth: string, 
-    email: string,
-    phone_number: string,
-    role: string,
-    salary: number, 
-    paid_salary: string, 
-    province: string,
-    district: string,
-    town: string,
-    detail_address: string,
+    fullname?: string,
+    username?: string,
+    date_of_birth?: string, 
+    email?: string,
+    phone_number?: string,
+    role?: string,
+    salary?: number, 
+    paid_salary?: string, 
+    province?: string,
+    district?: string,
+    town?: string,
+    detail_address?: string,
 }
   
 export interface UpdatingStaffCondition {
@@ -1267,30 +1267,30 @@ export interface UpdatingBusinessCondition {
 }
   
 export interface UpdatingBusinessInfo {
-	business_name: string,
-	email: string,
-	phone_number: string,
-	debit: string, 
-	province: string,
-	district: string,
-	town: string,
-	detail_address: string,
-	bin: string,
-	bank: string,
+	business_name?: string,
+	email?: string,
+	phone_number?: string,
+	debit?: string, 
+	province?: string,
+	district?: string,
+	town?: string,
+	detail_address?: string,
+	bin?: string,
+	bank?: string,
 }
   
 export interface UpdatingBusinessRepresentorInfo {
-	fullname: string,
-	phone_number: string,
-	email: string,
-	date_of_birth: string,
-	cccd: string,
-	province: string,
-	district: string,
-	town: string,
-	detail_address: string,
-	bin: string,
-	bank: string,
+	fullname?: string,
+	phone_number?: string,
+	email?: string,
+	date_of_birth?: string,
+	cccd?: string,
+	province?: string,
+	district?: string,
+	town?: string,
+	detail_address?: string,
+	bin?: string,
+	bank?: string,
 }
   
 export interface DeletingBusinessCondition {
@@ -1569,18 +1569,18 @@ export interface UpdatingPartnerStaffCondition {
 }
 
 export interface UpdatingPartnerStaffInfo {
-	fullname: string,
-	username: string,
-	date_of_birth: string, 
-	email: string,
-	phone_number: string,
-	province: string,
-	district: string,
-	town: string,
-	detail_address: string,
-	position: string,
-	bin: string,
-	bank: string,
+	fullname?: string,
+	username?: string,
+	date_of_birth?: string, 
+	email?: string,
+	phone_number?: string,
+	province?: string,
+	district?: string,
+	town?: string,
+	detail_address?: string,
+	position?: string,
+	bin?: string,
+	bank?: string,
 }
 
 export interface DeletingPartnerStaffCondition {
@@ -2175,12 +2175,12 @@ export interface UpdatingOrderCondition {
 }
 
 export interface UpdatingOrderInfo {
-    mass: number,
-    height: number,
-    width: number,
-    length: number,
-    COD: number,
-    status_code: number,
+    mass?: number,
+    height?: number,
+    width?: number,
+    length?: number,
+    COD?: number,
+    status_code?: number,
 }
 
 export interface CancelingOrderCondition {
@@ -2431,9 +2431,9 @@ export interface CreatingNewTaskInfo {
 }
 
 export interface UpdatingTaskInfo {
-    task: string,
-    priority: number,
-    completed: boolean,
+    task?: string,
+    priority?: number,
+    completed?: boolean,
 }
 
 export interface TaskId {
