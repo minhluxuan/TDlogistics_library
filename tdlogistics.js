@@ -999,23 +999,25 @@ var StaffsOperation = /** @class */ (function () {
     };
     // ROLE: any
     StaffsOperation.prototype.findByStaff = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_35;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "search?staff_id=").concat(condition.staff_id), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_35 = _a.sent();
-                        console.log("Error get one staff: ", error_35.response.data);
-                        return [2 /*return*/, error_35.response.data];
+                        error_35 = _c.sent();
+                        console.log("Error get one staff: ", (_a = error_35 === null || error_35 === void 0 ? void 0 : error_35.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_35 === null || error_35 === void 0 ? void 0 : error_35.request);
+                        return [2 /*return*/, { error: (_b = error_35 === null || error_35 === void 0 ? void 0 : error_35.response) === null || _b === void 0 ? void 0 : _b.data, request: error_35 === null || error_35 === void 0 ? void 0 : error_35.request, status: error_35.response ? error_35.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1023,23 +1025,25 @@ var StaffsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, TELLER, HUMAN_RESOURCE_MANAGER, COMPLAINTS_SOLVER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     StaffsOperation.prototype.findByAdmin = function (conditions) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_36;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_36 = _a.sent();
-                        console.log("Error get one staff: ", error_36.response.data);
-                        return [2 /*return*/, error_36.response.data];
+                        error_36 = _c.sent();
+                        console.log("Error get one staff: ", (_a = error_36 === null || error_36 === void 0 ? void 0 : error_36.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_36 === null || error_36 === void 0 ? void 0 : error_36.request);
+                        return [2 /*return*/, { error: (_b = error_36 === null || error_36 === void 0 ? void 0 : error_36.response) === null || _b === void 0 ? void 0 : _b.data, request: error_36 === null || error_36 === void 0 ? void 0 : error_36.request, status: error_36.response ? error_36.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1047,23 +1051,25 @@ var StaffsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER
     StaffsOperation.prototype.createByAdmin = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_37;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_37 = _a.sent();
-                        console.log("Error create new staff: ", error_37.response.data);
-                        return [2 /*return*/, error_37.response.data];
+                        error_37 = _c.sent();
+                        console.log("Error create new staff: ", (_a = error_37 === null || error_37 === void 0 ? void 0 : error_37.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_37 === null || error_37 === void 0 ? void 0 : error_37.request);
+                        return [2 /*return*/, { error: (_b = error_37 === null || error_37 === void 0 ? void 0 : error_37.response) === null || _b === void 0 ? void 0 : _b.data, request: error_37 === null || error_37 === void 0 ? void 0 : error_37.request, status: error_37.response ? error_37.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1071,23 +1077,25 @@ var StaffsOperation = /** @class */ (function () {
     };
     // ROLE: AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     StaffsOperation.prototype.createByAgency = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_38;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_38 = _a.sent();
-                        console.log("Error create new staff: ", error_38.response.data);
-                        return [2 /*return*/, error_38.response.data];
+                        error_38 = _c.sent();
+                        console.log("Error create new staff: ", (_a = error_38 === null || error_38 === void 0 ? void 0 : error_38.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_38 === null || error_38 === void 0 ? void 0 : error_38.request);
+                        return [2 /*return*/, { error: (_b = error_38 === null || error_38 === void 0 ? void 0 : error_38.response) === null || _b === void 0 ? void 0 : _b.data, request: error_38 === null || error_38 === void 0 ? void 0 : error_38.request, status: error_38.response ? error_38.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1095,23 +1103,25 @@ var StaffsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     StaffsOperation.prototype.update = function (info, condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_39;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?staff_id=").concat(condition.staff_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_39 = _a.sent();
-                        console.log("Error create new staff: ", error_39.response.data);
-                        return [2 /*return*/, error_39.response.data];
+                        error_39 = _c.sent();
+                        console.log("Error create new staff: ", (_a = error_39 === null || error_39 === void 0 ? void 0 : error_39.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_39 === null || error_39 === void 0 ? void 0 : error_39.request);
+                        return [2 /*return*/, { error: (_b = error_39 === null || error_39 === void 0 ? void 0 : error_39.response) === null || _b === void 0 ? void 0 : _b.data, request: error_39 === null || error_39 === void 0 ? void 0 : error_39.request, status: error_39.response ? error_39.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1119,23 +1129,25 @@ var StaffsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     StaffsOperation.prototype.deleteStaff = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_40;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?staff_id=").concat(condition.staff_id), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_40 = _a.sent();
-                        console.log("Error deleting staff: ", error_40.response.data);
-                        return [2 /*return*/, error_40.response.data];
+                        error_40 = _c.sent();
+                        console.log("Error deleting staff: ", (_a = error_40 === null || error_40 === void 0 ? void 0 : error_40.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_40 === null || error_40 === void 0 ? void 0 : error_40.request);
+                        return [2 /*return*/, { error: (_b = error_40 === null || error_40 === void 0 ? void 0 : error_40.response) === null || _b === void 0 ? void 0 : _b.data, request: error_40 === null || error_40 === void 0 ? void 0 : error_40.request, status: error_40.response ? error_40.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1143,25 +1155,27 @@ var StaffsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     StaffsOperation.prototype.updateAvatar = function (info, condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var formData, response, data, error_41;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         formData = new FormData();
                         formData.append('avatar', info.avatarFile);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_avatar?staff_id=").concat(condition.staff_id), formData, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_41 = _a.sent();
-                        console.error('Error uploading image:', error_41.response.data);
-                        return [2 /*return*/, error_41.response.data]; // Ném lỗi để xử lý bên ngoài
+                        error_41 = _c.sent();
+                        console.error('Error uploading image:', (_a = error_41 === null || error_41 === void 0 ? void 0 : error_41.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_41 === null || error_41 === void 0 ? void 0 : error_41.request);
+                        return [2 /*return*/, { error: (_b = error_41 === null || error_41 === void 0 ? void 0 : error_41.response) === null || _b === void 0 ? void 0 : _b.data, request: error_41 === null || error_41 === void 0 ? void 0 : error_41.request, status: error_41.response ? error_41.response.status : null }]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1195,23 +1209,25 @@ var StaffsOperation = /** @class */ (function () {
     // ROLE: any. But one staff can just change his/her own password.
     // So that, the staff_id in session must be the same with the staff_id in the query. 
     StaffsOperation.prototype.updatePassword = function (info, condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_43;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_password?staff_id=").concat(condition.staff_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_43 = _a.sent();
-                        console.log("Error update password: ", error_43.response.data);
-                        return [2 /*return*/, error_43.response.data];
+                        error_43 = _c.sent();
+                        console.log("Error update password: ", (_a = error_43 === null || error_43 === void 0 ? void 0 : error_43.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_43 === null || error_43 === void 0 ? void 0 : error_43.request);
+                        return [2 /*return*/, { error: (_b = error_43 === null || error_43 === void 0 ? void 0 : error_43.response) === null || _b === void 0 ? void 0 : _b.data, request: error_43 === null || error_43 === void 0 ? void 0 : error_43.request, status: error_43.response ? error_43.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1253,23 +1269,25 @@ var BusinessOperation = /** @class */ (function () {
     }
     // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER"
     BusinessOperation.prototype.createByAdmin = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_45;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_45 = _a.sent();
-                        console.log("Error creating new business: ", error_45.response.data);
-                        return [2 /*return*/, error_45.response.data];
+                        error_45 = _c.sent();
+                        console.log("Error creating new business: ", (_a = error_45 === null || error_45 === void 0 ? void 0 : error_45.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_45 === null || error_45 === void 0 ? void 0 : error_45.request);
+                        return [2 /*return*/, { error: (_b = error_45 === null || error_45 === void 0 ? void 0 : error_45.response) === null || _b === void 0 ? void 0 : _b.data, request: error_45 === null || error_45 === void 0 ? void 0 : error_45.request, status: error_45.response ? error_45.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1277,23 +1295,25 @@ var BusinessOperation = /** @class */ (function () {
     };
     // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER"
     BusinessOperation.prototype.createByAgency = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_46;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_46 = _a.sent();
-                        console.log("Error creating new business: ", error_46.response.data);
-                        return [2 /*return*/, error_46.response.data];
+                        error_46 = _c.sent();
+                        console.log("Error creating new business: ", (_a = error_46 === null || error_46 === void 0 ? void 0 : error_46.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_46 === null || error_46 === void 0 ? void 0 : error_46.request);
+                        return [2 /*return*/, { error: (_b = error_46 === null || error_46 === void 0 ? void 0 : error_46.response) === null || _b === void 0 ? void 0 : _b.data, request: error_46 === null || error_46 === void 0 ? void 0 : error_46.request, status: error_46.response ? error_46.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1301,23 +1321,25 @@ var BusinessOperation = /** @class */ (function () {
     };
     // "BUSINESS"
     BusinessOperation.prototype.findByBusiness = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_47;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search?business_id=").concat(condition.business_id), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_47 = _a.sent();
-                        console.log("Error finding business: ", error_47.response.data);
-                        return [2 /*return*/, error_47.response.data];
+                        error_47 = _c.sent();
+                        console.log("Error finding business: ", (_a = error_47 === null || error_47 === void 0 ? void 0 : error_47.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_47 === null || error_47 === void 0 ? void 0 : error_47.request);
+                        return [2 /*return*/, { error: (_b = error_47 === null || error_47 === void 0 ? void 0 : error_47.response) === null || _b === void 0 ? void 0 : _b.data, request: error_47 === null || error_47 === void 0 ? void 0 : error_47.request, status: error_47.response ? error_47.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1326,23 +1348,25 @@ var BusinessOperation = /** @class */ (function () {
     // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
     // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
     BusinessOperation.prototype.findByAdmin = function (conditions) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_48;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_48 = _a.sent();
-                        console.log("Error finding business: ", error_48.response.data);
-                        return [2 /*return*/, error_48.response.data];
+                        error_48 = _c.sent();
+                        console.log("Error finding business: ", (_a = error_48 === null || error_48 === void 0 ? void 0 : error_48.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_48 === null || error_48 === void 0 ? void 0 : error_48.request);
+                        return [2 /*return*/, { error: (_b = error_48 === null || error_48 === void 0 ? void 0 : error_48.response) === null || _b === void 0 ? void 0 : _b.data, request: error_48 === null || error_48 === void 0 ? void 0 : error_48.request, status: error_48.response ? error_48.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1350,23 +1374,25 @@ var BusinessOperation = /** @class */ (function () {
     };
     // BUSINESS
     BusinessOperation.prototype.findRepresentorByBusiness = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_49;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_representor"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_49 = _a.sent();
-                        console.log("Error finding representor: ", error_49.response.data);
-                        return [2 /*return*/, error_49.response.data];
+                        error_49 = _c.sent();
+                        console.log("Error finding representor: ", (_a = error_49 === null || error_49 === void 0 ? void 0 : error_49.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_49 === null || error_49 === void 0 ? void 0 : error_49.request);
+                        return [2 /*return*/, { error: (_b = error_49 === null || error_49 === void 0 ? void 0 : error_49.response) === null || _b === void 0 ? void 0 : _b.data, request: error_49 === null || error_49 === void 0 ? void 0 : error_49.request, status: error_49.response ? error_49.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1375,23 +1401,25 @@ var BusinessOperation = /** @class */ (function () {
     // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
     // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
     BusinessOperation.prototype.findRepresentorByAdmin = function (conditions) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_50;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_representor"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_50 = _a.sent();
-                        console.log("Error finding representor: ", error_50.response.data);
-                        return [2 /*return*/, error_50.response.data];
+                        error_50 = _c.sent();
+                        console.log("Error finding representor: ", (_a = error_50 === null || error_50 === void 0 ? void 0 : error_50.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_50 === null || error_50 === void 0 ? void 0 : error_50.request);
+                        return [2 /*return*/, { error: (_b = error_50 === null || error_50 === void 0 ? void 0 : error_50.response) === null || _b === void 0 ? void 0 : _b.data, request: error_50 === null || error_50 === void 0 ? void 0 : error_50.request, status: error_50.response ? error_50.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1399,23 +1427,25 @@ var BusinessOperation = /** @class */ (function () {
     };
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.updateBusiness = function (info, condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_51;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?business_id=").concat(condition.business_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_51 = _a.sent();
-                        console.log("Error updating business: ", error_51.response.data);
-                        return [2 /*return*/, error_51.response.data];
+                        error_51 = _c.sent();
+                        console.log("Error updating business: ", (_a = error_51 === null || error_51 === void 0 ? void 0 : error_51.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_51 === null || error_51 === void 0 ? void 0 : error_51.request);
+                        return [2 /*return*/, { error: (_b = error_51 === null || error_51 === void 0 ? void 0 : error_51.response) === null || _b === void 0 ? void 0 : _b.data, request: error_51 === null || error_51 === void 0 ? void 0 : error_51.request, status: error_51.response ? error_51.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1423,23 +1453,25 @@ var BusinessOperation = /** @class */ (function () {
     };
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.updateBusinessRepresentor = function (info, condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_52;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/update_business_representor?business_id=").concat(condition.business_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_52 = _a.sent();
-                        console.log("Error updating business: ", error_52.response.data);
-                        return [2 /*return*/, error_52.response.data];
+                        error_52 = _c.sent();
+                        console.log("Error updating business: ", (_a = error_52 === null || error_52 === void 0 ? void 0 : error_52.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_52 === null || error_52 === void 0 ? void 0 : error_52.request);
+                        return [2 /*return*/, { error: (_b = error_52 === null || error_52 === void 0 ? void 0 : error_52.response) === null || _b === void 0 ? void 0 : _b.data, request: error_52 === null || error_52 === void 0 ? void 0 : error_52.request, status: error_52.response ? error_52.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1447,23 +1479,25 @@ var BusinessOperation = /** @class */ (function () {
     };
     // any
     BusinessOperation.prototype.checkExist = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_53;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/check?tax_number=").concat(condition.tax_number), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
-                        error_53 = _a.sent();
-                        console.log("Error checking exist business: ", error_53.response.data);
-                        return [2 /*return*/, error_53.response.data];
+                        error_53 = _c.sent();
+                        console.log("Error checking exist business: ", (_a = error_53 === null || error_53 === void 0 ? void 0 : error_53.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_53 === null || error_53 === void 0 ? void 0 : error_53.request);
+                        return [2 /*return*/, { error: (_b = error_53 === null || error_53 === void 0 ? void 0 : error_53.response) === null || _b === void 0 ? void 0 : _b.data, request: error_53 === null || error_53 === void 0 ? void 0 : error_53.request, status: error_53.response ? error_53.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1471,23 +1505,25 @@ var BusinessOperation = /** @class */ (function () {
     };
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.removeBusiness = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_54;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/delete?business_id=").concat(condition.business_id, "&agency_id=").concat(condition.agency_id), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_54 = _a.sent();
-                        console.log("Error deleting business: ", error_54.response.data);
-                        return [2 /*return*/, error_54.response.data];
+                        error_54 = _c.sent();
+                        console.log("Error deleting business: ", (_a = error_54 === null || error_54 === void 0 ? void 0 : error_54.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_54 === null || error_54 === void 0 ? void 0 : error_54.request);
+                        return [2 /*return*/, { error: (_b = error_54 === null || error_54 === void 0 ? void 0 : error_54.response) === null || _b === void 0 ? void 0 : _b.data, request: error_54 === null || error_54 === void 0 ? void 0 : error_54.request, status: error_54.response ? error_54.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1556,23 +1592,25 @@ var PartnerStaffOperation = /** @class */ (function () {
     }
     // ROLE: PARTNER_DRIVER, PARTNER_SHIPPER
     PartnerStaffOperation.prototype.getAuthenticatedPartnerStaffInfo = function () {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_57;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_info"), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_57 = _a.sent();
-                        console.log("Error getting authenticated partner staff information: ", error_57.response.data);
-                        return [2 /*return*/, error_57.response.data];
+                        error_57 = _c.sent();
+                        console.log("Error getting authenticated partner staff information: ", (_a = error_57 === null || error_57 === void 0 ? void 0 : error_57.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_57 === null || error_57 === void 0 ? void 0 : error_57.request);
+                        return [2 /*return*/, { error: (_b = error_57 === null || error_57 === void 0 ? void 0 : error_57.response) === null || _b === void 0 ? void 0 : _b.data, request: error_57 === null || error_57 === void 0 ? void 0 : error_57.request, status: error_57.response ? error_57.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1580,23 +1618,25 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.create = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_58;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_58 = _a.sent();
-                        console.log("Error creating partner staff: ", error_58.response.data);
-                        return [2 /*return*/, error_58.response.data];
+                        error_58 = _c.sent();
+                        console.log("Error creating partner staff: ", (_a = error_58 === null || error_58 === void 0 ? void 0 : error_58.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_58 === null || error_58 === void 0 ? void 0 : error_58.request);
+                        return [2 /*return*/, { error: (_b = error_58 === null || error_58 === void 0 ? void 0 : error_58.response) === null || _b === void 0 ? void 0 : _b.data, request: error_58 === null || error_58 === void 0 ? void 0 : error_58.request, status: error_58.response ? error_58.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1604,23 +1644,25 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: PARTNER_DRIVER, PARTNER_SHIPPER
     PartnerStaffOperation.prototype.findByPartnerStaff = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_59;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_59 = _a.sent();
-                        console.log("Error finding partner staff: ", error_59.response.data);
-                        return [2 /*return*/, error_59.response.data];
+                        error_59 = _c.sent();
+                        console.log("Error finding partner staff: ", (_a = error_59 === null || error_59 === void 0 ? void 0 : error_59.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_59 === null || error_59 === void 0 ? void 0 : error_59.request);
+                        return [2 /*return*/, { error: (_b = error_59 === null || error_59 === void 0 ? void 0 : error_59.response) === null || _b === void 0 ? void 0 : _b.data, request: error_59 === null || error_59 === void 0 ? void 0 : error_59.request, status: error_59.response ? error_59.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1628,23 +1670,25 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: TRANSPORT_PARTNER_REPRESENTOR
     PartnerStaffOperation.prototype.findByPartner = function (conditions) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_60;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_60 = _a.sent();
-                        console.log("Error finding partner staff: ", error_60.response.data);
-                        return [2 /*return*/, error_60.response.data];
+                        error_60 = _c.sent();
+                        console.log("Error finding partner staff: ", (_a = error_60 === null || error_60 === void 0 ? void 0 : error_60.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_60 === null || error_60 === void 0 ? void 0 : error_60.request);
+                        return [2 /*return*/, { error: (_b = error_60 === null || error_60 === void 0 ? void 0 : error_60.response) === null || _b === void 0 ? void 0 : _b.data, request: error_60 === null || error_60 === void 0 ? void 0 : error_60.request, status: error_60.response ? error_60.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1652,23 +1696,25 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, TELLER, COMPLAINTS_SOLVER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, AGENCY_TELLER, AGENCY_COMPLAINTS_SOLVER 
     PartnerStaffOperation.prototype.findByAdmin = function (conditions) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_61;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_61 = _a.sent();
-                        console.log("Error finding partner staff: ", error_61.response.data);
-                        return [2 /*return*/, error_61.response.data];
+                        error_61 = _c.sent();
+                        console.log("Error finding partner staff: ", (_a = error_61 === null || error_61 === void 0 ? void 0 : error_61.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_61 === null || error_61 === void 0 ? void 0 : error_61.request);
+                        return [2 /*return*/, { error: (_b = error_61 === null || error_61 === void 0 ? void 0 : error_61.response) === null || _b === void 0 ? void 0 : _b.data, request: error_61 === null || error_61 === void 0 ? void 0 : error_61.request, status: error_61.response ? error_61.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1676,23 +1722,25 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.updatePartnerStaff = function (info, condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_62;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/update?staff_id=").concat(condition.staff_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_62 = _a.sent();
-                        console.log("Error updating partner staff: ", error_62.response.data);
-                        return [2 /*return*/, error_62.response.data];
+                        error_62 = _c.sent();
+                        console.log("Error updating partner staff: ", (_a = error_62 === null || error_62 === void 0 ? void 0 : error_62.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_62 === null || error_62 === void 0 ? void 0 : error_62.request);
+                        return [2 /*return*/, { error: (_b = error_62 === null || error_62 === void 0 ? void 0 : error_62.response) === null || _b === void 0 ? void 0 : _b.data, request: error_62 === null || error_62 === void 0 ? void 0 : error_62.request, status: error_62.response ? error_62.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1700,23 +1748,25 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: any
     PartnerStaffOperation.prototype.checkExist = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_63;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/check?cccd=").concat(condition.cccd), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
-                        error_63 = _a.sent();
-                        console.log("Error checking exist partner staff: ", error_63.response.data);
-                        return [2 /*return*/, error_63.response.data];
+                        error_63 = _c.sent();
+                        console.log("Error checking exist partner staff: ", (_a = error_63 === null || error_63 === void 0 ? void 0 : error_63.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_63 === null || error_63 === void 0 ? void 0 : error_63.request);
+                        return [2 /*return*/, { error: (_b = error_63 === null || error_63 === void 0 ? void 0 : error_63.response) === null || _b === void 0 ? void 0 : _b.data, request: error_63 === null || error_63 === void 0 ? void 0 : error_63.request, status: error_63.response ? error_63.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1724,23 +1774,25 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.deletePartnerStaff = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_64;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/delete?staff_id=").concat(condition.staff_id), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_64 = _a.sent();
-                        console.log("Error deleting business: ", error_64.response.data);
-                        return [2 /*return*/, error_64.response.data];
+                        error_64 = _c.sent();
+                        console.log("Error deleting business: ", (_a = error_64 === null || error_64 === void 0 ? void 0 : error_64.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_64 === null || error_64 === void 0 ? void 0 : error_64.request);
+                        return [2 /*return*/, { error: (_b = error_64 === null || error_64 === void 0 ? void 0 : error_64.response) === null || _b === void 0 ? void 0 : _b.data, request: error_64 === null || error_64 === void 0 ? void 0 : error_64.request, status: error_64.response ? error_64.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1748,23 +1800,25 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: PARTNER_DRIVER, PARTNER_SHIPPER
     PartnerStaffOperation.prototype.updatePassword = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_65;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_password"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_65 = _a.sent();
-                        console.log("Error update password: ", error_65.response.data);
-                        return [2 /*return*/, error_65.response.data];
+                        error_65 = _c.sent();
+                        console.log("Error update password: ", (_a = error_65 === null || error_65 === void 0 ? void 0 : error_65.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_65 === null || error_65 === void 0 ? void 0 : error_65.request);
+                        return [2 /*return*/, { error: (_b = error_65 === null || error_65 === void 0 ? void 0 : error_65.response) === null || _b === void 0 ? void 0 : _b.data, request: error_65 === null || error_65 === void 0 ? void 0 : error_65.request, status: error_65.response ? error_65.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1772,25 +1826,27 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.updatePartnerStaffAvatar = function (info, condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var formData, response, data, error_66;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         formData = new FormData();
                         formData.append('avatar', info.avatarFile);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_avatar?staff_id=").concat(condition.staff_id), formData, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_66 = _a.sent();
-                        console.error('Error uploading image:', error_66.response.data);
-                        return [2 /*return*/, error_66.response.data]; // Ném lỗi để xử lý bên ngoài
+                        error_66 = _c.sent();
+                        console.error('Error uploading image:', (_a = error_66 === null || error_66 === void 0 ? void 0 : error_66.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_66 === null || error_66 === void 0 ? void 0 : error_66.request);
+                        return [2 /*return*/, { error: (_b = error_66 === null || error_66 === void 0 ? void 0 : error_66.response) === null || _b === void 0 ? void 0 : _b.data, request: error_66 === null || error_66 === void 0 ? void 0 : error_66.request, status: error_66.response ? error_66.response.status : null }]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1798,12 +1854,13 @@ var PartnerStaffOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.updatePartnerStaffLicense = function (info, condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var formData, response, data, error_67;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         formData = new FormData();
                         formData.append('license_before', info.license_before);
                         formData.append('license_after', info.license_after);
@@ -1811,13 +1868,14 @@ var PartnerStaffOperation = /** @class */ (function () {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_67 = _a.sent();
-                        console.error('Error uploading image:', error_67.response.data);
-                        return [2 /*return*/, error_67.response.data]; // Ném lỗi để xử lý bên ngoài
+                        error_67 = _c.sent();
+                        console.error('Error uploading image:', (_a = error_67 === null || error_67 === void 0 ? void 0 : error_67.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_67 === null || error_67 === void 0 ? void 0 : error_67.request);
+                        return [2 /*return*/, { error: (_b = error_67 === null || error_67 === void 0 ? void 0 : error_67.response) === null || _b === void 0 ? void 0 : _b.data, request: error_67 === null || error_67 === void 0 ? void 0 : error_67.request, status: error_67.response ? error_67.response.status : null }]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1906,69 +1964,75 @@ var ShippersOperation = /** @class */ (function () {
         this.baseUrl = "http://localhost:5000/api/v1/shippers";
     }
     ShippersOperation.prototype.getTask = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_71;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_tasks"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_71 = _a.sent();
-                        console.log("Error getting tasks: ", error_71.response.data);
-                        return [2 /*return*/, error_71.response.data];
+                        error_71 = _c.sent();
+                        console.log("Error getting tasks: ", (_a = error_71 === null || error_71 === void 0 ? void 0 : error_71.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_71 === null || error_71 === void 0 ? void 0 : error_71.request);
+                        return [2 /*return*/, { error: (_b = error_71 === null || error_71 === void 0 ? void 0 : error_71.response) === null || _b === void 0 ? void 0 : _b.data, request: error_71 === null || error_71 === void 0 ? void 0 : error_71.request, status: error_71.response ? error_71.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
     ShippersOperation.prototype.confirmCompletedTask = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_72;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/confirm_completed"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_72 = _a.sent();
-                        console.log("Error confirming completed task: ", error_72.response.data);
-                        return [2 /*return*/, error_72.response.data];
+                        error_72 = _c.sent();
+                        console.log("Error confirming completed task: ", (_a = error_72 === null || error_72 === void 0 ? void 0 : error_72.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_72 === null || error_72 === void 0 ? void 0 : error_72.request);
+                        return [2 /*return*/, { error: (_b = error_72 === null || error_72 === void 0 ? void 0 : error_72.response) === null || _b === void 0 ? void 0 : _b.data, request: error_72 === null || error_72 === void 0 ? void 0 : error_72.request, status: error_72.response ? error_72.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
     ShippersOperation.prototype.getHistory = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_73;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get_history"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_73 = _a.sent();
-                        console.log("Error getting history: ", error_73.response.data);
-                        return [2 /*return*/, error_73.response.data];
+                        error_73 = _c.sent();
+                        console.log("Error getting history: ", (_a = error_73 === null || error_73 === void 0 ? void 0 : error_73.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_73 === null || error_73 === void 0 ? void 0 : error_73.request);
+                        return [2 /*return*/, { error: (_b = error_73 === null || error_73 === void 0 ? void 0 : error_73.response) === null || _b === void 0 ? void 0 : _b.data, request: error_73 === null || error_73 === void 0 ? void 0 : error_73.request, status: error_73.response ? error_73.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1983,23 +2047,25 @@ var ShipmentsOperation = /** @class */ (function () {
         this.baseUrl = "http://localhost:5000/api/v1/shipments";
     }
     ShipmentsOperation.prototype.check = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_74;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/check?shipment_id=").concat(condition.shipment_id), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
-                        error_74 = _a.sent();
-                        console.log("Error checking exist shipment: ", error_74.response.data);
-                        return [2 /*return*/, error_74.response.data];
+                        error_74 = _c.sent();
+                        console.log("Error checking exist shipment: ", (_a = error_74 === null || error_74 === void 0 ? void 0 : error_74.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_74 === null || error_74 === void 0 ? void 0 : error_74.request);
+                        return [2 /*return*/, { error: (_b = error_74 === null || error_74 === void 0 ? void 0 : error_74.response) === null || _b === void 0 ? void 0 : _b.data, request: error_74 === null || error_74 === void 0 ? void 0 : error_74.request, status: error_74.response ? error_74.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2007,46 +2073,50 @@ var ShipmentsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.create = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_75;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_75 = _a.sent();
-                        console.log("Error creating shipment: ", error_75.response.data);
-                        return [2 /*return*/, error_75.response.data];
+                        error_75 = _c.sent();
+                        console.log("Error creating shipment: ", (_a = error_75 === null || error_75 === void 0 ? void 0 : error_75.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_75 === null || error_75 === void 0 ? void 0 : error_75.request);
+                        return [2 /*return*/, { error: (_b = error_75 === null || error_75 === void 0 ? void 0 : error_75.response) === null || _b === void 0 ? void 0 : _b.data, request: error_75 === null || error_75 === void 0 ? void 0 : error_75.request, status: error_75.response ? error_75.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
         });
     };
     ShipmentsOperation.prototype.getOrdersFromShipment = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_76;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_orders?shipment_id=").concat(condition.shipment_id), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_76 = _a.sent();
-                        console.log("Error getting orders from shipment: ", error_76.response.data);
-                        return [2 /*return*/, error_76.response.data];
+                        error_76 = _c.sent();
+                        console.log("Error getting orders from shipment: ", (_a = error_76 === null || error_76 === void 0 ? void 0 : error_76.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_76 === null || error_76 === void 0 ? void 0 : error_76.request);
+                        return [2 /*return*/, { error: (_b = error_76 === null || error_76 === void 0 ? void 0 : error_76.response) === null || _b === void 0 ? void 0 : _b.data, request: error_76 === null || error_76 === void 0 ? void 0 : error_76.request, status: error_76.response ? error_76.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2054,23 +2124,25 @@ var ShipmentsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.addOrdersToShipment = function (condition, info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_77;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/add_orders?shipment_id=").concat(condition.shipment_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_77 = _a.sent();
-                        console.log("Error adding orders to shipment: ", error_77.response.data);
-                        return [2 /*return*/, error_77.response.data];
+                        error_77 = _c.sent();
+                        console.log("Error adding orders to shipment: ", (_a = error_77 === null || error_77 === void 0 ? void 0 : error_77.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_77 === null || error_77 === void 0 ? void 0 : error_77.request);
+                        return [2 /*return*/, { error: (_b = error_77 === null || error_77 === void 0 ? void 0 : error_77.response) === null || _b === void 0 ? void 0 : _b.data, request: error_77 === null || error_77 === void 0 ? void 0 : error_77.request, status: error_77.response ? error_77.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2078,23 +2150,25 @@ var ShipmentsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.deleteOrderFromShipment = function (condition, info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_78;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/remove_orders?shipment_id=").concat(condition.shipment_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_78 = _a.sent();
-                        console.log("Error deleting order from shipment: ", error_78.response.data);
-                        return [2 /*return*/, error_78.response.data];
+                        error_78 = _c.sent();
+                        console.log("Error deleting order from shipment: ", (_a = error_78 === null || error_78 === void 0 ? void 0 : error_78.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_78 === null || error_78 === void 0 ? void 0 : error_78.request);
+                        return [2 /*return*/, { error: (_b = error_78 === null || error_78 === void 0 ? void 0 : error_78.response) === null || _b === void 0 ? void 0 : _b.data, request: error_78 === null || error_78 === void 0 ? void 0 : error_78.request, status: error_78.response ? error_78.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2102,23 +2176,25 @@ var ShipmentsOperation = /** @class */ (function () {
     };
     // ROLE: AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.confirmCreate = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_79;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/confirm_create"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_79 = _a.sent();
-                        console.log("Error confirming creat shipment: ", error_79.response.data);
-                        return [2 /*return*/, error_79.response.data];
+                        error_79 = _c.sent();
+                        console.log("Error confirming creat shipment: ", (_a = error_79 === null || error_79 === void 0 ? void 0 : error_79.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_79 === null || error_79 === void 0 ? void 0 : error_79.request);
+                        return [2 /*return*/, { error: (_b = error_79 === null || error_79 === void 0 ? void 0 : error_79.response) === null || _b === void 0 ? void 0 : _b.data, request: error_79 === null || error_79 === void 0 ? void 0 : error_79.request, status: error_79.response ? error_79.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2126,23 +2202,25 @@ var ShipmentsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.get = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_80;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/get"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_80 = _a.sent();
-                        console.log("Error getting shipments: ", error_80.response.data);
-                        return [2 /*return*/, error_80.response.data];
+                        error_80 = _c.sent();
+                        console.log("Error getting shipments: ", (_a = error_80 === null || error_80 === void 0 ? void 0 : error_80.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_80 === null || error_80 === void 0 ? void 0 : error_80.request);
+                        return [2 /*return*/, { error: (_b = error_80 === null || error_80 === void 0 ? void 0 : error_80.response) === null || _b === void 0 ? void 0 : _b.data, request: error_80 === null || error_80 === void 0 ? void 0 : error_80.request, status: error_80.response ? error_80.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2150,23 +2228,25 @@ var ShipmentsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.delete = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_81;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?shipment_id=").concat(condition.shipment_id), {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_81 = _a.sent();
-                        console.log("Error deleting shipment: ", error_81.response.data);
-                        return [2 /*return*/, error_81.response.data];
+                        error_81 = _c.sent();
+                        console.log("Error deleting shipment: ", (_a = error_81 === null || error_81 === void 0 ? void 0 : error_81.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_81 === null || error_81 === void 0 ? void 0 : error_81.request);
+                        return [2 /*return*/, { error: (_b = error_81 === null || error_81 === void 0 ? void 0 : error_81.response) === null || _b === void 0 ? void 0 : _b.data, request: error_81 === null || error_81 === void 0 ? void 0 : error_81.request, status: error_81.response ? error_81.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2174,23 +2254,25 @@ var ShipmentsOperation = /** @class */ (function () {
     };
     // ROLE: ADMIN, MANAGER, TELLER, AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.decompose = function (condition, info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_82;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/decompose?shipment_id=").concat(condition.shipment_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_82 = _a.sent();
-                        console.log("Error decomposing shipment: ", error_82.response.data);
-                        return [2 /*return*/, error_82.response.data];
+                        error_82 = _c.sent();
+                        console.log("Error decomposing shipment: ", (_a = error_82 === null || error_82 === void 0 ? void 0 : error_82.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_82 === null || error_82 === void 0 ? void 0 : error_82.request);
+                        return [2 /*return*/, { error: (_b = error_82 === null || error_82 === void 0 ? void 0 : error_82.response) === null || _b === void 0 ? void 0 : _b.data, request: error_82 === null || error_82 === void 0 ? void 0 : error_82.request, status: error_82.response ? error_82.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2198,23 +2280,25 @@ var ShipmentsOperation = /** @class */ (function () {
     };
     // ROLE: AGENCY_MANAGER, AGENCY_TELLER
     ShipmentsOperation.prototype.receive = function (condition) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_83;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/receive"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_83 = _a.sent();
-                        console.log("Error receiving shipment: ", error_83.response.data);
-                        return [2 /*return*/, error_83.response.data];
+                        error_83 = _c.sent();
+                        console.log("Error receiving shipment: ", (_a = error_83 === null || error_83 === void 0 ? void 0 : error_83.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_83 === null || error_83 === void 0 ? void 0 : error_83.request);
+                        return [2 /*return*/, { error: (_b = error_83 === null || error_83 === void 0 ? void 0 : error_83.response) === null || _b === void 0 ? void 0 : _b.data, request: error_83 === null || error_83 === void 0 ? void 0 : error_83.request, status: error_83.response ? error_83.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2222,23 +2306,25 @@ var ShipmentsOperation = /** @class */ (function () {
     };
     // ROLE: SHIPPER, AGENCY_SHIPPER, PARTNER_SHIPPER
     ShipmentsOperation.prototype.undertake = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_84;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/undertake"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_84 = _a.sent();
-                        console.log("Error undertaking shipment: ", error_84.response.data);
-                        return [2 /*return*/, error_84.response.data];
+                        error_84 = _c.sent();
+                        console.log("Error undertaking shipment: ", (_a = error_84 === null || error_84 === void 0 ? void 0 : error_84.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_84 === null || error_84 === void 0 ? void 0 : error_84.request);
+                        return [2 /*return*/, { error: (_b = error_84 === null || error_84 === void 0 ? void 0 : error_84.response) === null || _b === void 0 ? void 0 : _b.data, request: error_84 === null || error_84 === void 0 ? void 0 : error_84.request, status: error_84.response ? error_84.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2328,12 +2414,13 @@ var OrdersOperation = /** @class */ (function () {
         });
     };
     OrdersOperation.prototype.checkFileFormat = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var formData, response, data, error_88;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         formData = new FormData();
                         formData.append("file", info.file);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/check_file_format"), formData, {
@@ -2343,13 +2430,14 @@ var OrdersOperation = /** @class */ (function () {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, valid: data.valid, message: data.message }];
                     case 2:
-                        error_88 = _a.sent();
-                        console.error('Error checking file format:', error_88.response.data);
-                        return [2 /*return*/, error_88.response.data];
+                        error_88 = _c.sent();
+                        console.error('Error checking file format:', (_a = error_88 === null || error_88 === void 0 ? void 0 : error_88.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_88 === null || error_88 === void 0 ? void 0 : error_88.request);
+                        return [2 /*return*/, { error: (_b = error_88 === null || error_88 === void 0 ? void 0 : error_88.response) === null || _b === void 0 ? void 0 : _b.data, request: error_88 === null || error_88 === void 0 ? void 0 : error_88.request, status: error_88.response ? error_88.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2382,12 +2470,13 @@ var OrdersOperation = /** @class */ (function () {
         });
     };
     OrdersOperation.prototype.createByFile = function (info) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var formData, response, data, error_89;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         formData = new FormData();
                         formData.append("file", info.file);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create_by_file"), formData, {
@@ -2397,13 +2486,14 @@ var OrdersOperation = /** @class */ (function () {
                                 withCredentials: true,
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_89 = _a.sent();
-                        console.error('Error creating orders by file:', error_89.response.data);
-                        return [2 /*return*/, error_89.response.data];
+                        error_89 = _c.sent();
+                        console.error('Error creating orders by file:', (_a = error_89 === null || error_89 === void 0 ? void 0 : error_89.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_89 === null || error_89 === void 0 ? void 0 : error_89.request);
+                        return [2 /*return*/, { error: (_b = error_89 === null || error_89 === void 0 ? void 0 : error_89.response) === null || _b === void 0 ? void 0 : _b.data, request: error_89 === null || error_89 === void 0 ? void 0 : error_89.request, status: error_89.response ? error_89.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
