@@ -1374,7 +1374,7 @@ class BusinessOperation {
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async updateBusiness(info: UpdatingBusinessInfo, condition: UpdatingBusinessCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/update?business_id=${condition.business_id}`, info, {
+			const response = await axios.put(`${this.baseUrl}/update?business_id=${condition.business_id}`, info, {
 				withCredentials: true,
 			});
 
