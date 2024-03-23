@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AdministrativeOperation = exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.VehicleOperation = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.PartnerStaffAuthenticate = exports.BusinessAuthenticate = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
 var axios_1 = require("axios");
 var FormData = require("form-data");
+var JSZip = require("jszip");
 // socket.on("connect", () => {
 //     console.log("Connected to server.");
 // });
@@ -2176,6 +2177,7 @@ var ShipmentsOperation = /** @class */ (function () {
     return ShipmentsOperation;
 }());
 exports.ShipmentsOperation = ShipmentsOperation;
+;
 var OrdersOperation = /** @class */ (function () {
     function OrdersOperation() {
         this.baseUrl = "http://localhost:5000/api/v1/orders";
@@ -2400,6 +2402,81 @@ var OrdersOperation = /** @class */ (function () {
             });
         });
     };
+    OrdersOperation.prototype.updateImage = function (info, condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var formData, i, response, error_93;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        formData = new FormData();
+                        for (i = 0; i < info.files.length; i++) {
+                            formData.append('files', info.files[i]);
+                        }
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/update_images?order_id=").concat(condition.order_id, "&type=").concat(condition.type), formData, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        console.log('Image uploaded successfully:', response.data);
+                        return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
+                    case 2:
+                        error_93 = _a.sent();
+                        console.error('Error uploading image:', error_93.response.data);
+                        throw error_93; // Ném lỗi để xử lý bên ngoài
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //get_images
+    OrdersOperation.prototype.getImage = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, zipFile_1, imageUrls_1, error_94;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 4, , 5]);
+                        return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_images?order_id=").concat(condition.order_id, "&type=").concat(condition.type), {
+                                responseType: 'arraybuffer', // Ensure response is treated as a binary buffer
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, JSZip.loadAsync(response.data)];
+                    case 2:
+                        zipFile_1 = _a.sent();
+                        imageUrls_1 = [];
+                        // Extract each file from the ZIP archive and create object URLs
+                        return [4 /*yield*/, Promise.all(Object.keys(zipFile_1.files).map(function (filename) { return __awaiter(_this, void 0, void 0, function () {
+                                var file, blob, url;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            file = zipFile_1.files[filename];
+                                            return [4 /*yield*/, file.async('blob')];
+                                        case 1:
+                                            blob = _a.sent();
+                                            url = URL.createObjectURL(blob);
+                                            imageUrls_1.push(url);
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            }); }))];
+                    case 3:
+                        // Extract each file from the ZIP archive and create object URLs
+                        _a.sent();
+                        return [2 /*return*/, imageUrls_1];
+                    case 4:
+                        error_94 = _a.sent();
+                        console.error('Error getting image:', error_94.message);
+                        throw error_94; // Ném lỗi để xử lý bên ngoài
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return OrdersOperation;
 }());
 exports.OrdersOperation = OrdersOperation;
@@ -2409,7 +2486,7 @@ var ScheduleOperation = /** @class */ (function () {
     }
     ScheduleOperation.prototype.get = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_93;
+            var response, data, error_95;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2422,9 +2499,9 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, data: data.data, message: data.message }];
                     case 2:
-                        error_93 = _a.sent();
-                        console.log("Error getting tasks: ", error_93.response.data);
-                        return [2 /*return*/, error_93.response.data];
+                        error_95 = _a.sent();
+                        console.log("Error getting tasks: ", error_95.response.data);
+                        return [2 /*return*/, error_95.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2432,7 +2509,7 @@ var ScheduleOperation = /** @class */ (function () {
     };
     ScheduleOperation.prototype.create = function (info) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_94;
+            var response, data, error_96;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2445,9 +2522,9 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_94 = _a.sent();
-                        console.log("Error creating new tasks: ", error_94.response.data);
-                        return [2 /*return*/, error_94.response.data];
+                        error_96 = _a.sent();
+                        console.log("Error creating new tasks: ", error_96.response.data);
+                        return [2 /*return*/, error_96.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2455,7 +2532,7 @@ var ScheduleOperation = /** @class */ (function () {
     };
     ScheduleOperation.prototype.update = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_95;
+            var response, data, error_97;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2468,9 +2545,9 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_95 = _a.sent();
-                        console.log("Error updating tasks: ", error_95.response.data);
-                        return [2 /*return*/, error_95.response.data];
+                        error_97 = _a.sent();
+                        console.log("Error updating tasks: ", error_97.response.data);
+                        return [2 /*return*/, error_97.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2478,7 +2555,7 @@ var ScheduleOperation = /** @class */ (function () {
     };
     ScheduleOperation.prototype.deleteTask = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_96;
+            var response, data, error_98;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2491,9 +2568,9 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_96 = _a.sent();
-                        console.log("Error deleting tasks: ", error_96.response.data);
-                        return [2 /*return*/, error_96.response.data];
+                        error_98 = _a.sent();
+                        console.log("Error deleting tasks: ", error_98.response.data);
+                        return [2 /*return*/, error_98.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2508,7 +2585,7 @@ var AdministrativeOperation = /** @class */ (function () {
     }
     AdministrativeOperation.prototype.get = function (conditions) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_97;
+            var response, data, error_99;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2521,9 +2598,9 @@ var AdministrativeOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, data: data.data, message: data.message }];
                     case 2:
-                        error_97 = _a.sent();
-                        console.log("Error getting tasks: ", error_97.response.data);
-                        return [2 /*return*/, error_97.response.data];
+                        error_99 = _a.sent();
+                        console.log("Error getting tasks: ", error_99.response.data);
+                        return [2 /*return*/, error_99.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
