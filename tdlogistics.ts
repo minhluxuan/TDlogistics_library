@@ -1472,7 +1472,7 @@ class BusinessOperation {
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async removeBusiness(condition: DeletingBusinessCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/delete?business_id=${condition.business_id}&agency_id=${condition.agency_id}`, {
+			const response = await axios.delete(`${this.baseUrl}/delete?business_id=${condition.business_id}&agency_id=${condition.agency_id}`, {
 				withCredentials: true,
 			});
 
