@@ -541,7 +541,7 @@ export interface UpdatingTransportPartnerInfo {
     email?: string,
     bin?: string,
     bank?: string,
-    debit?: string,
+    debit?: number,
 }
 
 export interface UpdatingTransportPartnerCondition {
@@ -1278,7 +1278,7 @@ export interface UpdatingBusinessInfo {
 	business_name?: string,
 	email?: string,
 	phone_number?: string,
-	debit?: string, 
+	debit?: number, 
 	province?: string,
 	district?: string,
 	town?: string,
@@ -2577,7 +2577,7 @@ class AdministrativeOperation {
             const data = response.data;
             return { error: data, data: data.data, message: data.message }
         } catch (error: any) {
-            console.error("Error getting tasks: ", error?.response?.data);
+            console.error("Error getting administrative: ", error?.response?.data);
             console.error("Request that caused the error: ", error?.request);
             return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }

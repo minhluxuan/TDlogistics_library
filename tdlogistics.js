@@ -2784,7 +2784,7 @@ var AdministrativeOperation = /** @class */ (function () {
                         return [2 /*return*/, { error: data, data: data.data, message: data.message }];
                     case 2:
                         error_99 = _c.sent();
-                        console.error("Error getting tasks: ", (_a = error_99 === null || error_99 === void 0 ? void 0 : error_99.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Error getting administrative: ", (_a = error_99 === null || error_99 === void 0 ? void 0 : error_99.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_99 === null || error_99 === void 0 ? void 0 : error_99.request);
                         return [2 /*return*/, { error: (_b = error_99 === null || error_99 === void 0 ? void 0 : error_99.response) === null || _b === void 0 ? void 0 : _b.data, request: error_99 === null || error_99 === void 0 ? void 0 : error_99.request, status: error_99.response ? error_99.response.status : null }];
                     case 3: return [2 /*return*/];
