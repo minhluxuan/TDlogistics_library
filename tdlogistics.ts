@@ -1245,6 +1245,7 @@ export interface FindingBusinessByAdminCondition {
 	town: string,
 	bin: string,
 	bank: string,
+    approved: boolean,
 }
   
 export interface FindingRepresentorByBusinessCondition {
@@ -1264,7 +1265,6 @@ export interface FindingRepresentorByAdminCondition {
 	town: string,
 	bin: string,
 	bank: string,
-    approved: boolean,
 }
   
 export interface CheckingExistBusinessCondition {
