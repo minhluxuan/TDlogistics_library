@@ -1313,6 +1313,35 @@ export interface UpdatingContractInfo {
 export interface FindingContractCondition {
     business_id: string,
 }
+
+export interface SigningUpInfo {
+    // Representor of business information
+    user_fullname: string,
+    user_phone_number: string,
+    user_email: string,
+    user_date_of_birth: string,
+    user_cccd: string,
+    user_province: string,
+    user_district: string,
+    user_town: string,
+    user_detail_address: string,
+    user_bin: string,
+    user_bank: string,
+
+    // Business information
+    username: string,
+    password: string,
+    business_name: string,
+    email: string,
+    phone_number: string,
+    tax_number: string, 
+    province: string,
+    district: string,
+    town: string,
+    detail_address: string,
+    bin: string,
+    bank: string,
+}
   
 class BusinessOperation {
 	private baseUrl: string;
@@ -1322,6 +1351,21 @@ class BusinessOperation {
 		this.baseUrl = "http://localhost:5000/api/v1/business";
 
 	}
+
+    async signup(info: SigningUpInfo) {
+        try {
+            const response: AxiosResponse<any> = await axios.post(`${this.baseUrl}/signup`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error signing up business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
 
     // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER"
 	async createByAdmin(info: CreateBusinessByAdminInfo) {
