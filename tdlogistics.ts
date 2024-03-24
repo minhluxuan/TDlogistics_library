@@ -1264,6 +1264,7 @@ export interface FindingRepresentorByAdminCondition {
 	town: string,
 	bin: string,
 	bank: string,
+    approved: boolean,
 }
   
 export interface CheckingExistBusinessCondition {
