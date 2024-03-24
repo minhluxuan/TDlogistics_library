@@ -1460,7 +1460,7 @@ var BusinessOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/update_business_representor?business_id=").concat(condition.business_id), info, {
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update_business_representor?business_id=").concat(condition.business_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1892,6 +1892,7 @@ var PartnerStaffOperation = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_avatar?staff_id=").concat(condition.staff_id), {
                                 responseType: 'arraybuffer',
+                                withCredentials: true,
                             })];
                     case 1:
                         response = _a.sent();
@@ -1917,6 +1918,7 @@ var PartnerStaffOperation = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_license_before?staff_id=").concat(condition.staff_id), {
                                 responseType: 'arraybuffer',
+                                withCredentials: true,
                             })];
                     case 1:
                         response = _a.sent();
@@ -1942,6 +1944,7 @@ var PartnerStaffOperation = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_license_after?staff_id=").concat(condition.staff_id), {
                                 responseType: 'arraybuffer',
+                                withCredentials: true,
                             })];
                     case 1:
                         response = _a.sent();

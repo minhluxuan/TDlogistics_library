@@ -1440,7 +1440,7 @@ class BusinessOperation {
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async updateBusinessRepresentor(info: UpdatingBusinessRepresentorInfo, condition: UpdatingBusinessCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/update_business_representor?business_id=${condition.business_id}`, info, {
+			const response = await axios.put(`${this.baseUrl}/update_business_representor?business_id=${condition.business_id}`, info, {
 				withCredentials: true,
 			});
 
@@ -1829,6 +1829,7 @@ class PartnerStaffOperation {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
                 responseType: 'arraybuffer',
+                withCredentials: true,
             });
 
             const blob = new Blob([response.data], { type: response.headers['content-type'] });
@@ -1846,6 +1847,7 @@ class PartnerStaffOperation {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_license_before?staff_id=${condition.staff_id}`, {
                 responseType: 'arraybuffer',
+                withCredentials: true,
             });
 
             const blob = new Blob([response.data], { type: response.headers['content-type'] });
@@ -1863,6 +1865,7 @@ class PartnerStaffOperation {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_license_after?staff_id=${condition.staff_id}`, {
                 responseType: 'arraybuffer',
+                withCredentials: true,
             });
 
             const blob = new Blob([response.data], { type: response.headers['content-type'] });
