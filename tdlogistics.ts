@@ -1574,6 +1574,7 @@ class BusinessOperation {
         }
 	}
 
+    // ROLE: ADMIN, MANAGER, TELLER
     async approve(info: ApprovingBusinessInfo, condition: UpdatingBusinessCondition) {
         try {
             const response = await axios.post(`${this.baseUrl}/approve?business_id=${condition.business_id}`, info, {

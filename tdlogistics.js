@@ -1609,6 +1609,7 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // ROLE: ADMIN, MANAGER, TELLER
     BusinessOperation.prototype.approve = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
