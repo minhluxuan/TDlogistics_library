@@ -1343,6 +1343,10 @@ export interface SigningUpInfo {
     bank: string,
 }
   
+export interface ApprovingBusinessInfo {
+    agency_id: string
+}
+
 class BusinessOperation {
 	private baseUrl: string;
 
@@ -1563,10 +1567,26 @@ class BusinessOperation {
     
             return fileUrl;
         } catch (error: any) {
-            console.error("Error getting contract: ", error);
-            return error.response.data;
+            console.error("Error getting contract: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
 	}
+
+    async approve(info: ApprovingBusinessInfo, condition: UpdatingBusinessCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/approve?business_id=${condition.business_id}`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.error("Error approving new business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
 }
 
 export interface CreatingPartnerStaffInfo {
