@@ -342,6 +342,10 @@ export interface DeletingAgencyCondition {
     agency_id: string,
 }
 
+export interface UpdatingLicenseInfo {
+    licenseFiles: FileList,
+}
+
 class AgencyOperation {
     private baseUrl: string;
     constructor() {
@@ -432,6 +436,55 @@ class AgencyOperation {
             return error.response.data;
         }
     }
+
+    async updateLicense(info : UpdatingLicenseInfo, condition: UpdatingAgencyCondition) {
+        try {       
+			// Tạo FormData object và thêm hình ảnh vào đó
+			const formData = new FormData();
+            for (let i = 0; i < info.licenseFiles.length; i++) {
+                formData.append('files', info.licenseFiles[i]);
+            }
+			// Gửi yêu cầu POST để tải lên hình ảnh
+			const response: AxiosResponse = await axios.post(`${this.baseUrl}/update_agency_company_license?agency_id=${condition.agency_id}`, formData , {
+				withCredentials: true,
+			});
+		
+			console.log('Image uploaded successfully:', response.data);
+			return response.data; // Trả về dữ liệu phản hồi từ máy chủ
+	
+		} catch (error: any) {
+			console.error('Error uploading image:', error.response.data);
+			throw error; // Ném lỗi để xử lý bên ngoài
+		} 
+    }
+
+    async findLicense(condition: UpdatingAgencyCondition) {
+		try {
+            
+            const response: AxiosResponse = await axios.get(`${this.baseUrl}/search_agency_company_license?agency_id=${condition.agency_id}`, {
+                responseType: 'arraybuffer', // Ensure response is treated as a binary buffer
+                withCredentials: true,
+            });
+            // const zip = new JSZip();
+            const zipFile = await JSZip.loadAsync(response.data);
+            const imageUrls: string[] = [];
+
+            // Extract each file from the ZIP archive and create object URLs
+            await Promise.all(
+                Object.keys(zipFile.files).map(async (filename) => {
+                    const file = zipFile.files[filename];
+                    const blob = await file.async('blob');
+                    const url = URL.createObjectURL(blob);
+                    imageUrls.push(url);
+                })
+            );
+
+            return imageUrls;
+        } catch (error: any) {
+			console.error('Error getting image:', error.message);
+			throw error; // Ném lỗi để xử lý bên ngoài
+		} 
+	}
 }
 
 export interface CreatingTransportPartnerByAdminInfo {
@@ -1436,20 +1489,20 @@ class BusinessOperation {
 	async updateContract(info: UpdatingContractInfo, condition: UpdatingBusinessCondition) {
 		try {        
 			// Tạo FormData object 
-			const formData = new FormData();
-			formData.append('contract', info.contractFile);
-	
-			// Gửi yêu cầu POST để tải lên hình ảnh
-			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_contract?business_id=${condition.business_id}`, formData , {
-				withCredentials: true,
-			});
-		
-			const data = response.data;
+            const formData = new FormData();
+            formData.append('contract', info.contractFile);
+
+            // Gửi yêu cầu POST để tải lên hình ảnh
+            const response: AxiosResponse = await axios.patch(`${this.baseUrl}/update_contract?business_id=${condition.business_id}`, formData , {
+                withCredentials: true,
+            });
+        
+            const data = response.data;
             return { error: data.error, message: data.message };
-			} catch (error: any) {
-                console.error('Error uploading file:', error.response.data);
-                return error.response.data; // Ném lỗi để xử lý bên ngoài
-			} 
+        } catch (error: any) {
+            console.error('Error uploading file:', error.response.data);
+            return error.response.data; // Ném lỗi để xử lý bên ngoài
+        } 
 	}
 
     // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
@@ -1458,6 +1511,7 @@ class BusinessOperation {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_contract?business_id=${condition.business_id}`, {
                 responseType: 'arraybuffer',
+                withCredentials: true,
             });
 
             const blob = new Blob([response.data], { type: response.headers['content-type'] });
