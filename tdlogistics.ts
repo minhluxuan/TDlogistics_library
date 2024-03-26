@@ -37,8 +37,9 @@ class UsersAuthenticate {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error sending OTP: ", error.response.data);
-            return error.response.data;
+            console.log("Error sending OTP: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -54,8 +55,9 @@ class UsersAuthenticate {
             const data = response.data;
             return { error: data.error, valid: data.valid, message: data.message };
         } catch (error: any) {
-            console.log("Error verifying OTP:", error.response.data);
-            return error.response.data;
+            console.log("Error verifying OTP:", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 }
@@ -79,8 +81,9 @@ class StaffsAuthenticate {
             const data = response.data;
             return { error: data.error, valid: data.valid, message: data.message };
         } catch (error: any) {
-            console.log("Error logging in: ", error.response.data);
-            return error.response.data;
+            console.log("Error logging in: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -96,8 +99,9 @@ class StaffsAuthenticate {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error sending OTP: ", error.response.data);
-            return error.response.data;
+            console.log("Error sending OTP: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -114,8 +118,9 @@ class StaffsAuthenticate {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error verify OTP", error.response.data);
-            return error.response.data;
+            console.log("Error verify OTP", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 }
@@ -139,8 +144,9 @@ class BusinessAuthenticate {
             const data = response.data;
             return { error: data.error, valid: data.valid, message: data.message };
         } catch (error: any) {
-            console.log("Error logging in: ", error.response.data);
-            return error.response.data;
+            console.log("Error logging in: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -165,8 +171,9 @@ class PartnerStaffAuthenticate {
             const data = response.data;
             return { error: data.error, valid: data.valid, message: data.message };
         } catch (error: any) {
-            console.log("Error logging in: ", error.response.data);
-            return error.response.data;
+            console.log("Error logging in: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 }
@@ -189,8 +196,8 @@ export interface FindingUserByAdminConditions {
 }
 
 export interface UpdatingUserInfo {
-    fullname: string,
-    email: string,
+    fullname?: string,
+    email?: string,
 }
 
 export interface UpdatingUserCondition {
@@ -214,8 +221,9 @@ class UsersOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error get one user: ", error.response.data);
-            return error.response.data;
+            console.log("Error get one user: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -228,8 +236,9 @@ class UsersOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error get one user: ", error.response.data);
-            return error.response.data;
+            console.log("Error get one user: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -242,8 +251,9 @@ class UsersOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error create new user: ", error.response.data);
-            return error.response.data;
+            console.log("Error create new user: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -256,8 +266,9 @@ class UsersOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error update new user: ", error.response.data);
-            return error.response.data;
+            console.log("Error update new user: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 }
@@ -319,19 +330,19 @@ export interface FindingAgencyByAdminInfo {
 }
 
 export interface UpdatingAgencyInfo {
-    agency_name: string,
-    province: string,
-    district: string,
-    town: string,
-    detail_address: string,
-    latitude: string,
-    longitude: string,
-    email: string,
-    phone_number: string,
-    revenue: string,
-    commission_rate: string,
-    bin: string,
-    bank: string,
+    agency_name?: string,
+    province?: string,
+    district?: string,
+    town?: string,
+    detail_address?: string,
+    latitude?: string,
+    longitude?: string,
+    email?: string,
+    phone_number?: string,
+    revenue?: string,
+    commission_rate?: string,
+    bin?: string,
+    bank?: string,
 }
 
 export interface UpdatingAgencyCondition {
@@ -362,8 +373,9 @@ class AgencyOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error checking exist agency: ", error.response.data);
-            return error.response.data;
+            console.log("Error checking exist agency: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -376,8 +388,9 @@ class AgencyOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error creating agency: ", error.response.data);
-            return error.response.data;
+            console.log("Error creating agency: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -390,8 +403,9 @@ class AgencyOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error finding agency: ", error.response.data);
-            return error.response.data;
+            console.log("Error finding agency: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -404,8 +418,9 @@ class AgencyOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error finding agency: ", error.response.data);
-            return error.response.data;
+            console.log("Error finding agency: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -418,8 +433,9 @@ class AgencyOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error finding agency: ", error.response.data);
-            return error.response.data;
+            console.log("Error finding agency: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -432,8 +448,9 @@ class AgencyOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error finding agency: ", error.response.data);
-            return error.response.data;
+            console.log("Error finding agency: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -567,17 +584,17 @@ export interface FindingTransportPartnerByAdminConditions {
 }
 
 export interface UpdatingTransportPartnerInfo {
-    tax_code: string,
-    transport_partner_name: string,
-    province: string,
-    district: string,
-    town: string,
-    detail_address: string,
-    phone_number: string,
-    email: string,
-    bin: string,
-    bank: string,
-    debit: string,
+    tax_code?: string,
+    transport_partner_name?: string,
+    province?: string,
+    district?: string,
+    town?: string,
+    detail_address?: string,
+    phone_number?: string,
+    email?: string,
+    bin?: string,
+    bank?: string,
+    debit?: number,
 }
 
 export interface UpdatingTransportPartnerCondition {
@@ -605,8 +622,9 @@ class TransportPartnersOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error creating new transport partner: ", error.response.data);
-            return error.response.data;
+            console.log("Error creating new transport partner: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -619,8 +637,9 @@ class TransportPartnersOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error creating new transport partner: ", error.response.data);
-            return error.response.data;
+            console.log("Error creating new transport partner: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -633,8 +652,9 @@ class TransportPartnersOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error finding transport partner: ", error.response.data);
-            return error.response.data;
+            console.log("Error finding transport partner: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -647,8 +667,9 @@ class TransportPartnersOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error finding transport partner: ", error.response.data);
-            return error.response.data;
+            console.log("Error finding transport partner: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -661,8 +682,9 @@ class TransportPartnersOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error updating transport partner: ", error.response.data);
-            return error.response.data;
+            console.log("Error updating transport partner: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -675,8 +697,9 @@ class TransportPartnersOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error deleting transport partner: ", error.response.data);
-            return error.response.data;
+            console.log("Error deleting transport partner: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 }
@@ -720,10 +743,10 @@ export interface GettingShipmentsContainedByVehicleCondition {
 }
 
 export interface UpdatingVehicleInfo {
-    transport_partner_id: string,
-    staff_id: string,
-    type: string,
-    max_load: number,
+    transport_partner_id?: string,
+    staff_id?: string,
+    type?: string,
+    max_load?: number,
 }
 
 export interface UpdatingVehicleCondition {
@@ -767,8 +790,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, existed: data.existed, message: data.message };
         } catch (error: any) {
-            console.log("Error checking exist vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error checking exist vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -781,8 +805,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error creating new vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error creating new vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -795,8 +820,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error creating new vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error creating new vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -809,8 +835,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error finding vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error finding vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -823,8 +850,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error finding vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error finding vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -837,8 +865,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error getting shipments contained by vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error getting shipments contained by vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -852,8 +881,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error updating vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error updating vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -866,8 +896,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, info: data.info, message: data.message };
         } catch (error: any) {
-            console.log("Error adding shipments to vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error adding shipments to vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -880,8 +911,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, info: data.info, message: data.message };
         } catch (error: any) {
-            console.log("Error deleting shipments from vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error deleting shipments from vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -894,8 +926,9 @@ class VehicleOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error deleting vehicle: ", error.response.data);
-            return error.response.data;
+            console.log("Error deleting vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 }
@@ -956,18 +989,18 @@ export interface FindingStaffByAdminConditions {
 }
   
 export interface UpdatingStaffInfo {
-    fullname: string,
-    username: string,
-    date_of_birth: string, 
-    email: string,
-    phone_number: string,
-    role: string,
-    salary: number, 
-    paid_salary: string, 
-    province: string,
-    district: string,
-    town: string,
-    detail_address: string,
+    fullname?: string,
+    username?: string,
+    date_of_birth?: string, 
+    email?: string,
+    phone_number?: string,
+    role?: string,
+    salary?: number, 
+    paid_salary?: string, 
+    province?: string,
+    district?: string,
+    town?: string,
+    detail_address?: string,
 }
   
 export interface UpdatingStaffCondition {
@@ -1009,8 +1042,9 @@ class StaffsOperation {
             const data = response.data;
             return { error: data.error, data: data.info, message: data.message };
         } catch (error: any) {
-            console.log("Error get authenticated staff information: ", error.response.data);
-            return error.response.data;
+            console.log("Error get authenticated staff information: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -1024,8 +1058,9 @@ class StaffsOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error get one staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error get one staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1040,8 +1075,9 @@ class StaffsOperation {
 			return { error: data.error, data: data.data, message: data.message };
 		}     
 		catch (error: any) {
-			console.log("Error get one staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error get one staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1056,8 +1092,9 @@ class StaffsOperation {
 			return { error: data.error, message: data.message };
 		} 
 		catch (error: any) {
-			console.log("Error create new staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error create new staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1072,8 +1109,9 @@ class StaffsOperation {
 			return { error: data.error, message: data.message };
 		} 
 		catch (error: any) {
-			console.log("Error create new staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error create new staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1088,8 +1126,9 @@ class StaffsOperation {
 			return { error: data.error, message: data.message };
 		} 
 		catch (error: any) {
-			console.log("Error create new staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error create new staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1104,8 +1143,9 @@ class StaffsOperation {
 			return { error: data.error, message: data.message };
 		} 
 		catch (error: any) {
-			console.log("Error deleting staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error deleting staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1124,8 +1164,9 @@ class StaffsOperation {
 			const data = response.data;
             return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.error('Error uploading image:', error.response.data);
-			return error.response.data; // Ném lỗi để xử lý bên ngoài
+			console.error('Error uploading image:', error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null }; // Ném lỗi để xử lý bên ngoài
 		}   
 	}
 
@@ -1138,8 +1179,9 @@ class StaffsOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error logging out: ", error.response.data);
-            return error.response.data;
+            console.log("Error logging out: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -1155,8 +1197,9 @@ class StaffsOperation {
 			return { error: data.error, data: data.data, message: data.message };
 		} 
 		catch (error: any) {
-			console.log("Error update password: ", error.response.data);
-			return error.response.data;
+			console.log("Error update password: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}    
 	}
 
@@ -1255,6 +1298,7 @@ export interface FindingBusinessByAdminCondition {
 	town: string,
 	bin: string,
 	bank: string,
+    approved: boolean,
 }
   
 export interface FindingRepresentorByBusinessCondition {
@@ -1285,30 +1329,30 @@ export interface UpdatingBusinessCondition {
 }
   
 export interface UpdatingBusinessInfo {
-	business_name: string,
-	email: string,
-	phone_number: string,
-	debit: string, 
-	province: string,
-	district: string,
-	town: string,
-	detail_address: string,
-	bin: string,
-	bank: string,
+	business_name?: string,
+	email?: string,
+	phone_number?: string,
+	debit?: number, 
+	province?: string,
+	district?: string,
+	town?: string,
+	detail_address?: string,
+	bin?: string,
+	bank?: string,
 }
   
 export interface UpdatingBusinessRepresentorInfo {
-	fullname: string,
-	phone_number: string,
-	email: string,
-	date_of_birth: string,
-	cccd: string,
-	province: string,
-	district: string,
-	town: string,
-	detail_address: string,
-	bin: string,
-	bank: string,
+	fullname?: string,
+	phone_number?: string,
+	email?: string,
+	date_of_birth?: string,
+	cccd?: string,
+	province?: string,
+	district?: string,
+	town?: string,
+	detail_address?: string,
+	bin?: string,
+	bank?: string,
 }
   
 export interface DeletingBusinessCondition {
@@ -1323,7 +1367,40 @@ export interface UpdatingContractInfo {
 export interface FindingContractCondition {
     business_id: string,
 }
+
+export interface SigningUpInfo {
+    // Representor of business information
+    user_fullname: string,
+    user_phone_number: string,
+    user_email: string,
+    user_date_of_birth: string,
+    user_cccd: string,
+    user_province: string,
+    user_district: string,
+    user_town: string,
+    user_detail_address: string,
+    user_bin: string,
+    user_bank: string,
+
+    // Business information
+    username: string,
+    password: string,
+    business_name: string,
+    email: string,
+    phone_number: string,
+    tax_number: string, 
+    province: string,
+    district: string,
+    town: string,
+    detail_address: string,
+    bin: string,
+    bank: string,
+}
   
+export interface ApprovingBusinessInfo {
+    agency_id: string
+}
+
 class BusinessOperation {
 	private baseUrl: string;
 
@@ -1332,6 +1409,21 @@ class BusinessOperation {
 		this.baseUrl = "http://localhost:5000/api/v1/business";
 
 	}
+
+    async signup(info: SigningUpInfo) {
+        try {
+            const response: AxiosResponse<any> = await axios.post(`${this.baseUrl}/signup`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error signing up business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
 
     // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER"
 	async createByAdmin(info: CreateBusinessByAdminInfo) {
@@ -1343,8 +1435,9 @@ class BusinessOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating new business: ", error.response.data);
-			return error.response.data;
+			console.log("Error creating new business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1358,8 +1451,9 @@ class BusinessOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating new business: ", error.response.data);
-			return error.response.data;
+			console.log("Error creating new business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1373,8 +1467,9 @@ class BusinessOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error finding business: ", error.response.data);
-			return error.response.data;
+			console.log("Error finding business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1389,8 +1484,9 @@ class BusinessOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error finding business: ", error.response.data);
-			return error.response.data;
+			console.log("Error finding business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1404,8 +1500,9 @@ class BusinessOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error finding representor: ", error.response.data);
-			return error.response.data;
+			console.log("Error finding representor: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1420,38 +1517,41 @@ class BusinessOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error finding representor: ", error.response.data);
-			return error.response.data;
+			console.log("Error finding representor: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async updateBusiness(info: UpdatingBusinessInfo, condition: UpdatingBusinessCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/update?business_id=${condition.business_id}`, info, {
+			const response = await axios.put(`${this.baseUrl}/update?business_id=${condition.business_id}`, info, {
 				withCredentials: true,
 			});
 
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error updating business: ", error.response.data);
-			return error.response.data;
+			console.log("Error updating business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async updateBusinessRepresentor(info: UpdatingBusinessRepresentorInfo, condition: UpdatingBusinessCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/update_business_representor?business_id=${condition.business_id}`, info, {
+			const response = await axios.put(`${this.baseUrl}/update_business_representor?business_id=${condition.business_id}`, info, {
 				withCredentials: true,
 			});
 
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error updating business: ", error.response.data);
-			return error.response.data;
+			console.log("Error updating business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1465,23 +1565,25 @@ class BusinessOperation {
 			const data = response.data;
 			return { error: data.error, existed: data.existed, message: data.message };
 		} catch (error: any) {
-			console.log("Error checking exist business: ", error.response.data);
-			return error.response.data;
+			console.log("Error checking exist business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
 	async removeBusiness(condition: DeletingBusinessCondition) {
 		try {
-			const response = await axios.post(`${this.baseUrl}/delete?business_id=${condition.business_id}&agency_id=${condition.agency_id}`, {
+			const response = await axios.delete(`${this.baseUrl}/delete?business_id=${condition.business_id}&agency_id=${condition.agency_id}`, {
 				withCredentials: true,
 			});
 
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error deleting business: ", error.response.data);
-			return error.response.data;
+			console.log("Error deleting business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1519,10 +1621,27 @@ class BusinessOperation {
     
             return fileUrl;
         } catch (error: any) {
-            console.error("Error getting contract: ", error);
-            return error.response.data;
+            console.error("Error getting contract: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
 	}
+
+    // ROLE: ADMIN, MANAGER, TELLER
+    async approve(info: ApprovingBusinessInfo, condition: UpdatingBusinessCondition) {
+        try {
+            const response = await axios.post(`${this.baseUrl}/approve?business_id=${condition.business_id}`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.error("Error approving new business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
 }
 
 export interface CreatingPartnerStaffInfo {
@@ -1588,18 +1707,18 @@ export interface UpdatingPartnerStaffCondition {
 }
 
 export interface UpdatingPartnerStaffInfo {
-	fullname: string,
-	username: string,
-	date_of_birth: string, 
-	email: string,
-	phone_number: string,
-	province: string,
-	district: string,
-	town: string,
-	detail_address: string,
-	position: string,
-	bin: string,
-	bank: string,
+	fullname?: string,
+	username?: string,
+	date_of_birth?: string, 
+	email?: string,
+	phone_number?: string,
+	province?: string,
+	district?: string,
+	town?: string,
+	detail_address?: string,
+	position?: string,
+	bin?: string,
+	bank?: string,
 }
 
 export interface DeletingPartnerStaffCondition {
@@ -1646,8 +1765,9 @@ class PartnerStaffOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error getting authenticated partner staff information: ", error.response.data);
-			return error.response.data;
+			console.log("Error getting authenticated partner staff information: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1661,8 +1781,9 @@ class PartnerStaffOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating partner staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error creating partner staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1676,8 +1797,9 @@ class PartnerStaffOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error finding partner staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1691,8 +1813,9 @@ class PartnerStaffOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error finding partner staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1706,8 +1829,9 @@ class PartnerStaffOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error finding partner staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error finding partner staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1721,8 +1845,9 @@ class PartnerStaffOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error updating partner staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error updating partner staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1736,8 +1861,9 @@ class PartnerStaffOperation {
 			const data = response.data;
 			return { error: data.error, existed: data.existed, message: data.message };
 		} catch (error: any) {
-			console.log("Error checking exist partner staff: ", error.response.data);
-			return error.response.data;
+			console.log("Error checking exist partner staff: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1751,8 +1877,9 @@ class PartnerStaffOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error deleting business: ", error.response.data);
-			return error.response.data;
+			console.log("Error deleting business: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1767,8 +1894,9 @@ class PartnerStaffOperation {
 			return { error: data.error, data: data.data, message: data.message };
 		} 
 		catch (error: any) {
-			console.log("Error update password: ", error.response.data);
-			return error.response.data;
+			console.log("Error update password: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}    
 	}
 
@@ -1786,8 +1914,9 @@ class PartnerStaffOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.error('Error uploading image:', error.response.data);
-			return error.response.data; // Ném lỗi để xử lý bên ngoài
+			console.error('Error uploading image:', error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null }; // Ném lỗi để xử lý bên ngoài
 		}
 	}
 	
@@ -1808,8 +1937,9 @@ class PartnerStaffOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.error('Error uploading image:', error.response.data);
-			return error.response.data; // Ném lỗi để xử lý bên ngoài
+			console.error('Error uploading image:', error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null }; // Ném lỗi để xử lý bên ngoài
 		}
 	}
 
@@ -1818,6 +1948,7 @@ class PartnerStaffOperation {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_avatar?staff_id=${condition.staff_id}`, {
                 responseType: 'arraybuffer',
+                withCredentials: true,
             });
 
             const blob = new Blob([response.data], { type: response.headers['content-type'] });
@@ -1835,6 +1966,7 @@ class PartnerStaffOperation {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_license_before?staff_id=${condition.staff_id}`, {
                 responseType: 'arraybuffer',
+                withCredentials: true,
             });
 
             const blob = new Blob([response.data], { type: response.headers['content-type'] });
@@ -1852,6 +1984,7 @@ class PartnerStaffOperation {
 		try {
             const response = await axios.get(`${this.baseUrl}/get_license_after?staff_id=${condition.staff_id}`, {
                 responseType: 'arraybuffer',
+                withCredentials: true,
             });
 
             const blob = new Blob([response.data], { type: response.headers['content-type'] });
@@ -1892,8 +2025,9 @@ class ShippersOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error getting tasks: ", error.response.data);
-			return error.response.data;
+			console.log("Error getting tasks: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1906,8 +2040,9 @@ class ShippersOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error confirming completed task: ", error.response.data);
-			return error.response.data;
+			console.log("Error confirming completed task: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1920,8 +2055,9 @@ class ShippersOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error getting history: ", error.response.data);
-			return error.response.data;
+			console.log("Error getting history: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 }
@@ -1970,8 +2106,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, existed: data.existed, message: data.message };
 		} catch (error: any) {
-			console.log("Error checking exist shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error checking exist shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
     }
 
@@ -1985,8 +2122,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error creating shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error creating shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
 
@@ -1999,8 +2137,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error getting orders from shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error getting orders from shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
     }
 
@@ -2014,8 +2153,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error adding orders to shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error adding orders to shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
     }
 
@@ -2029,8 +2169,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error deleting order from shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error deleting order from shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
     }
 
@@ -2044,8 +2185,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error confirming creat shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error confirming creat shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}  
     }
 
@@ -2059,8 +2201,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
-			console.log("Error getting shipments: ", error.response.data);
-			return error.response.data;
+			console.log("Error getting shipments: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		} 
     }
 
@@ -2074,8 +2217,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error deleting shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error deleting shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		} 
     }
 
@@ -2089,8 +2233,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error decomposing shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error decomposing shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		} 
     }
 
@@ -2104,8 +2249,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error receiving shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error receiving shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		} 
     }
     
@@ -2119,8 +2265,9 @@ class ShipmentsOperation {
 			const data = response.data;
 			return { error: data.error, message: data.message };
 		} catch (error: any) {
-			console.log("Error undertaking shipment: ", error.response.data);
-			return error.response.data;
+			console.log("Error undertaking shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
     }
 }
@@ -2194,12 +2341,12 @@ export interface UpdatingOrderCondition {
 }
 
 export interface UpdatingOrderInfo {
-    mass: number,
-    height: number,
-    width: number,
-    length: number,
-    COD: number,
-    status_code: number,
+    mass?: number,
+    height?: number,
+    width?: number,
+    length?: number,
+    COD?: number,
+    status_code?: number,
 }
 
 export interface CancelingOrderCondition {
@@ -2249,8 +2396,9 @@ class OrdersOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error getting orders: ", error.response.data);
-            return error.response.data;
+            console.log("Error getting orders: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2263,8 +2411,9 @@ class OrdersOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error getting orders: ", error.response.data);
-            return error.response.data;
+            console.log("Error getting orders: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2277,8 +2426,9 @@ class OrdersOperation {
             const data = response.data;
             return { error: data.error, exist: data.existed, message: data.message };
         } catch (error: any) {
-            console.log("Error checking exist order: ", error.response.data);
-            return error.response.data;
+            console.log("Error checking exist order: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2297,8 +2447,9 @@ class OrdersOperation {
             const data = response.data;
 			return { error: data.error, valid: data.valid, message: data.message };
         } catch (error: any) {
-            console.error('Error checking file format:', error.response.data);
-			return error.response.data;
+            console.error('Error checking file format:', error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2333,8 +2484,9 @@ class OrdersOperation {
             const data = response.data;
 			return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.error('Error creating orders by file:', error.response.data);
-			return error.response.data;
+            console.error('Error creating orders by file:', error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2347,8 +2499,9 @@ class OrdersOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error updating order: ", error.response.data);
-            return error.response.data;
+            console.log("Error updating order: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2361,8 +2514,9 @@ class OrdersOperation {
             const data = response.data;
             return { error: data.error, message: data.message };
         } catch (error: any) {
-            console.log("Error canceling order: ", error.response.data);
-            return error.response.data;
+            console.log("Error canceling order: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2375,8 +2529,9 @@ class OrdersOperation {
             const data = response.data;
             return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
-            console.log("Error calculating fee: ", error.response.data);
-            return error.response.data;
+            console.log("Error calculating fee: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2444,9 +2599,9 @@ export interface CreatingNewTaskInfo {
 }
 
 export interface UpdatingTaskInfo {
-    task: string,
-    priority: number,
-    completed: boolean,
+    task?: string,
+    priority?: number,
+    completed?: boolean,
 }
 
 export interface TaskId {
@@ -2468,8 +2623,9 @@ class ScheduleOperation {
             const data = response.data;
             return { error: data, data: data.data, message: data.message }
         } catch (error: any) {
-            console.log("Error getting tasks: ", error.response.data);
-            return error.response.data;
+            console.log("Error getting tasks: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2482,8 +2638,9 @@ class ScheduleOperation {
             const data = response.data;
             return { error: data, message: data.message }
         } catch (error: any) {
-            console.log("Error creating new tasks: ", error.response.data);
-            return error.response.data;
+            console.log("Error creating new tasks: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2496,8 +2653,9 @@ class ScheduleOperation {
             const data = response.data;
             return { error: data, message: data.message }
         } catch (error: any) {
-            console.log("Error updating tasks: ", error.response.data);
-            return error.response.data;
+            console.log("Error updating tasks: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 
@@ -2510,8 +2668,9 @@ class ScheduleOperation {
             const data = response.data;
             return { error: data, message: data.message }
         } catch (error: any) {
-            console.log("Error deleting tasks: ", error.response.data);
-            return error.response.data;
+            console.log("Error deleting tasks: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 }
@@ -2537,8 +2696,9 @@ class AdministrativeOperation {
             const data = response.data;
             return { error: data, data: data.data, message: data.message }
         } catch (error: any) {
-            console.log("Error getting tasks: ", error.response.data);
-            return error.response.data;
+            console.error("Error getting administrative: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
 }
