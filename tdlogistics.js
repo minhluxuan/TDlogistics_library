@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AdministrativeOperation = exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.VehicleOperation = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.PartnerStaffAuthenticate = exports.BusinessAuthenticate = exports.StaffsAuthenticate = exports.UsersAuthenticate = void 0;
+exports.AdministrativeOperation = exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.VehicleOperation = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.PartnerStaffAuthenticate = exports.BusinessAuthenticate = exports.StaffsAuthenticate = exports.UsersAuthenticate = exports.UserOperation = void 0;
 var axios_1 = require("axios");
 var FormData = require("form-data");
 var JSZip = require("jszip");
@@ -52,6 +52,38 @@ var JSZip = require("jszip");
 // socket.on("notifyFailCreatedNewOrder", message => {
 //     // showing custome notification on UI
 // });
+var UserOperation = /** @class */ (function () {
+    function UserOperation() {
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/users";
+    }
+    UserOperation.prototype.getAuthenticatedUserInfo = function () {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_1;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_info"), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, info: data.info, message: data.message }];
+                    case 2:
+                        error_1 = _c.sent();
+                        console.log("Error getting authenticated user info: ", (_a = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_1 === null || error_1 === void 0 ? void 0 : error_1.request);
+                        return [2 /*return*/, { error: (_b = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _b === void 0 ? void 0 : _b.data, request: error_1 === null || error_1 === void 0 ? void 0 : error_1.request, status: error_1.response ? error_1.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return UserOperation;
+}());
+exports.UserOperation = UserOperation;
 var UsersAuthenticate = /** @class */ (function () {
     function UsersAuthenticate() {
         // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
@@ -60,7 +92,7 @@ var UsersAuthenticate = /** @class */ (function () {
     UsersAuthenticate.prototype.sendOTP = function (phoneNumber, email) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_1;
+            var response, data, error_2;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -76,10 +108,10 @@ var UsersAuthenticate = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_1 = _c.sent();
-                        console.log("Error sending OTP: ", (_a = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_1 === null || error_1 === void 0 ? void 0 : error_1.request);
-                        return [2 /*return*/, { error: (_b = error_1 === null || error_1 === void 0 ? void 0 : error_1.response) === null || _b === void 0 ? void 0 : _b.data, request: error_1 === null || error_1 === void 0 ? void 0 : error_1.request, status: error_1.response ? error_1.response.status : null }];
+                        error_2 = _c.sent();
+                        console.log("Error sending OTP: ", (_a = error_2 === null || error_2 === void 0 ? void 0 : error_2.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_2 === null || error_2 === void 0 ? void 0 : error_2.request);
+                        return [2 /*return*/, { error: (_b = error_2 === null || error_2 === void 0 ? void 0 : error_2.response) === null || _b === void 0 ? void 0 : _b.data, request: error_2 === null || error_2 === void 0 ? void 0 : error_2.request, status: error_2.response ? error_2.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -88,7 +120,7 @@ var UsersAuthenticate = /** @class */ (function () {
     UsersAuthenticate.prototype.verifyOTP = function (phoneNumber, otp) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_2;
+            var response, data, error_3;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -104,10 +136,10 @@ var UsersAuthenticate = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, valid: data.valid, message: data.message }];
                     case 2:
-                        error_2 = _c.sent();
-                        console.log("Error verifying OTP:", (_a = error_2 === null || error_2 === void 0 ? void 0 : error_2.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_2 === null || error_2 === void 0 ? void 0 : error_2.request);
-                        return [2 /*return*/, { error: (_b = error_2 === null || error_2 === void 0 ? void 0 : error_2.response) === null || _b === void 0 ? void 0 : _b.data, request: error_2 === null || error_2 === void 0 ? void 0 : error_2.request, status: error_2.response ? error_2.response.status : null }];
+                        error_3 = _c.sent();
+                        console.log("Error verifying OTP:", (_a = error_3 === null || error_3 === void 0 ? void 0 : error_3.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_3 === null || error_3 === void 0 ? void 0 : error_3.request);
+                        return [2 /*return*/, { error: (_b = error_3 === null || error_3 === void 0 ? void 0 : error_3.response) === null || _b === void 0 ? void 0 : _b.data, request: error_3 === null || error_3 === void 0 ? void 0 : error_3.request, status: error_3.response ? error_3.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -124,7 +156,7 @@ var StaffsAuthenticate = /** @class */ (function () {
     StaffsAuthenticate.prototype.login = function (username, password) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_3;
+            var response, data, error_4;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -140,10 +172,10 @@ var StaffsAuthenticate = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, valid: data.valid, message: data.message }];
                     case 2:
-                        error_3 = _c.sent();
-                        console.log("Error logging in: ", (_a = error_3 === null || error_3 === void 0 ? void 0 : error_3.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_3 === null || error_3 === void 0 ? void 0 : error_3.request);
-                        return [2 /*return*/, { error: (_b = error_3 === null || error_3 === void 0 ? void 0 : error_3.response) === null || _b === void 0 ? void 0 : _b.data, request: error_3 === null || error_3 === void 0 ? void 0 : error_3.request, status: error_3.response ? error_3.response.status : null }];
+                        error_4 = _c.sent();
+                        console.log("Error logging in: ", (_a = error_4 === null || error_4 === void 0 ? void 0 : error_4.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_4 === null || error_4 === void 0 ? void 0 : error_4.request);
+                        return [2 /*return*/, { error: (_b = error_4 === null || error_4 === void 0 ? void 0 : error_4.response) === null || _b === void 0 ? void 0 : _b.data, request: error_4 === null || error_4 === void 0 ? void 0 : error_4.request, status: error_4.response ? error_4.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -152,7 +184,7 @@ var StaffsAuthenticate = /** @class */ (function () {
     StaffsAuthenticate.prototype.sendOTP = function (phone_number, email) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_4;
+            var response, data, error_5;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -168,10 +200,10 @@ var StaffsAuthenticate = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_4 = _c.sent();
-                        console.log("Error sending OTP: ", (_a = error_4 === null || error_4 === void 0 ? void 0 : error_4.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_4 === null || error_4 === void 0 ? void 0 : error_4.request);
-                        return [2 /*return*/, { error: (_b = error_4 === null || error_4 === void 0 ? void 0 : error_4.response) === null || _b === void 0 ? void 0 : _b.data, request: error_4 === null || error_4 === void 0 ? void 0 : error_4.request, status: error_4.response ? error_4.response.status : null }];
+                        error_5 = _c.sent();
+                        console.log("Error sending OTP: ", (_a = error_5 === null || error_5 === void 0 ? void 0 : error_5.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_5 === null || error_5 === void 0 ? void 0 : error_5.request);
+                        return [2 /*return*/, { error: (_b = error_5 === null || error_5 === void 0 ? void 0 : error_5.response) === null || _b === void 0 ? void 0 : _b.data, request: error_5 === null || error_5 === void 0 ? void 0 : error_5.request, status: error_5.response ? error_5.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -180,7 +212,7 @@ var StaffsAuthenticate = /** @class */ (function () {
     StaffsAuthenticate.prototype.verifyOTP = function (phone_number, email, otp) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_5;
+            var response, data, error_6;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -197,10 +229,10 @@ var StaffsAuthenticate = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_5 = _c.sent();
-                        console.log("Error verify OTP", (_a = error_5 === null || error_5 === void 0 ? void 0 : error_5.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_5 === null || error_5 === void 0 ? void 0 : error_5.request);
-                        return [2 /*return*/, { error: (_b = error_5 === null || error_5 === void 0 ? void 0 : error_5.response) === null || _b === void 0 ? void 0 : _b.data, request: error_5 === null || error_5 === void 0 ? void 0 : error_5.request, status: error_5.response ? error_5.response.status : null }];
+                        error_6 = _c.sent();
+                        console.log("Error verify OTP", (_a = error_6 === null || error_6 === void 0 ? void 0 : error_6.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_6 === null || error_6 === void 0 ? void 0 : error_6.request);
+                        return [2 /*return*/, { error: (_b = error_6 === null || error_6 === void 0 ? void 0 : error_6.response) === null || _b === void 0 ? void 0 : _b.data, request: error_6 === null || error_6 === void 0 ? void 0 : error_6.request, status: error_6.response ? error_6.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -215,42 +247,6 @@ var BusinessAuthenticate = /** @class */ (function () {
         this.baseUrl = "http://localhost:5000/api/v1/business";
     }
     BusinessAuthenticate.prototype.login = function (username, password) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_6;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/login"), {
-                                username: username,
-                                password: password,
-                            }, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, valid: data.valid, message: data.message }];
-                    case 2:
-                        error_6 = _c.sent();
-                        console.log("Error logging in: ", (_a = error_6 === null || error_6 === void 0 ? void 0 : error_6.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_6 === null || error_6 === void 0 ? void 0 : error_6.request);
-                        return [2 /*return*/, { error: (_b = error_6 === null || error_6 === void 0 ? void 0 : error_6.response) === null || _b === void 0 ? void 0 : _b.data, request: error_6 === null || error_6 === void 0 ? void 0 : error_6.request, status: error_6.response ? error_6.response.status : null }];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    return BusinessAuthenticate;
-}());
-exports.BusinessAuthenticate = BusinessAuthenticate;
-var PartnerStaffAuthenticate = /** @class */ (function () {
-    function PartnerStaffAuthenticate() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staffs";
-        this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
-    }
-    PartnerStaffAuthenticate.prototype.login = function (username, password) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_7;
@@ -278,6 +274,42 @@ var PartnerStaffAuthenticate = /** @class */ (function () {
             });
         });
     };
+    return BusinessAuthenticate;
+}());
+exports.BusinessAuthenticate = BusinessAuthenticate;
+var PartnerStaffAuthenticate = /** @class */ (function () {
+    function PartnerStaffAuthenticate() {
+        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staffs";
+        this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
+    }
+    PartnerStaffAuthenticate.prototype.login = function (username, password) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_8;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/login"), {
+                                username: username,
+                                password: password,
+                            }, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, valid: data.valid, message: data.message }];
+                    case 2:
+                        error_8 = _c.sent();
+                        console.log("Error logging in: ", (_a = error_8 === null || error_8 === void 0 ? void 0 : error_8.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_8 === null || error_8 === void 0 ? void 0 : error_8.request);
+                        return [2 /*return*/, { error: (_b = error_8 === null || error_8 === void 0 ? void 0 : error_8.response) === null || _b === void 0 ? void 0 : _b.data, request: error_8 === null || error_8 === void 0 ? void 0 : error_8.request, status: error_8.response ? error_8.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return PartnerStaffAuthenticate;
 }());
 exports.PartnerStaffAuthenticate = PartnerStaffAuthenticate;
@@ -289,37 +321,12 @@ var UsersOperation = /** @class */ (function () {
     UsersOperation.prototype.findByUser = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_8;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
-                    case 2:
-                        error_8 = _c.sent();
-                        console.log("Error get one user: ", (_a = error_8 === null || error_8 === void 0 ? void 0 : error_8.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_8 === null || error_8 === void 0 ? void 0 : error_8.request);
-                        return [2 /*return*/, { error: (_b = error_8 === null || error_8 === void 0 ? void 0 : error_8.response) === null || _b === void 0 ? void 0 : _b.data, request: error_8 === null || error_8 === void 0 ? void 0 : error_8.request, status: error_8.response ? error_8.response.status : null }];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    UsersOperation.prototype.findByAdmin = function (conditions) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
             var response, data, error_9;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -336,10 +343,35 @@ var UsersOperation = /** @class */ (function () {
             });
         });
     };
-    UsersOperation.prototype.create = function (info) {
+    UsersOperation.prototype.findByAdmin = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_10;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_10 = _c.sent();
+                        console.log("Error get one user: ", (_a = error_10 === null || error_10 === void 0 ? void 0 : error_10.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_10 === null || error_10 === void 0 ? void 0 : error_10.request);
+                        return [2 /*return*/, { error: (_b = error_10 === null || error_10 === void 0 ? void 0 : error_10.response) === null || _b === void 0 ? void 0 : _b.data, request: error_10 === null || error_10 === void 0 ? void 0 : error_10.request, status: error_10.response ? error_10.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    UsersOperation.prototype.create = function (info) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_11;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -352,10 +384,10 @@ var UsersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_10 = _c.sent();
-                        console.log("Error create new user: ", (_a = error_10 === null || error_10 === void 0 ? void 0 : error_10.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_10 === null || error_10 === void 0 ? void 0 : error_10.request);
-                        return [2 /*return*/, { error: (_b = error_10 === null || error_10 === void 0 ? void 0 : error_10.response) === null || _b === void 0 ? void 0 : _b.data, request: error_10 === null || error_10 === void 0 ? void 0 : error_10.request, status: error_10.response ? error_10.response.status : null }];
+                        error_11 = _c.sent();
+                        console.log("Error create new user: ", (_a = error_11 === null || error_11 === void 0 ? void 0 : error_11.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_11 === null || error_11 === void 0 ? void 0 : error_11.request);
+                        return [2 /*return*/, { error: (_b = error_11 === null || error_11 === void 0 ? void 0 : error_11.response) === null || _b === void 0 ? void 0 : _b.data, request: error_11 === null || error_11 === void 0 ? void 0 : error_11.request, status: error_11.response ? error_11.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -364,7 +396,7 @@ var UsersOperation = /** @class */ (function () {
     UsersOperation.prototype.update = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_11;
+            var response, data, error_12;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -377,10 +409,10 @@ var UsersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_11 = _c.sent();
-                        console.log("Error update new user: ", (_a = error_11 === null || error_11 === void 0 ? void 0 : error_11.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_11 === null || error_11 === void 0 ? void 0 : error_11.request);
-                        return [2 /*return*/, { error: (_b = error_11 === null || error_11 === void 0 ? void 0 : error_11.response) === null || _b === void 0 ? void 0 : _b.data, request: error_11 === null || error_11 === void 0 ? void 0 : error_11.request, status: error_11.response ? error_11.response.status : null }];
+                        error_12 = _c.sent();
+                        console.log("Error update new user: ", (_a = error_12 === null || error_12 === void 0 ? void 0 : error_12.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_12 === null || error_12 === void 0 ? void 0 : error_12.request);
+                        return [2 /*return*/, { error: (_b = error_12 === null || error_12 === void 0 ? void 0 : error_12.response) === null || _b === void 0 ? void 0 : _b.data, request: error_12 === null || error_12 === void 0 ? void 0 : error_12.request, status: error_12.response ? error_12.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -397,7 +429,7 @@ var AgencyOperation = /** @class */ (function () {
     AgencyOperation.prototype.checkExist = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_12;
+            var response, data, error_13;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -410,10 +442,10 @@ var AgencyOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_12 = _c.sent();
-                        console.log("Error checking exist agency: ", (_a = error_12 === null || error_12 === void 0 ? void 0 : error_12.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_12 === null || error_12 === void 0 ? void 0 : error_12.request);
-                        return [2 /*return*/, { error: (_b = error_12 === null || error_12 === void 0 ? void 0 : error_12.response) === null || _b === void 0 ? void 0 : _b.data, request: error_12 === null || error_12 === void 0 ? void 0 : error_12.request, status: error_12.response ? error_12.response.status : null }];
+                        error_13 = _c.sent();
+                        console.log("Error checking exist agency: ", (_a = error_13 === null || error_13 === void 0 ? void 0 : error_13.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_13 === null || error_13 === void 0 ? void 0 : error_13.request);
+                        return [2 /*return*/, { error: (_b = error_13 === null || error_13 === void 0 ? void 0 : error_13.response) === null || _b === void 0 ? void 0 : _b.data, request: error_13 === null || error_13 === void 0 ? void 0 : error_13.request, status: error_13.response ? error_13.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -422,7 +454,7 @@ var AgencyOperation = /** @class */ (function () {
     AgencyOperation.prototype.create = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_13;
+            var response, data, error_14;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -435,33 +467,8 @@ var AgencyOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_13 = _c.sent();
-                        console.log("Error creating agency: ", (_a = error_13 === null || error_13 === void 0 ? void 0 : error_13.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_13 === null || error_13 === void 0 ? void 0 : error_13.request);
-                        return [2 /*return*/, { error: (_b = error_13 === null || error_13 === void 0 ? void 0 : error_13.response) === null || _b === void 0 ? void 0 : _b.data, request: error_13 === null || error_13 === void 0 ? void 0 : error_13.request, status: error_13.response ? error_13.response.status : null }];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    AgencyOperation.prototype.findByAgency = function (conditions) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_14;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
-                    case 2:
                         error_14 = _c.sent();
-                        console.log("Error finding agency: ", (_a = error_14 === null || error_14 === void 0 ? void 0 : error_14.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.log("Error creating agency: ", (_a = error_14 === null || error_14 === void 0 ? void 0 : error_14.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_14 === null || error_14 === void 0 ? void 0 : error_14.request);
                         return [2 /*return*/, { error: (_b = error_14 === null || error_14 === void 0 ? void 0 : error_14.response) === null || _b === void 0 ? void 0 : _b.data, request: error_14 === null || error_14 === void 0 ? void 0 : error_14.request, status: error_14.response ? error_14.response.status : null }];
                     case 3: return [2 /*return*/];
@@ -469,7 +476,7 @@ var AgencyOperation = /** @class */ (function () {
             });
         });
     };
-    AgencyOperation.prototype.findByAdmin = function (conditions) {
+    AgencyOperation.prototype.findByAgency = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_15;
@@ -494,7 +501,7 @@ var AgencyOperation = /** @class */ (function () {
             });
         });
     };
-    AgencyOperation.prototype.update = function (info, condition) {
+    AgencyOperation.prototype.findByAdmin = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_16;
@@ -502,7 +509,7 @@ var AgencyOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?agency_id=").concat(condition.agency_id), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -519,7 +526,7 @@ var AgencyOperation = /** @class */ (function () {
             });
         });
     };
-    AgencyOperation.prototype.delete = function (condition) {
+    AgencyOperation.prototype.update = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_17;
@@ -527,7 +534,7 @@ var AgencyOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?agency_id=").concat(condition.agency_id), {
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?agency_id=").concat(condition.agency_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -544,6 +551,31 @@ var AgencyOperation = /** @class */ (function () {
             });
         });
     };
+    AgencyOperation.prototype.delete = function (condition) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_18;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?agency_id=").concat(condition.agency_id), {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_18 = _c.sent();
+                        console.log("Error finding agency: ", (_a = error_18 === null || error_18 === void 0 ? void 0 : error_18.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_18 === null || error_18 === void 0 ? void 0 : error_18.request);
+                        return [2 /*return*/, { error: (_b = error_18 === null || error_18 === void 0 ? void 0 : error_18.response) === null || _b === void 0 ? void 0 : _b.data, request: error_18 === null || error_18 === void 0 ? void 0 : error_18.request, status: error_18.response ? error_18.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return AgencyOperation;
 }());
 exports.AgencyOperation = AgencyOperation;
@@ -553,31 +585,6 @@ var TransportPartnersOperation = /** @class */ (function () {
         this.baseUrl = "http://localhost:5000/api/v1/transport_partners";
     }
     TransportPartnersOperation.prototype.createByAdmin = function (info) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_18;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
-                    case 2:
-                        error_18 = _c.sent();
-                        console.log("Error creating new transport partner: ", (_a = error_18 === null || error_18 === void 0 ? void 0 : error_18.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_18 === null || error_18 === void 0 ? void 0 : error_18.request);
-                        return [2 /*return*/, { error: (_b = error_18 === null || error_18 === void 0 ? void 0 : error_18.response) === null || _b === void 0 ? void 0 : _b.data, request: error_18 === null || error_18 === void 0 ? void 0 : error_18.request, status: error_18.response ? error_18.response.status : null }];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    TransportPartnersOperation.prototype.createByAgency = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_19;
@@ -602,7 +609,7 @@ var TransportPartnersOperation = /** @class */ (function () {
             });
         });
     };
-    TransportPartnersOperation.prototype.findByTransportPartner = function (condition) {
+    TransportPartnersOperation.prototype.createByAgency = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_20;
@@ -610,16 +617,16 @@ var TransportPartnersOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
                         response = _c.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_20 = _c.sent();
-                        console.log("Error finding transport partner: ", (_a = error_20 === null || error_20 === void 0 ? void 0 : error_20.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.log("Error creating new transport partner: ", (_a = error_20 === null || error_20 === void 0 ? void 0 : error_20.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_20 === null || error_20 === void 0 ? void 0 : error_20.request);
                         return [2 /*return*/, { error: (_b = error_20 === null || error_20 === void 0 ? void 0 : error_20.response) === null || _b === void 0 ? void 0 : _b.data, request: error_20 === null || error_20 === void 0 ? void 0 : error_20.request, status: error_20.response ? error_20.response.status : null }];
                     case 3: return [2 /*return*/];
@@ -627,7 +634,7 @@ var TransportPartnersOperation = /** @class */ (function () {
             });
         });
     };
-    TransportPartnersOperation.prototype.findByAdmin = function (conditions) {
+    TransportPartnersOperation.prototype.findByTransportPartner = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_21;
@@ -635,7 +642,7 @@ var TransportPartnersOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -652,10 +659,35 @@ var TransportPartnersOperation = /** @class */ (function () {
             });
         });
     };
-    TransportPartnersOperation.prototype.update = function (info, condition) {
+    TransportPartnersOperation.prototype.findByAdmin = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_22;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_22 = _c.sent();
+                        console.log("Error finding transport partner: ", (_a = error_22 === null || error_22 === void 0 ? void 0 : error_22.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_22 === null || error_22 === void 0 ? void 0 : error_22.request);
+                        return [2 /*return*/, { error: (_b = error_22 === null || error_22 === void 0 ? void 0 : error_22.response) === null || _b === void 0 ? void 0 : _b.data, request: error_22 === null || error_22 === void 0 ? void 0 : error_22.request, status: error_22.response ? error_22.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TransportPartnersOperation.prototype.update = function (info, condition) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_23;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -668,10 +700,10 @@ var TransportPartnersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_22 = _c.sent();
-                        console.log("Error updating transport partner: ", (_a = error_22 === null || error_22 === void 0 ? void 0 : error_22.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_22 === null || error_22 === void 0 ? void 0 : error_22.request);
-                        return [2 /*return*/, { error: (_b = error_22 === null || error_22 === void 0 ? void 0 : error_22.response) === null || _b === void 0 ? void 0 : _b.data, request: error_22 === null || error_22 === void 0 ? void 0 : error_22.request, status: error_22.response ? error_22.response.status : null }];
+                        error_23 = _c.sent();
+                        console.log("Error updating transport partner: ", (_a = error_23 === null || error_23 === void 0 ? void 0 : error_23.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_23 === null || error_23 === void 0 ? void 0 : error_23.request);
+                        return [2 /*return*/, { error: (_b = error_23 === null || error_23 === void 0 ? void 0 : error_23.response) === null || _b === void 0 ? void 0 : _b.data, request: error_23 === null || error_23 === void 0 ? void 0 : error_23.request, status: error_23.response ? error_23.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -680,7 +712,7 @@ var TransportPartnersOperation = /** @class */ (function () {
     TransportPartnersOperation.prototype.remove = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_23;
+            var response, data, error_24;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -693,10 +725,10 @@ var TransportPartnersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_23 = _c.sent();
-                        console.log("Error deleting transport partner: ", (_a = error_23 === null || error_23 === void 0 ? void 0 : error_23.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_23 === null || error_23 === void 0 ? void 0 : error_23.request);
-                        return [2 /*return*/, { error: (_b = error_23 === null || error_23 === void 0 ? void 0 : error_23.response) === null || _b === void 0 ? void 0 : _b.data, request: error_23 === null || error_23 === void 0 ? void 0 : error_23.request, status: error_23.response ? error_23.response.status : null }];
+                        error_24 = _c.sent();
+                        console.log("Error deleting transport partner: ", (_a = error_24 === null || error_24 === void 0 ? void 0 : error_24.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_24 === null || error_24 === void 0 ? void 0 : error_24.request);
+                        return [2 /*return*/, { error: (_b = error_24 === null || error_24 === void 0 ? void 0 : error_24.response) === null || _b === void 0 ? void 0 : _b.data, request: error_24 === null || error_24 === void 0 ? void 0 : error_24.request, status: error_24.response ? error_24.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -713,7 +745,7 @@ var VehicleOperation = /** @class */ (function () {
     VehicleOperation.prototype.checkExist = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_24;
+            var response, data, error_25;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -726,33 +758,8 @@ var VehicleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
-                        error_24 = _c.sent();
-                        console.log("Error checking exist vehicle: ", (_a = error_24 === null || error_24 === void 0 ? void 0 : error_24.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_24 === null || error_24 === void 0 ? void 0 : error_24.request);
-                        return [2 /*return*/, { error: (_b = error_24 === null || error_24 === void 0 ? void 0 : error_24.response) === null || _b === void 0 ? void 0 : _b.data, request: error_24 === null || error_24 === void 0 ? void 0 : error_24.request, status: error_24.response ? error_24.response.status : null }];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    VehicleOperation.prototype.createByAgency = function (info) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_25;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
-                    case 2:
                         error_25 = _c.sent();
-                        console.log("Error creating new vehicle: ", (_a = error_25 === null || error_25 === void 0 ? void 0 : error_25.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.log("Error checking exist vehicle: ", (_a = error_25 === null || error_25 === void 0 ? void 0 : error_25.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_25 === null || error_25 === void 0 ? void 0 : error_25.request);
                         return [2 /*return*/, { error: (_b = error_25 === null || error_25 === void 0 ? void 0 : error_25.response) === null || _b === void 0 ? void 0 : _b.data, request: error_25 === null || error_25 === void 0 ? void 0 : error_25.request, status: error_25.response ? error_25.response.status : null }];
                     case 3: return [2 /*return*/];
@@ -760,7 +767,7 @@ var VehicleOperation = /** @class */ (function () {
             });
         });
     };
-    VehicleOperation.prototype.createByAdmin = function (info) {
+    VehicleOperation.prototype.createByAgency = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_26;
@@ -785,7 +792,7 @@ var VehicleOperation = /** @class */ (function () {
             });
         });
     };
-    VehicleOperation.prototype.findByStaff = function (condition) {
+    VehicleOperation.prototype.createByAdmin = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_27;
@@ -793,16 +800,16 @@ var VehicleOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search?staff_id=").concat(condition.staff_id), {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
                         response = _c.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_27 = _c.sent();
-                        console.log("Error finding vehicle: ", (_a = error_27 === null || error_27 === void 0 ? void 0 : error_27.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.log("Error creating new vehicle: ", (_a = error_27 === null || error_27 === void 0 ? void 0 : error_27.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_27 === null || error_27 === void 0 ? void 0 : error_27.request);
                         return [2 /*return*/, { error: (_b = error_27 === null || error_27 === void 0 ? void 0 : error_27.response) === null || _b === void 0 ? void 0 : _b.data, request: error_27 === null || error_27 === void 0 ? void 0 : error_27.request, status: error_27.response ? error_27.response.status : null }];
                     case 3: return [2 /*return*/];
@@ -810,7 +817,7 @@ var VehicleOperation = /** @class */ (function () {
             });
         });
     };
-    VehicleOperation.prototype.findByAdmin = function (conditions) {
+    VehicleOperation.prototype.findByStaff = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_28;
@@ -818,7 +825,7 @@ var VehicleOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search?staff_id=").concat(condition.staff_id), {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -835,10 +842,35 @@ var VehicleOperation = /** @class */ (function () {
             });
         });
     };
-    VehicleOperation.prototype.getShipment = function (condition) {
+    VehicleOperation.prototype.findByAdmin = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_29;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_29 = _c.sent();
+                        console.log("Error finding vehicle: ", (_a = error_29 === null || error_29 === void 0 ? void 0 : error_29.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_29 === null || error_29 === void 0 ? void 0 : error_29.request);
+                        return [2 /*return*/, { error: (_b = error_29 === null || error_29 === void 0 ? void 0 : error_29.response) === null || _b === void 0 ? void 0 : _b.data, request: error_29 === null || error_29 === void 0 ? void 0 : error_29.request, status: error_29.response ? error_29.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    VehicleOperation.prototype.getShipment = function (condition) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_30;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -851,10 +883,10 @@ var VehicleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_29 = _c.sent();
-                        console.log("Error getting shipments contained by vehicle: ", (_a = error_29 === null || error_29 === void 0 ? void 0 : error_29.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_29 === null || error_29 === void 0 ? void 0 : error_29.request);
-                        return [2 /*return*/, { error: (_b = error_29 === null || error_29 === void 0 ? void 0 : error_29.response) === null || _b === void 0 ? void 0 : _b.data, request: error_29 === null || error_29 === void 0 ? void 0 : error_29.request, status: error_29.response ? error_29.response.status : null }];
+                        error_30 = _c.sent();
+                        console.log("Error getting shipments contained by vehicle: ", (_a = error_30 === null || error_30 === void 0 ? void 0 : error_30.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_30 === null || error_30 === void 0 ? void 0 : error_30.request);
+                        return [2 /*return*/, { error: (_b = error_30 === null || error_30 === void 0 ? void 0 : error_30.response) === null || _b === void 0 ? void 0 : _b.data, request: error_30 === null || error_30 === void 0 ? void 0 : error_30.request, status: error_30.response ? error_30.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -863,7 +895,7 @@ var VehicleOperation = /** @class */ (function () {
     VehicleOperation.prototype.update = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_30;
+            var response, data, error_31;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -876,10 +908,10 @@ var VehicleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_30 = _c.sent();
-                        console.log("Error updating vehicle: ", (_a = error_30 === null || error_30 === void 0 ? void 0 : error_30.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_30 === null || error_30 === void 0 ? void 0 : error_30.request);
-                        return [2 /*return*/, { error: (_b = error_30 === null || error_30 === void 0 ? void 0 : error_30.response) === null || _b === void 0 ? void 0 : _b.data, request: error_30 === null || error_30 === void 0 ? void 0 : error_30.request, status: error_30.response ? error_30.response.status : null }];
+                        error_31 = _c.sent();
+                        console.log("Error updating vehicle: ", (_a = error_31 === null || error_31 === void 0 ? void 0 : error_31.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_31 === null || error_31 === void 0 ? void 0 : error_31.request);
+                        return [2 /*return*/, { error: (_b = error_31 === null || error_31 === void 0 ? void 0 : error_31.response) === null || _b === void 0 ? void 0 : _b.data, request: error_31 === null || error_31 === void 0 ? void 0 : error_31.request, status: error_31.response ? error_31.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -888,7 +920,7 @@ var VehicleOperation = /** @class */ (function () {
     VehicleOperation.prototype.addShipments = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_31;
+            var response, data, error_32;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -901,10 +933,10 @@ var VehicleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, info: data.info, message: data.message }];
                     case 2:
-                        error_31 = _c.sent();
-                        console.log("Error adding shipments to vehicle: ", (_a = error_31 === null || error_31 === void 0 ? void 0 : error_31.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_31 === null || error_31 === void 0 ? void 0 : error_31.request);
-                        return [2 /*return*/, { error: (_b = error_31 === null || error_31 === void 0 ? void 0 : error_31.response) === null || _b === void 0 ? void 0 : _b.data, request: error_31 === null || error_31 === void 0 ? void 0 : error_31.request, status: error_31.response ? error_31.response.status : null }];
+                        error_32 = _c.sent();
+                        console.log("Error adding shipments to vehicle: ", (_a = error_32 === null || error_32 === void 0 ? void 0 : error_32.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_32 === null || error_32 === void 0 ? void 0 : error_32.request);
+                        return [2 /*return*/, { error: (_b = error_32 === null || error_32 === void 0 ? void 0 : error_32.response) === null || _b === void 0 ? void 0 : _b.data, request: error_32 === null || error_32 === void 0 ? void 0 : error_32.request, status: error_32.response ? error_32.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -913,7 +945,7 @@ var VehicleOperation = /** @class */ (function () {
     VehicleOperation.prototype.deleteShipments = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_32;
+            var response, data, error_33;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -926,10 +958,10 @@ var VehicleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, info: data.info, message: data.message }];
                     case 2:
-                        error_32 = _c.sent();
-                        console.log("Error deleting shipments from vehicle: ", (_a = error_32 === null || error_32 === void 0 ? void 0 : error_32.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_32 === null || error_32 === void 0 ? void 0 : error_32.request);
-                        return [2 /*return*/, { error: (_b = error_32 === null || error_32 === void 0 ? void 0 : error_32.response) === null || _b === void 0 ? void 0 : _b.data, request: error_32 === null || error_32 === void 0 ? void 0 : error_32.request, status: error_32.response ? error_32.response.status : null }];
+                        error_33 = _c.sent();
+                        console.log("Error deleting shipments from vehicle: ", (_a = error_33 === null || error_33 === void 0 ? void 0 : error_33.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_33 === null || error_33 === void 0 ? void 0 : error_33.request);
+                        return [2 /*return*/, { error: (_b = error_33 === null || error_33 === void 0 ? void 0 : error_33.response) === null || _b === void 0 ? void 0 : _b.data, request: error_33 === null || error_33 === void 0 ? void 0 : error_33.request, status: error_33.response ? error_33.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -938,7 +970,7 @@ var VehicleOperation = /** @class */ (function () {
     VehicleOperation.prototype.deleteVehicle = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_33;
+            var response, data, error_34;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -951,10 +983,10 @@ var VehicleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_33 = _c.sent();
-                        console.log("Error deleting vehicle: ", (_a = error_33 === null || error_33 === void 0 ? void 0 : error_33.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_33 === null || error_33 === void 0 ? void 0 : error_33.request);
-                        return [2 /*return*/, { error: (_b = error_33 === null || error_33 === void 0 ? void 0 : error_33.response) === null || _b === void 0 ? void 0 : _b.data, request: error_33 === null || error_33 === void 0 ? void 0 : error_33.request, status: error_33.response ? error_33.response.status : null }];
+                        error_34 = _c.sent();
+                        console.log("Error deleting vehicle: ", (_a = error_34 === null || error_34 === void 0 ? void 0 : error_34.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_34 === null || error_34 === void 0 ? void 0 : error_34.request);
+                        return [2 /*return*/, { error: (_b = error_34 === null || error_34 === void 0 ? void 0 : error_34.response) === null || _b === void 0 ? void 0 : _b.data, request: error_34 === null || error_34 === void 0 ? void 0 : error_34.request, status: error_34.response ? error_34.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -975,7 +1007,7 @@ var StaffsOperation = /** @class */ (function () {
     StaffsOperation.prototype.getAuthenticatedStaffInfo = function () {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_34;
+            var response, data, error_35;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -988,10 +1020,10 @@ var StaffsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.info, message: data.message }];
                     case 2:
-                        error_34 = _c.sent();
-                        console.log("Error get authenticated staff information: ", (_a = error_34 === null || error_34 === void 0 ? void 0 : error_34.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_34 === null || error_34 === void 0 ? void 0 : error_34.request);
-                        return [2 /*return*/, { error: (_b = error_34 === null || error_34 === void 0 ? void 0 : error_34.response) === null || _b === void 0 ? void 0 : _b.data, request: error_34 === null || error_34 === void 0 ? void 0 : error_34.request, status: error_34.response ? error_34.response.status : null }];
+                        error_35 = _c.sent();
+                        console.log("Error get authenticated staff information: ", (_a = error_35 === null || error_35 === void 0 ? void 0 : error_35.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_35 === null || error_35 === void 0 ? void 0 : error_35.request);
+                        return [2 /*return*/, { error: (_b = error_35 === null || error_35 === void 0 ? void 0 : error_35.response) === null || _b === void 0 ? void 0 : _b.data, request: error_35 === null || error_35 === void 0 ? void 0 : error_35.request, status: error_35.response ? error_35.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1001,38 +1033,12 @@ var StaffsOperation = /** @class */ (function () {
     StaffsOperation.prototype.findByStaff = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_35;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "search?staff_id=").concat(condition.staff_id), {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
-                    case 2:
-                        error_35 = _c.sent();
-                        console.log("Error get one staff: ", (_a = error_35 === null || error_35 === void 0 ? void 0 : error_35.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_35 === null || error_35 === void 0 ? void 0 : error_35.request);
-                        return [2 /*return*/, { error: (_b = error_35 === null || error_35 === void 0 ? void 0 : error_35.response) === null || _b === void 0 ? void 0 : _b.data, request: error_35 === null || error_35 === void 0 ? void 0 : error_35.request, status: error_35.response ? error_35.response.status : null }];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    // ROLE: ADMIN, TELLER, HUMAN_RESOURCE_MANAGER, COMPLAINTS_SOLVER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
-    StaffsOperation.prototype.findByAdmin = function (conditions) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
             var response, data, error_36;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "search?staff_id=").concat(condition.staff_id), {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1049,8 +1055,8 @@ var StaffsOperation = /** @class */ (function () {
             });
         });
     };
-    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER
-    StaffsOperation.prototype.createByAdmin = function (info) {
+    // ROLE: ADMIN, TELLER, HUMAN_RESOURCE_MANAGER, COMPLAINTS_SOLVER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
+    StaffsOperation.prototype.findByAdmin = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_37;
@@ -1058,16 +1064,16 @@ var StaffsOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
                         response = _c.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_37 = _c.sent();
-                        console.log("Error create new staff: ", (_a = error_37 === null || error_37 === void 0 ? void 0 : error_37.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.log("Error get one staff: ", (_a = error_37 === null || error_37 === void 0 ? void 0 : error_37.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_37 === null || error_37 === void 0 ? void 0 : error_37.request);
                         return [2 /*return*/, { error: (_b = error_37 === null || error_37 === void 0 ? void 0 : error_37.response) === null || _b === void 0 ? void 0 : _b.data, request: error_37 === null || error_37 === void 0 ? void 0 : error_37.request, status: error_37.response ? error_37.response.status : null }];
                     case 3: return [2 /*return*/];
@@ -1075,8 +1081,8 @@ var StaffsOperation = /** @class */ (function () {
             });
         });
     };
-    // ROLE: AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
-    StaffsOperation.prototype.createByAgency = function (info) {
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER
+    StaffsOperation.prototype.createByAdmin = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_38;
@@ -1101,8 +1107,8 @@ var StaffsOperation = /** @class */ (function () {
             });
         });
     };
-    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
-    StaffsOperation.prototype.update = function (info, condition) {
+    // ROLE: AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
+    StaffsOperation.prototype.createByAgency = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_39;
@@ -1110,7 +1116,7 @@ var StaffsOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?staff_id=").concat(condition.staff_id), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1128,10 +1134,36 @@ var StaffsOperation = /** @class */ (function () {
         });
     };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
-    StaffsOperation.prototype.deleteStaff = function (condition) {
+    StaffsOperation.prototype.update = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_40;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?staff_id=").concat(condition.staff_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_40 = _c.sent();
+                        console.log("Error create new staff: ", (_a = error_40 === null || error_40 === void 0 ? void 0 : error_40.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_40 === null || error_40 === void 0 ? void 0 : error_40.request);
+                        return [2 /*return*/, { error: (_b = error_40 === null || error_40 === void 0 ? void 0 : error_40.response) === null || _b === void 0 ? void 0 : _b.data, request: error_40 === null || error_40 === void 0 ? void 0 : error_40.request, status: error_40.response ? error_40.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
+    StaffsOperation.prototype.deleteStaff = function (condition) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_41;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1144,10 +1176,10 @@ var StaffsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_40 = _c.sent();
-                        console.log("Error deleting staff: ", (_a = error_40 === null || error_40 === void 0 ? void 0 : error_40.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_40 === null || error_40 === void 0 ? void 0 : error_40.request);
-                        return [2 /*return*/, { error: (_b = error_40 === null || error_40 === void 0 ? void 0 : error_40.response) === null || _b === void 0 ? void 0 : _b.data, request: error_40 === null || error_40 === void 0 ? void 0 : error_40.request, status: error_40.response ? error_40.response.status : null }];
+                        error_41 = _c.sent();
+                        console.log("Error deleting staff: ", (_a = error_41 === null || error_41 === void 0 ? void 0 : error_41.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_41 === null || error_41 === void 0 ? void 0 : error_41.request);
+                        return [2 /*return*/, { error: (_b = error_41 === null || error_41 === void 0 ? void 0 : error_41.response) === null || _b === void 0 ? void 0 : _b.data, request: error_41 === null || error_41 === void 0 ? void 0 : error_41.request, status: error_41.response ? error_41.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1157,7 +1189,7 @@ var StaffsOperation = /** @class */ (function () {
     StaffsOperation.prototype.updateAvatar = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_41;
+            var formData, response, data, error_42;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1172,10 +1204,10 @@ var StaffsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_41 = _c.sent();
-                        console.error('Error uploading image:', (_a = error_41 === null || error_41 === void 0 ? void 0 : error_41.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_41 === null || error_41 === void 0 ? void 0 : error_41.request);
-                        return [2 /*return*/, { error: (_b = error_41 === null || error_41 === void 0 ? void 0 : error_41.response) === null || _b === void 0 ? void 0 : _b.data, request: error_41 === null || error_41 === void 0 ? void 0 : error_41.request, status: error_41.response ? error_41.response.status : null }]; // Ném lỗi để xử lý bên ngoài
+                        error_42 = _c.sent();
+                        console.error('Error uploading image:', (_a = error_42 === null || error_42 === void 0 ? void 0 : error_42.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_42 === null || error_42 === void 0 ? void 0 : error_42.request);
+                        return [2 /*return*/, { error: (_b = error_42 === null || error_42 === void 0 ? void 0 : error_42.response) === null || _b === void 0 ? void 0 : _b.data, request: error_42 === null || error_42 === void 0 ? void 0 : error_42.request, status: error_42.response ? error_42.response.status : null }]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1184,7 +1216,7 @@ var StaffsOperation = /** @class */ (function () {
     StaffsOperation.prototype.logout = function () {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_42;
+            var response, data, error_43;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1197,10 +1229,10 @@ var StaffsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_42 = _c.sent();
-                        console.log("Error logging out: ", (_a = error_42 === null || error_42 === void 0 ? void 0 : error_42.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_42 === null || error_42 === void 0 ? void 0 : error_42.request);
-                        return [2 /*return*/, { error: (_b = error_42 === null || error_42 === void 0 ? void 0 : error_42.response) === null || _b === void 0 ? void 0 : _b.data, request: error_42 === null || error_42 === void 0 ? void 0 : error_42.request, status: error_42.response ? error_42.response.status : null }];
+                        error_43 = _c.sent();
+                        console.log("Error logging out: ", (_a = error_43 === null || error_43 === void 0 ? void 0 : error_43.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_43 === null || error_43 === void 0 ? void 0 : error_43.request);
+                        return [2 /*return*/, { error: (_b = error_43 === null || error_43 === void 0 ? void 0 : error_43.response) === null || _b === void 0 ? void 0 : _b.data, request: error_43 === null || error_43 === void 0 ? void 0 : error_43.request, status: error_43.response ? error_43.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1211,7 +1243,7 @@ var StaffsOperation = /** @class */ (function () {
     StaffsOperation.prototype.updatePassword = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_43;
+            var response, data, error_44;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1224,10 +1256,10 @@ var StaffsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_43 = _c.sent();
-                        console.log("Error update password: ", (_a = error_43 === null || error_43 === void 0 ? void 0 : error_43.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_43 === null || error_43 === void 0 ? void 0 : error_43.request);
-                        return [2 /*return*/, { error: (_b = error_43 === null || error_43 === void 0 ? void 0 : error_43.response) === null || _b === void 0 ? void 0 : _b.data, request: error_43 === null || error_43 === void 0 ? void 0 : error_43.request, status: error_43.response ? error_43.response.status : null }];
+                        error_44 = _c.sent();
+                        console.log("Error update password: ", (_a = error_44 === null || error_44 === void 0 ? void 0 : error_44.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_44 === null || error_44 === void 0 ? void 0 : error_44.request);
+                        return [2 /*return*/, { error: (_b = error_44 === null || error_44 === void 0 ? void 0 : error_44.response) === null || _b === void 0 ? void 0 : _b.data, request: error_44 === null || error_44 === void 0 ? void 0 : error_44.request, status: error_44.response ? error_44.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1236,7 +1268,7 @@ var StaffsOperation = /** @class */ (function () {
     // ROLE: any.
     StaffsOperation.prototype.getAvatar = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, blob, imgUrl, error_44;
+            var response, blob, imgUrl, error_45;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1251,9 +1283,9 @@ var StaffsOperation = /** @class */ (function () {
                         imgUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, imgUrl];
                     case 2:
-                        error_44 = _a.sent();
-                        console.error("Error getting avatar: ", error_44);
-                        return [2 /*return*/, error_44.response.data];
+                        error_45 = _a.sent();
+                        console.error("Error getting avatar: ", error_45);
+                        return [2 /*return*/, error_45.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1270,7 +1302,7 @@ var BusinessOperation = /** @class */ (function () {
     BusinessOperation.prototype.signup = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_45;
+            var response, data, error_46;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1283,34 +1315,8 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_45 = _c.sent();
-                        console.log("Error signing up business: ", (_a = error_45 === null || error_45 === void 0 ? void 0 : error_45.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_45 === null || error_45 === void 0 ? void 0 : error_45.request);
-                        return [2 /*return*/, { error: (_b = error_45 === null || error_45 === void 0 ? void 0 : error_45.response) === null || _b === void 0 ? void 0 : _b.data, request: error_45 === null || error_45 === void 0 ? void 0 : error_45.request, status: error_45.response ? error_45.response.status : null }];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER"
-    BusinessOperation.prototype.createByAdmin = function (info) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_46;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
-                    case 2:
                         error_46 = _c.sent();
-                        console.log("Error creating new business: ", (_a = error_46 === null || error_46 === void 0 ? void 0 : error_46.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.log("Error signing up business: ", (_a = error_46 === null || error_46 === void 0 ? void 0 : error_46.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_46 === null || error_46 === void 0 ? void 0 : error_46.request);
                         return [2 /*return*/, { error: (_b = error_46 === null || error_46 === void 0 ? void 0 : error_46.response) === null || _b === void 0 ? void 0 : _b.data, request: error_46 === null || error_46 === void 0 ? void 0 : error_46.request, status: error_46.response ? error_46.response.status : null }];
                     case 3: return [2 /*return*/];
@@ -1318,8 +1324,8 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER"
-    BusinessOperation.prototype.createByAgency = function (info) {
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER"
+    BusinessOperation.prototype.createByAdmin = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_47;
@@ -1344,8 +1350,8 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    // "BUSINESS"
-    BusinessOperation.prototype.findByBusiness = function (condition) {
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER"
+    BusinessOperation.prototype.createByAgency = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_48;
@@ -1353,16 +1359,16 @@ var BusinessOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search?business_id=").concat(condition.business_id), {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
                                 withCredentials: true,
                             })];
                     case 1:
                         response = _c.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                        return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
                         error_48 = _c.sent();
-                        console.log("Error finding business: ", (_a = error_48 === null || error_48 === void 0 ? void 0 : error_48.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.log("Error creating new business: ", (_a = error_48 === null || error_48 === void 0 ? void 0 : error_48.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_48 === null || error_48 === void 0 ? void 0 : error_48.request);
                         return [2 /*return*/, { error: (_b = error_48 === null || error_48 === void 0 ? void 0 : error_48.response) === null || _b === void 0 ? void 0 : _b.data, request: error_48 === null || error_48 === void 0 ? void 0 : error_48.request, status: error_48.response ? error_48.response.status : null }];
                     case 3: return [2 /*return*/];
@@ -1370,9 +1376,8 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
-    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
-    BusinessOperation.prototype.findByAdmin = function (conditions) {
+    // "BUSINESS"
+    BusinessOperation.prototype.findByBusiness = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_49;
@@ -1380,7 +1385,7 @@ var BusinessOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search?business_id=").concat(condition.business_id), {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1397,8 +1402,9 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    // BUSINESS
-    BusinessOperation.prototype.findRepresentorByBusiness = function (condition) {
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
+    BusinessOperation.prototype.findByAdmin = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_50;
@@ -1406,7 +1412,7 @@ var BusinessOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_representor"), condition, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1415,7 +1421,7 @@ var BusinessOperation = /** @class */ (function () {
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_50 = _c.sent();
-                        console.log("Error finding representor: ", (_a = error_50 === null || error_50 === void 0 ? void 0 : error_50.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.log("Error finding business: ", (_a = error_50 === null || error_50 === void 0 ? void 0 : error_50.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_50 === null || error_50 === void 0 ? void 0 : error_50.request);
                         return [2 /*return*/, { error: (_b = error_50 === null || error_50 === void 0 ? void 0 : error_50.response) === null || _b === void 0 ? void 0 : _b.data, request: error_50 === null || error_50 === void 0 ? void 0 : error_50.request, status: error_50.response ? error_50.response.status : null }];
                     case 3: return [2 /*return*/];
@@ -1423,9 +1429,8 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
-    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
-    BusinessOperation.prototype.findRepresentorByAdmin = function (conditions) {
+    // BUSINESS
+    BusinessOperation.prototype.findRepresentorByBusiness = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_51;
@@ -1433,7 +1438,7 @@ var BusinessOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_representor"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_representor"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1450,8 +1455,9 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
-    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
-    BusinessOperation.prototype.updateBusiness = function (info, condition) {
+    // "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "TELLER", "COMPLAINTS_SOLVER",
+    // "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER", "AGENCY_TELLER", "AGENCY_COMPLAINTS_SOLVER"
+    BusinessOperation.prototype.findRepresentorByAdmin = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_52;
@@ -1459,16 +1465,16 @@ var BusinessOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?business_id=").concat(condition.business_id), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search_representor"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
                         response = _c.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_52 = _c.sent();
-                        console.log("Error updating business: ", (_a = error_52 === null || error_52 === void 0 ? void 0 : error_52.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.log("Error finding representor: ", (_a = error_52 === null || error_52 === void 0 ? void 0 : error_52.response) === null || _a === void 0 ? void 0 : _a.data);
                         console.error("Request that caused the error: ", error_52 === null || error_52 === void 0 ? void 0 : error_52.request);
                         return [2 /*return*/, { error: (_b = error_52 === null || error_52 === void 0 ? void 0 : error_52.response) === null || _b === void 0 ? void 0 : _b.data, request: error_52 === null || error_52 === void 0 ? void 0 : error_52.request, status: error_52.response ? error_52.response.status : null }];
                     case 3: return [2 /*return*/];
@@ -1477,7 +1483,7 @@ var BusinessOperation = /** @class */ (function () {
         });
     };
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
-    BusinessOperation.prototype.updateBusinessRepresentor = function (info, condition) {
+    BusinessOperation.prototype.updateBusiness = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_53;
@@ -1485,7 +1491,7 @@ var BusinessOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update_business_representor?business_id=").concat(condition.business_id), info, {
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?business_id=").concat(condition.business_id), info, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1502,11 +1508,37 @@ var BusinessOperation = /** @class */ (function () {
             });
         });
     };
+    // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
+    BusinessOperation.prototype.updateBusinessRepresentor = function (info, condition) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_54;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update_business_representor?business_id=").concat(condition.business_id), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_54 = _c.sent();
+                        console.log("Error updating business: ", (_a = error_54 === null || error_54 === void 0 ? void 0 : error_54.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_54 === null || error_54 === void 0 ? void 0 : error_54.request);
+                        return [2 /*return*/, { error: (_b = error_54 === null || error_54 === void 0 ? void 0 : error_54.response) === null || _b === void 0 ? void 0 : _b.data, request: error_54 === null || error_54 === void 0 ? void 0 : error_54.request, status: error_54.response ? error_54.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     // any
     BusinessOperation.prototype.checkExist = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_54;
+            var response, data, error_55;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1519,10 +1551,10 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
-                        error_54 = _c.sent();
-                        console.log("Error checking exist business: ", (_a = error_54 === null || error_54 === void 0 ? void 0 : error_54.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_54 === null || error_54 === void 0 ? void 0 : error_54.request);
-                        return [2 /*return*/, { error: (_b = error_54 === null || error_54 === void 0 ? void 0 : error_54.response) === null || _b === void 0 ? void 0 : _b.data, request: error_54 === null || error_54 === void 0 ? void 0 : error_54.request, status: error_54.response ? error_54.response.status : null }];
+                        error_55 = _c.sent();
+                        console.log("Error checking exist business: ", (_a = error_55 === null || error_55 === void 0 ? void 0 : error_55.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_55 === null || error_55 === void 0 ? void 0 : error_55.request);
+                        return [2 /*return*/, { error: (_b = error_55 === null || error_55 === void 0 ? void 0 : error_55.response) === null || _b === void 0 ? void 0 : _b.data, request: error_55 === null || error_55 === void 0 ? void 0 : error_55.request, status: error_55.response ? error_55.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1532,7 +1564,7 @@ var BusinessOperation = /** @class */ (function () {
     BusinessOperation.prototype.removeBusiness = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_55;
+            var response, data, error_56;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1545,10 +1577,10 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_55 = _c.sent();
-                        console.log("Error deleting business: ", (_a = error_55 === null || error_55 === void 0 ? void 0 : error_55.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_55 === null || error_55 === void 0 ? void 0 : error_55.request);
-                        return [2 /*return*/, { error: (_b = error_55 === null || error_55 === void 0 ? void 0 : error_55.response) === null || _b === void 0 ? void 0 : _b.data, request: error_55 === null || error_55 === void 0 ? void 0 : error_55.request, status: error_55.response ? error_55.response.status : null }];
+                        error_56 = _c.sent();
+                        console.log("Error deleting business: ", (_a = error_56 === null || error_56 === void 0 ? void 0 : error_56.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_56 === null || error_56 === void 0 ? void 0 : error_56.request);
+                        return [2 /*return*/, { error: (_b = error_56 === null || error_56 === void 0 ? void 0 : error_56.response) === null || _b === void 0 ? void 0 : _b.data, request: error_56 === null || error_56 === void 0 ? void 0 : error_56.request, status: error_56.response ? error_56.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1557,7 +1589,7 @@ var BusinessOperation = /** @class */ (function () {
     // "ADMIN", "MANAGER", "TELLER", "AGENCY_MANAGER", "AGENCY_TELLER"
     BusinessOperation.prototype.updateContract = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_56;
+            var formData, response, data, error_57;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1572,9 +1604,9 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_56 = _a.sent();
-                        console.error('Error uploading file:', error_56.response.data);
-                        return [2 /*return*/, error_56.response.data]; // Ném lỗi để xử lý bên ngoài
+                        error_57 = _a.sent();
+                        console.error('Error uploading file:', error_57.response.data);
+                        return [2 /*return*/, error_57.response.data]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1585,7 +1617,7 @@ var BusinessOperation = /** @class */ (function () {
     BusinessOperation.prototype.findContract = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, blob, fileUrl, error_57;
+            var response, blob, fileUrl, error_58;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1600,10 +1632,10 @@ var BusinessOperation = /** @class */ (function () {
                         fileUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, fileUrl];
                     case 2:
-                        error_57 = _c.sent();
-                        console.error("Error getting contract: ", (_a = error_57 === null || error_57 === void 0 ? void 0 : error_57.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_57 === null || error_57 === void 0 ? void 0 : error_57.request);
-                        return [2 /*return*/, { error: (_b = error_57 === null || error_57 === void 0 ? void 0 : error_57.response) === null || _b === void 0 ? void 0 : _b.data, request: error_57 === null || error_57 === void 0 ? void 0 : error_57.request, status: error_57.response ? error_57.response.status : null }];
+                        error_58 = _c.sent();
+                        console.error("Error getting contract: ", (_a = error_58 === null || error_58 === void 0 ? void 0 : error_58.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_58 === null || error_58 === void 0 ? void 0 : error_58.request);
+                        return [2 /*return*/, { error: (_b = error_58 === null || error_58 === void 0 ? void 0 : error_58.response) === null || _b === void 0 ? void 0 : _b.data, request: error_58 === null || error_58 === void 0 ? void 0 : error_58.request, status: error_58.response ? error_58.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1613,7 +1645,7 @@ var BusinessOperation = /** @class */ (function () {
     BusinessOperation.prototype.approve = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_58;
+            var response, data, error_59;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1626,10 +1658,10 @@ var BusinessOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_58 = _c.sent();
-                        console.error("Error approving new business: ", (_a = error_58 === null || error_58 === void 0 ? void 0 : error_58.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_58 === null || error_58 === void 0 ? void 0 : error_58.request);
-                        return [2 /*return*/, { error: (_b = error_58 === null || error_58 === void 0 ? void 0 : error_58.response) === null || _b === void 0 ? void 0 : _b.data, request: error_58 === null || error_58 === void 0 ? void 0 : error_58.request, status: error_58.response ? error_58.response.status : null }];
+                        error_59 = _c.sent();
+                        console.error("Error approving new business: ", (_a = error_59 === null || error_59 === void 0 ? void 0 : error_59.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_59 === null || error_59 === void 0 ? void 0 : error_59.request);
+                        return [2 /*return*/, { error: (_b = error_59 === null || error_59 === void 0 ? void 0 : error_59.response) === null || _b === void 0 ? void 0 : _b.data, request: error_59 === null || error_59 === void 0 ? void 0 : error_59.request, status: error_59.response ? error_59.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1648,7 +1680,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     PartnerStaffOperation.prototype.getAuthenticatedPartnerStaffInfo = function () {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_59;
+            var response, data, error_60;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1661,10 +1693,10 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_59 = _c.sent();
-                        console.log("Error getting authenticated partner staff information: ", (_a = error_59 === null || error_59 === void 0 ? void 0 : error_59.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_59 === null || error_59 === void 0 ? void 0 : error_59.request);
-                        return [2 /*return*/, { error: (_b = error_59 === null || error_59 === void 0 ? void 0 : error_59.response) === null || _b === void 0 ? void 0 : _b.data, request: error_59 === null || error_59 === void 0 ? void 0 : error_59.request, status: error_59.response ? error_59.response.status : null }];
+                        error_60 = _c.sent();
+                        console.log("Error getting authenticated partner staff information: ", (_a = error_60 === null || error_60 === void 0 ? void 0 : error_60.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_60 === null || error_60 === void 0 ? void 0 : error_60.request);
+                        return [2 /*return*/, { error: (_b = error_60 === null || error_60 === void 0 ? void 0 : error_60.response) === null || _b === void 0 ? void 0 : _b.data, request: error_60 === null || error_60 === void 0 ? void 0 : error_60.request, status: error_60.response ? error_60.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1674,7 +1706,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     PartnerStaffOperation.prototype.create = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_60;
+            var response, data, error_61;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1687,10 +1719,10 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_60 = _c.sent();
-                        console.log("Error creating partner staff: ", (_a = error_60 === null || error_60 === void 0 ? void 0 : error_60.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_60 === null || error_60 === void 0 ? void 0 : error_60.request);
-                        return [2 /*return*/, { error: (_b = error_60 === null || error_60 === void 0 ? void 0 : error_60.response) === null || _b === void 0 ? void 0 : _b.data, request: error_60 === null || error_60 === void 0 ? void 0 : error_60.request, status: error_60.response ? error_60.response.status : null }];
+                        error_61 = _c.sent();
+                        console.log("Error creating partner staff: ", (_a = error_61 === null || error_61 === void 0 ? void 0 : error_61.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_61 === null || error_61 === void 0 ? void 0 : error_61.request);
+                        return [2 /*return*/, { error: (_b = error_61 === null || error_61 === void 0 ? void 0 : error_61.response) === null || _b === void 0 ? void 0 : _b.data, request: error_61 === null || error_61 === void 0 ? void 0 : error_61.request, status: error_61.response ? error_61.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1700,38 +1732,12 @@ var PartnerStaffOperation = /** @class */ (function () {
     PartnerStaffOperation.prototype.findByPartnerStaff = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_61;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
-                    case 2:
-                        error_61 = _c.sent();
-                        console.log("Error finding partner staff: ", (_a = error_61 === null || error_61 === void 0 ? void 0 : error_61.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_61 === null || error_61 === void 0 ? void 0 : error_61.request);
-                        return [2 /*return*/, { error: (_b = error_61 === null || error_61 === void 0 ? void 0 : error_61.response) === null || _b === void 0 ? void 0 : _b.data, request: error_61 === null || error_61 === void 0 ? void 0 : error_61.request, status: error_61.response ? error_61.response.status : null }];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    // ROLE: TRANSPORT_PARTNER_REPRESENTOR
-    PartnerStaffOperation.prototype.findByPartner = function (conditions) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
             var response, data, error_62;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), condition, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1748,8 +1754,8 @@ var PartnerStaffOperation = /** @class */ (function () {
             });
         });
     };
-    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, TELLER, COMPLAINTS_SOLVER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, AGENCY_TELLER, AGENCY_COMPLAINTS_SOLVER 
-    PartnerStaffOperation.prototype.findByAdmin = function (conditions) {
+    // ROLE: TRANSPORT_PARTNER_REPRESENTOR
+    PartnerStaffOperation.prototype.findByPartner = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_63;
@@ -1774,11 +1780,37 @@ var PartnerStaffOperation = /** @class */ (function () {
             });
         });
     };
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, TELLER, COMPLAINTS_SOLVER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, AGENCY_TELLER, AGENCY_COMPLAINTS_SOLVER 
+    PartnerStaffOperation.prototype.findByAdmin = function (conditions) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_64;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_64 = _c.sent();
+                        console.log("Error finding partner staff: ", (_a = error_64 === null || error_64 === void 0 ? void 0 : error_64.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_64 === null || error_64 === void 0 ? void 0 : error_64.request);
+                        return [2 /*return*/, { error: (_b = error_64 === null || error_64 === void 0 ? void 0 : error_64.response) === null || _b === void 0 ? void 0 : _b.data, request: error_64 === null || error_64 === void 0 ? void 0 : error_64.request, status: error_64.response ? error_64.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     PartnerStaffOperation.prototype.updatePartnerStaff = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_64;
+            var response, data, error_65;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1791,10 +1823,10 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_64 = _c.sent();
-                        console.log("Error updating partner staff: ", (_a = error_64 === null || error_64 === void 0 ? void 0 : error_64.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_64 === null || error_64 === void 0 ? void 0 : error_64.request);
-                        return [2 /*return*/, { error: (_b = error_64 === null || error_64 === void 0 ? void 0 : error_64.response) === null || _b === void 0 ? void 0 : _b.data, request: error_64 === null || error_64 === void 0 ? void 0 : error_64.request, status: error_64.response ? error_64.response.status : null }];
+                        error_65 = _c.sent();
+                        console.log("Error updating partner staff: ", (_a = error_65 === null || error_65 === void 0 ? void 0 : error_65.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_65 === null || error_65 === void 0 ? void 0 : error_65.request);
+                        return [2 /*return*/, { error: (_b = error_65 === null || error_65 === void 0 ? void 0 : error_65.response) === null || _b === void 0 ? void 0 : _b.data, request: error_65 === null || error_65 === void 0 ? void 0 : error_65.request, status: error_65.response ? error_65.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1804,7 +1836,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     PartnerStaffOperation.prototype.checkExist = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_65;
+            var response, data, error_66;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1817,10 +1849,10 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
-                        error_65 = _c.sent();
-                        console.log("Error checking exist partner staff: ", (_a = error_65 === null || error_65 === void 0 ? void 0 : error_65.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_65 === null || error_65 === void 0 ? void 0 : error_65.request);
-                        return [2 /*return*/, { error: (_b = error_65 === null || error_65 === void 0 ? void 0 : error_65.response) === null || _b === void 0 ? void 0 : _b.data, request: error_65 === null || error_65 === void 0 ? void 0 : error_65.request, status: error_65.response ? error_65.response.status : null }];
+                        error_66 = _c.sent();
+                        console.log("Error checking exist partner staff: ", (_a = error_66 === null || error_66 === void 0 ? void 0 : error_66.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_66 === null || error_66 === void 0 ? void 0 : error_66.request);
+                        return [2 /*return*/, { error: (_b = error_66 === null || error_66 === void 0 ? void 0 : error_66.response) === null || _b === void 0 ? void 0 : _b.data, request: error_66 === null || error_66 === void 0 ? void 0 : error_66.request, status: error_66.response ? error_66.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1830,7 +1862,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     PartnerStaffOperation.prototype.deletePartnerStaff = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_66;
+            var response, data, error_67;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1843,10 +1875,10 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_66 = _c.sent();
-                        console.log("Error deleting business: ", (_a = error_66 === null || error_66 === void 0 ? void 0 : error_66.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_66 === null || error_66 === void 0 ? void 0 : error_66.request);
-                        return [2 /*return*/, { error: (_b = error_66 === null || error_66 === void 0 ? void 0 : error_66.response) === null || _b === void 0 ? void 0 : _b.data, request: error_66 === null || error_66 === void 0 ? void 0 : error_66.request, status: error_66.response ? error_66.response.status : null }];
+                        error_67 = _c.sent();
+                        console.log("Error deleting business: ", (_a = error_67 === null || error_67 === void 0 ? void 0 : error_67.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_67 === null || error_67 === void 0 ? void 0 : error_67.request);
+                        return [2 /*return*/, { error: (_b = error_67 === null || error_67 === void 0 ? void 0 : error_67.response) === null || _b === void 0 ? void 0 : _b.data, request: error_67 === null || error_67 === void 0 ? void 0 : error_67.request, status: error_67.response ? error_67.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1856,7 +1888,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     PartnerStaffOperation.prototype.updatePassword = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_67;
+            var response, data, error_68;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1869,10 +1901,10 @@ var PartnerStaffOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_67 = _c.sent();
-                        console.log("Error update password: ", (_a = error_67 === null || error_67 === void 0 ? void 0 : error_67.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_67 === null || error_67 === void 0 ? void 0 : error_67.request);
-                        return [2 /*return*/, { error: (_b = error_67 === null || error_67 === void 0 ? void 0 : error_67.response) === null || _b === void 0 ? void 0 : _b.data, request: error_67 === null || error_67 === void 0 ? void 0 : error_67.request, status: error_67.response ? error_67.response.status : null }];
+                        error_68 = _c.sent();
+                        console.log("Error update password: ", (_a = error_68 === null || error_68 === void 0 ? void 0 : error_68.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_68 === null || error_68 === void 0 ? void 0 : error_68.request);
+                        return [2 /*return*/, { error: (_b = error_68 === null || error_68 === void 0 ? void 0 : error_68.response) === null || _b === void 0 ? void 0 : _b.data, request: error_68 === null || error_68 === void 0 ? void 0 : error_68.request, status: error_68.response ? error_68.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1882,7 +1914,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     PartnerStaffOperation.prototype.updatePartnerStaffAvatar = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_68;
+            var formData, response, data, error_69;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -1890,35 +1922,6 @@ var PartnerStaffOperation = /** @class */ (function () {
                         formData = new FormData();
                         formData.append('avatar', info.avatarFile);
                         return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_avatar?staff_id=").concat(condition.staff_id), formData, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
-                    case 2:
-                        error_68 = _c.sent();
-                        console.error('Error uploading image:', (_a = error_68 === null || error_68 === void 0 ? void 0 : error_68.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_68 === null || error_68 === void 0 ? void 0 : error_68.request);
-                        return [2 /*return*/, { error: (_b = error_68 === null || error_68 === void 0 ? void 0 : error_68.response) === null || _b === void 0 ? void 0 : _b.data, request: error_68 === null || error_68 === void 0 ? void 0 : error_68.request, status: error_68.response ? error_68.response.status : null }]; // Ném lỗi để xử lý bên ngoài
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
-    PartnerStaffOperation.prototype.updatePartnerStaffLicense = function (info, condition) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_69;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        formData = new FormData();
-                        formData.append('license_before', info.license_before);
-                        formData.append('license_after', info.license_after);
-                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_licenses?staff_id=").concat(condition.staff_id), formData, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -1935,10 +1938,39 @@ var PartnerStaffOperation = /** @class */ (function () {
             });
         });
     };
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
+    PartnerStaffOperation.prototype.updatePartnerStaffLicense = function (info, condition) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var formData, response, data, error_70;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        formData = new FormData();
+                        formData.append('license_before', info.license_before);
+                        formData.append('license_after', info.license_after);
+                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/update_licenses?staff_id=").concat(condition.staff_id), formData, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_70 = _c.sent();
+                        console.error('Error uploading image:', (_a = error_70 === null || error_70 === void 0 ? void 0 : error_70.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_70 === null || error_70 === void 0 ? void 0 : error_70.request);
+                        return [2 /*return*/, { error: (_b = error_70 === null || error_70 === void 0 ? void 0 : error_70.response) === null || _b === void 0 ? void 0 : _b.data, request: error_70 === null || error_70 === void 0 ? void 0 : error_70.request, status: error_70.response ? error_70.response.status : null }]; // Ném lỗi để xử lý bên ngoài
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
     PartnerStaffOperation.prototype.findPartnerStaffAvatar = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, blob, fileUrl, error_70;
+            var response, blob, fileUrl, error_71;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1953,9 +1985,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         fileUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, fileUrl];
                     case 2:
-                        error_70 = _a.sent();
-                        console.error("Error getting avatar: ", error_70);
-                        return [2 /*return*/, error_70.response.data];
+                        error_71 = _a.sent();
+                        console.error("Error getting avatar: ", error_71);
+                        return [2 /*return*/, error_71.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1964,7 +1996,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
     PartnerStaffOperation.prototype.findPartnerStaffLicenseBefore = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, blob, fileUrl, error_71;
+            var response, blob, fileUrl, error_72;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1979,9 +2011,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         fileUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, fileUrl];
                     case 2:
-                        error_71 = _a.sent();
-                        console.error("Error getting license front: ", error_71);
-                        return [2 /*return*/, error_71.response.data];
+                        error_72 = _a.sent();
+                        console.error("Error getting license front: ", error_72);
+                        return [2 /*return*/, error_72.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -1990,7 +2022,7 @@ var PartnerStaffOperation = /** @class */ (function () {
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER, PARTNER_SHIPPER
     PartnerStaffOperation.prototype.findPartnerStaffLicenseAfter = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, blob, fileUrl, error_72;
+            var response, blob, fileUrl, error_73;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2005,9 +2037,9 @@ var PartnerStaffOperation = /** @class */ (function () {
                         fileUrl = URL.createObjectURL(blob);
                         return [2 /*return*/, fileUrl];
                     case 2:
-                        error_72 = _a.sent();
-                        console.error("Error getting license after: ", error_72);
-                        return [2 /*return*/, error_72.response.data];
+                        error_73 = _a.sent();
+                        console.error("Error getting license after: ", error_73);
+                        return [2 /*return*/, error_73.response.data];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2023,7 +2055,7 @@ var ShippersOperation = /** @class */ (function () {
     ShippersOperation.prototype.getTask = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_73;
+            var response, data, error_74;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2036,10 +2068,10 @@ var ShippersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_73 = _c.sent();
-                        console.log("Error getting tasks: ", (_a = error_73 === null || error_73 === void 0 ? void 0 : error_73.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_73 === null || error_73 === void 0 ? void 0 : error_73.request);
-                        return [2 /*return*/, { error: (_b = error_73 === null || error_73 === void 0 ? void 0 : error_73.response) === null || _b === void 0 ? void 0 : _b.data, request: error_73 === null || error_73 === void 0 ? void 0 : error_73.request, status: error_73.response ? error_73.response.status : null }];
+                        error_74 = _c.sent();
+                        console.log("Error getting tasks: ", (_a = error_74 === null || error_74 === void 0 ? void 0 : error_74.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_74 === null || error_74 === void 0 ? void 0 : error_74.request);
+                        return [2 /*return*/, { error: (_b = error_74 === null || error_74 === void 0 ? void 0 : error_74.response) === null || _b === void 0 ? void 0 : _b.data, request: error_74 === null || error_74 === void 0 ? void 0 : error_74.request, status: error_74.response ? error_74.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2048,7 +2080,7 @@ var ShippersOperation = /** @class */ (function () {
     ShippersOperation.prototype.confirmCompletedTask = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_74;
+            var response, data, error_75;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2061,10 +2093,10 @@ var ShippersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_74 = _c.sent();
-                        console.log("Error confirming completed task: ", (_a = error_74 === null || error_74 === void 0 ? void 0 : error_74.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_74 === null || error_74 === void 0 ? void 0 : error_74.request);
-                        return [2 /*return*/, { error: (_b = error_74 === null || error_74 === void 0 ? void 0 : error_74.response) === null || _b === void 0 ? void 0 : _b.data, request: error_74 === null || error_74 === void 0 ? void 0 : error_74.request, status: error_74.response ? error_74.response.status : null }];
+                        error_75 = _c.sent();
+                        console.log("Error confirming completed task: ", (_a = error_75 === null || error_75 === void 0 ? void 0 : error_75.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_75 === null || error_75 === void 0 ? void 0 : error_75.request);
+                        return [2 /*return*/, { error: (_b = error_75 === null || error_75 === void 0 ? void 0 : error_75.response) === null || _b === void 0 ? void 0 : _b.data, request: error_75 === null || error_75 === void 0 ? void 0 : error_75.request, status: error_75.response ? error_75.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2073,7 +2105,7 @@ var ShippersOperation = /** @class */ (function () {
     ShippersOperation.prototype.getHistory = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_75;
+            var response, data, error_76;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2086,10 +2118,10 @@ var ShippersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_75 = _c.sent();
-                        console.log("Error getting history: ", (_a = error_75 === null || error_75 === void 0 ? void 0 : error_75.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_75 === null || error_75 === void 0 ? void 0 : error_75.request);
-                        return [2 /*return*/, { error: (_b = error_75 === null || error_75 === void 0 ? void 0 : error_75.response) === null || _b === void 0 ? void 0 : _b.data, request: error_75 === null || error_75 === void 0 ? void 0 : error_75.request, status: error_75.response ? error_75.response.status : null }];
+                        error_76 = _c.sent();
+                        console.log("Error getting history: ", (_a = error_76 === null || error_76 === void 0 ? void 0 : error_76.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_76 === null || error_76 === void 0 ? void 0 : error_76.request);
+                        return [2 /*return*/, { error: (_b = error_76 === null || error_76 === void 0 ? void 0 : error_76.response) === null || _b === void 0 ? void 0 : _b.data, request: error_76 === null || error_76 === void 0 ? void 0 : error_76.request, status: error_76.response ? error_76.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2106,7 +2138,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.check = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_76;
+            var response, data, error_77;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2119,10 +2151,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, existed: data.existed, message: data.message }];
                     case 2:
-                        error_76 = _c.sent();
-                        console.log("Error checking exist shipment: ", (_a = error_76 === null || error_76 === void 0 ? void 0 : error_76.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_76 === null || error_76 === void 0 ? void 0 : error_76.request);
-                        return [2 /*return*/, { error: (_b = error_76 === null || error_76 === void 0 ? void 0 : error_76.response) === null || _b === void 0 ? void 0 : _b.data, request: error_76 === null || error_76 === void 0 ? void 0 : error_76.request, status: error_76.response ? error_76.response.status : null }];
+                        error_77 = _c.sent();
+                        console.log("Error checking exist shipment: ", (_a = error_77 === null || error_77 === void 0 ? void 0 : error_77.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_77 === null || error_77 === void 0 ? void 0 : error_77.request);
+                        return [2 /*return*/, { error: (_b = error_77 === null || error_77 === void 0 ? void 0 : error_77.response) === null || _b === void 0 ? void 0 : _b.data, request: error_77 === null || error_77 === void 0 ? void 0 : error_77.request, status: error_77.response ? error_77.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2132,7 +2164,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.create = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_77;
+            var response, data, error_78;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2145,10 +2177,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_77 = _c.sent();
-                        console.log("Error creating shipment: ", (_a = error_77 === null || error_77 === void 0 ? void 0 : error_77.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_77 === null || error_77 === void 0 ? void 0 : error_77.request);
-                        return [2 /*return*/, { error: (_b = error_77 === null || error_77 === void 0 ? void 0 : error_77.response) === null || _b === void 0 ? void 0 : _b.data, request: error_77 === null || error_77 === void 0 ? void 0 : error_77.request, status: error_77.response ? error_77.response.status : null }];
+                        error_78 = _c.sent();
+                        console.log("Error creating shipment: ", (_a = error_78 === null || error_78 === void 0 ? void 0 : error_78.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_78 === null || error_78 === void 0 ? void 0 : error_78.request);
+                        return [2 /*return*/, { error: (_b = error_78 === null || error_78 === void 0 ? void 0 : error_78.response) === null || _b === void 0 ? void 0 : _b.data, request: error_78 === null || error_78 === void 0 ? void 0 : error_78.request, status: error_78.response ? error_78.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2157,7 +2189,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.getOrdersFromShipment = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_78;
+            var response, data, error_79;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2170,10 +2202,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_78 = _c.sent();
-                        console.log("Error getting orders from shipment: ", (_a = error_78 === null || error_78 === void 0 ? void 0 : error_78.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_78 === null || error_78 === void 0 ? void 0 : error_78.request);
-                        return [2 /*return*/, { error: (_b = error_78 === null || error_78 === void 0 ? void 0 : error_78.response) === null || _b === void 0 ? void 0 : _b.data, request: error_78 === null || error_78 === void 0 ? void 0 : error_78.request, status: error_78.response ? error_78.response.status : null }];
+                        error_79 = _c.sent();
+                        console.log("Error getting orders from shipment: ", (_a = error_79 === null || error_79 === void 0 ? void 0 : error_79.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_79 === null || error_79 === void 0 ? void 0 : error_79.request);
+                        return [2 /*return*/, { error: (_b = error_79 === null || error_79 === void 0 ? void 0 : error_79.response) === null || _b === void 0 ? void 0 : _b.data, request: error_79 === null || error_79 === void 0 ? void 0 : error_79.request, status: error_79.response ? error_79.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2183,7 +2215,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.addOrdersToShipment = function (condition, info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_79;
+            var response, data, error_80;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2196,10 +2228,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_79 = _c.sent();
-                        console.log("Error adding orders to shipment: ", (_a = error_79 === null || error_79 === void 0 ? void 0 : error_79.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_79 === null || error_79 === void 0 ? void 0 : error_79.request);
-                        return [2 /*return*/, { error: (_b = error_79 === null || error_79 === void 0 ? void 0 : error_79.response) === null || _b === void 0 ? void 0 : _b.data, request: error_79 === null || error_79 === void 0 ? void 0 : error_79.request, status: error_79.response ? error_79.response.status : null }];
+                        error_80 = _c.sent();
+                        console.log("Error adding orders to shipment: ", (_a = error_80 === null || error_80 === void 0 ? void 0 : error_80.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_80 === null || error_80 === void 0 ? void 0 : error_80.request);
+                        return [2 /*return*/, { error: (_b = error_80 === null || error_80 === void 0 ? void 0 : error_80.response) === null || _b === void 0 ? void 0 : _b.data, request: error_80 === null || error_80 === void 0 ? void 0 : error_80.request, status: error_80.response ? error_80.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2209,7 +2241,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.deleteOrderFromShipment = function (condition, info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_80;
+            var response, data, error_81;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2222,10 +2254,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_80 = _c.sent();
-                        console.log("Error deleting order from shipment: ", (_a = error_80 === null || error_80 === void 0 ? void 0 : error_80.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_80 === null || error_80 === void 0 ? void 0 : error_80.request);
-                        return [2 /*return*/, { error: (_b = error_80 === null || error_80 === void 0 ? void 0 : error_80.response) === null || _b === void 0 ? void 0 : _b.data, request: error_80 === null || error_80 === void 0 ? void 0 : error_80.request, status: error_80.response ? error_80.response.status : null }];
+                        error_81 = _c.sent();
+                        console.log("Error deleting order from shipment: ", (_a = error_81 === null || error_81 === void 0 ? void 0 : error_81.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_81 === null || error_81 === void 0 ? void 0 : error_81.request);
+                        return [2 /*return*/, { error: (_b = error_81 === null || error_81 === void 0 ? void 0 : error_81.response) === null || _b === void 0 ? void 0 : _b.data, request: error_81 === null || error_81 === void 0 ? void 0 : error_81.request, status: error_81.response ? error_81.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2235,7 +2267,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.confirmCreate = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_81;
+            var response, data, error_82;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2248,10 +2280,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_81 = _c.sent();
-                        console.log("Error confirming creat shipment: ", (_a = error_81 === null || error_81 === void 0 ? void 0 : error_81.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_81 === null || error_81 === void 0 ? void 0 : error_81.request);
-                        return [2 /*return*/, { error: (_b = error_81 === null || error_81 === void 0 ? void 0 : error_81.response) === null || _b === void 0 ? void 0 : _b.data, request: error_81 === null || error_81 === void 0 ? void 0 : error_81.request, status: error_81.response ? error_81.response.status : null }];
+                        error_82 = _c.sent();
+                        console.log("Error confirming creat shipment: ", (_a = error_82 === null || error_82 === void 0 ? void 0 : error_82.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_82 === null || error_82 === void 0 ? void 0 : error_82.request);
+                        return [2 /*return*/, { error: (_b = error_82 === null || error_82 === void 0 ? void 0 : error_82.response) === null || _b === void 0 ? void 0 : _b.data, request: error_82 === null || error_82 === void 0 ? void 0 : error_82.request, status: error_82.response ? error_82.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2261,7 +2293,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.get = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_82;
+            var response, data, error_83;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2274,10 +2306,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_82 = _c.sent();
-                        console.log("Error getting shipments: ", (_a = error_82 === null || error_82 === void 0 ? void 0 : error_82.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_82 === null || error_82 === void 0 ? void 0 : error_82.request);
-                        return [2 /*return*/, { error: (_b = error_82 === null || error_82 === void 0 ? void 0 : error_82.response) === null || _b === void 0 ? void 0 : _b.data, request: error_82 === null || error_82 === void 0 ? void 0 : error_82.request, status: error_82.response ? error_82.response.status : null }];
+                        error_83 = _c.sent();
+                        console.log("Error getting shipments: ", (_a = error_83 === null || error_83 === void 0 ? void 0 : error_83.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_83 === null || error_83 === void 0 ? void 0 : error_83.request);
+                        return [2 /*return*/, { error: (_b = error_83 === null || error_83 === void 0 ? void 0 : error_83.response) === null || _b === void 0 ? void 0 : _b.data, request: error_83 === null || error_83 === void 0 ? void 0 : error_83.request, status: error_83.response ? error_83.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2287,7 +2319,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.delete = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_83;
+            var response, data, error_84;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2300,10 +2332,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_83 = _c.sent();
-                        console.log("Error deleting shipment: ", (_a = error_83 === null || error_83 === void 0 ? void 0 : error_83.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_83 === null || error_83 === void 0 ? void 0 : error_83.request);
-                        return [2 /*return*/, { error: (_b = error_83 === null || error_83 === void 0 ? void 0 : error_83.response) === null || _b === void 0 ? void 0 : _b.data, request: error_83 === null || error_83 === void 0 ? void 0 : error_83.request, status: error_83.response ? error_83.response.status : null }];
+                        error_84 = _c.sent();
+                        console.log("Error deleting shipment: ", (_a = error_84 === null || error_84 === void 0 ? void 0 : error_84.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_84 === null || error_84 === void 0 ? void 0 : error_84.request);
+                        return [2 /*return*/, { error: (_b = error_84 === null || error_84 === void 0 ? void 0 : error_84.response) === null || _b === void 0 ? void 0 : _b.data, request: error_84 === null || error_84 === void 0 ? void 0 : error_84.request, status: error_84.response ? error_84.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2313,7 +2345,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.decompose = function (condition, info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_84;
+            var response, data, error_85;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2326,10 +2358,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_84 = _c.sent();
-                        console.log("Error decomposing shipment: ", (_a = error_84 === null || error_84 === void 0 ? void 0 : error_84.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_84 === null || error_84 === void 0 ? void 0 : error_84.request);
-                        return [2 /*return*/, { error: (_b = error_84 === null || error_84 === void 0 ? void 0 : error_84.response) === null || _b === void 0 ? void 0 : _b.data, request: error_84 === null || error_84 === void 0 ? void 0 : error_84.request, status: error_84.response ? error_84.response.status : null }];
+                        error_85 = _c.sent();
+                        console.log("Error decomposing shipment: ", (_a = error_85 === null || error_85 === void 0 ? void 0 : error_85.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_85 === null || error_85 === void 0 ? void 0 : error_85.request);
+                        return [2 /*return*/, { error: (_b = error_85 === null || error_85 === void 0 ? void 0 : error_85.response) === null || _b === void 0 ? void 0 : _b.data, request: error_85 === null || error_85 === void 0 ? void 0 : error_85.request, status: error_85.response ? error_85.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2339,7 +2371,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.receive = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_85;
+            var response, data, error_86;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2352,10 +2384,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_85 = _c.sent();
-                        console.log("Error receiving shipment: ", (_a = error_85 === null || error_85 === void 0 ? void 0 : error_85.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_85 === null || error_85 === void 0 ? void 0 : error_85.request);
-                        return [2 /*return*/, { error: (_b = error_85 === null || error_85 === void 0 ? void 0 : error_85.response) === null || _b === void 0 ? void 0 : _b.data, request: error_85 === null || error_85 === void 0 ? void 0 : error_85.request, status: error_85.response ? error_85.response.status : null }];
+                        error_86 = _c.sent();
+                        console.log("Error receiving shipment: ", (_a = error_86 === null || error_86 === void 0 ? void 0 : error_86.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_86 === null || error_86 === void 0 ? void 0 : error_86.request);
+                        return [2 /*return*/, { error: (_b = error_86 === null || error_86 === void 0 ? void 0 : error_86.response) === null || _b === void 0 ? void 0 : _b.data, request: error_86 === null || error_86 === void 0 ? void 0 : error_86.request, status: error_86.response ? error_86.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2365,7 +2397,7 @@ var ShipmentsOperation = /** @class */ (function () {
     ShipmentsOperation.prototype.undertake = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_86;
+            var response, data, error_87;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2378,10 +2410,10 @@ var ShipmentsOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_86 = _c.sent();
-                        console.log("Error undertaking shipment: ", (_a = error_86 === null || error_86 === void 0 ? void 0 : error_86.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_86 === null || error_86 === void 0 ? void 0 : error_86.request);
-                        return [2 /*return*/, { error: (_b = error_86 === null || error_86 === void 0 ? void 0 : error_86.response) === null || _b === void 0 ? void 0 : _b.data, request: error_86 === null || error_86 === void 0 ? void 0 : error_86.request, status: error_86.response ? error_86.response.status : null }];
+                        error_87 = _c.sent();
+                        console.log("Error undertaking shipment: ", (_a = error_87 === null || error_87 === void 0 ? void 0 : error_87.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_87 === null || error_87 === void 0 ? void 0 : error_87.request);
+                        return [2 /*return*/, { error: (_b = error_87 === null || error_87 === void 0 ? void 0 : error_87.response) === null || _b === void 0 ? void 0 : _b.data, request: error_87 === null || error_87 === void 0 ? void 0 : error_87.request, status: error_87.response ? error_87.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2398,37 +2430,12 @@ var OrdersOperation = /** @class */ (function () {
     OrdersOperation.prototype.get = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_87;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
-                                withCredentials: true,
-                            })];
-                    case 1:
-                        response = _c.sent();
-                        data = response.data;
-                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
-                    case 2:
-                        error_87 = _c.sent();
-                        console.log("Error getting orders: ", (_a = error_87 === null || error_87 === void 0 ? void 0 : error_87.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_87 === null || error_87 === void 0 ? void 0 : error_87.request);
-                        return [2 /*return*/, { error: (_b = error_87 === null || error_87 === void 0 ? void 0 : error_87.response) === null || _b === void 0 ? void 0 : _b.data, request: error_87 === null || error_87 === void 0 ? void 0 : error_87.request, status: error_87.response ? error_87.response.status : null }];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    OrdersOperation.prototype.calculatefee = function (info) {
-        var _a, _b;
-        return __awaiter(this, void 0, void 0, function () {
             var response, data, error_88;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/calculatefee"), info, {
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -2445,10 +2452,35 @@ var OrdersOperation = /** @class */ (function () {
             });
         });
     };
-    OrdersOperation.prototype.checkExist = function (condition) {
+    OrdersOperation.prototype.calculatefee = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_89;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/calculatefee"), info, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
+                    case 2:
+                        error_89 = _c.sent();
+                        console.log("Error getting orders: ", (_a = error_89 === null || error_89 === void 0 ? void 0 : error_89.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_89 === null || error_89 === void 0 ? void 0 : error_89.request);
+                        return [2 /*return*/, { error: (_b = error_89 === null || error_89 === void 0 ? void 0 : error_89.response) === null || _b === void 0 ? void 0 : _b.data, request: error_89 === null || error_89 === void 0 ? void 0 : error_89.request, status: error_89.response ? error_89.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    OrdersOperation.prototype.checkExist = function (condition) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_90;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2461,10 +2493,10 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, exist: data.existed, message: data.message }];
                     case 2:
-                        error_89 = _c.sent();
-                        console.log("Error checking exist order: ", (_a = error_89 === null || error_89 === void 0 ? void 0 : error_89.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_89 === null || error_89 === void 0 ? void 0 : error_89.request);
-                        return [2 /*return*/, { error: (_b = error_89 === null || error_89 === void 0 ? void 0 : error_89.response) === null || _b === void 0 ? void 0 : _b.data, request: error_89 === null || error_89 === void 0 ? void 0 : error_89.request, status: error_89.response ? error_89.response.status : null }];
+                        error_90 = _c.sent();
+                        console.log("Error checking exist order: ", (_a = error_90 === null || error_90 === void 0 ? void 0 : error_90.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_90 === null || error_90 === void 0 ? void 0 : error_90.request);
+                        return [2 /*return*/, { error: (_b = error_90 === null || error_90 === void 0 ? void 0 : error_90.response) === null || _b === void 0 ? void 0 : _b.data, request: error_90 === null || error_90 === void 0 ? void 0 : error_90.request, status: error_90.response ? error_90.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2473,7 +2505,7 @@ var OrdersOperation = /** @class */ (function () {
     OrdersOperation.prototype.checkFileFormat = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_90;
+            var formData, response, data, error_91;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2491,10 +2523,10 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, valid: data.valid, message: data.message }];
                     case 2:
-                        error_90 = _c.sent();
-                        console.error('Error checking file format:', (_a = error_90 === null || error_90 === void 0 ? void 0 : error_90.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_90 === null || error_90 === void 0 ? void 0 : error_90.request);
-                        return [2 /*return*/, { error: (_b = error_90 === null || error_90 === void 0 ? void 0 : error_90.response) === null || _b === void 0 ? void 0 : _b.data, request: error_90 === null || error_90 === void 0 ? void 0 : error_90.request, status: error_90.response ? error_90.response.status : null }];
+                        error_91 = _c.sent();
+                        console.error('Error checking file format:', (_a = error_91 === null || error_91 === void 0 ? void 0 : error_91.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_91 === null || error_91 === void 0 ? void 0 : error_91.request);
+                        return [2 /*return*/, { error: (_b = error_91 === null || error_91 === void 0 ? void 0 : error_91.response) === null || _b === void 0 ? void 0 : _b.data, request: error_91 === null || error_91 === void 0 ? void 0 : error_91.request, status: error_91.response ? error_91.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2529,7 +2561,7 @@ var OrdersOperation = /** @class */ (function () {
     OrdersOperation.prototype.createByFile = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var formData, response, data, error_91;
+            var formData, response, data, error_92;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2547,10 +2579,10 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_91 = _c.sent();
-                        console.error('Error creating orders by file:', (_a = error_91 === null || error_91 === void 0 ? void 0 : error_91.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_91 === null || error_91 === void 0 ? void 0 : error_91.request);
-                        return [2 /*return*/, { error: (_b = error_91 === null || error_91 === void 0 ? void 0 : error_91.response) === null || _b === void 0 ? void 0 : _b.data, request: error_91 === null || error_91 === void 0 ? void 0 : error_91.request, status: error_91.response ? error_91.response.status : null }];
+                        error_92 = _c.sent();
+                        console.error('Error creating orders by file:', (_a = error_92 === null || error_92 === void 0 ? void 0 : error_92.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_92 === null || error_92 === void 0 ? void 0 : error_92.request);
+                        return [2 /*return*/, { error: (_b = error_92 === null || error_92 === void 0 ? void 0 : error_92.response) === null || _b === void 0 ? void 0 : _b.data, request: error_92 === null || error_92 === void 0 ? void 0 : error_92.request, status: error_92.response ? error_92.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2559,7 +2591,7 @@ var OrdersOperation = /** @class */ (function () {
     OrdersOperation.prototype.update = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_92;
+            var response, data, error_93;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2572,10 +2604,10 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_92 = _c.sent();
-                        console.log("Error updating order: ", (_a = error_92 === null || error_92 === void 0 ? void 0 : error_92.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_92 === null || error_92 === void 0 ? void 0 : error_92.request);
-                        return [2 /*return*/, { error: (_b = error_92 === null || error_92 === void 0 ? void 0 : error_92.response) === null || _b === void 0 ? void 0 : _b.data, request: error_92 === null || error_92 === void 0 ? void 0 : error_92.request, status: error_92.response ? error_92.response.status : null }];
+                        error_93 = _c.sent();
+                        console.log("Error updating order: ", (_a = error_93 === null || error_93 === void 0 ? void 0 : error_93.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_93 === null || error_93 === void 0 ? void 0 : error_93.request);
+                        return [2 /*return*/, { error: (_b = error_93 === null || error_93 === void 0 ? void 0 : error_93.response) === null || _b === void 0 ? void 0 : _b.data, request: error_93 === null || error_93 === void 0 ? void 0 : error_93.request, status: error_93.response ? error_93.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2584,7 +2616,7 @@ var OrdersOperation = /** @class */ (function () {
     OrdersOperation.prototype.cancel = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_93;
+            var response, data, error_94;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2597,10 +2629,10 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, message: data.message }];
                     case 2:
-                        error_93 = _c.sent();
-                        console.log("Error canceling order: ", (_a = error_93 === null || error_93 === void 0 ? void 0 : error_93.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_93 === null || error_93 === void 0 ? void 0 : error_93.request);
-                        return [2 /*return*/, { error: (_b = error_93 === null || error_93 === void 0 ? void 0 : error_93.response) === null || _b === void 0 ? void 0 : _b.data, request: error_93 === null || error_93 === void 0 ? void 0 : error_93.request, status: error_93.response ? error_93.response.status : null }];
+                        error_94 = _c.sent();
+                        console.log("Error canceling order: ", (_a = error_94 === null || error_94 === void 0 ? void 0 : error_94.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_94 === null || error_94 === void 0 ? void 0 : error_94.request);
+                        return [2 /*return*/, { error: (_b = error_94 === null || error_94 === void 0 ? void 0 : error_94.response) === null || _b === void 0 ? void 0 : _b.data, request: error_94 === null || error_94 === void 0 ? void 0 : error_94.request, status: error_94.response ? error_94.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2609,7 +2641,7 @@ var OrdersOperation = /** @class */ (function () {
     OrdersOperation.prototype.calculateFee = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_94;
+            var response, data, error_95;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2622,10 +2654,10 @@ var OrdersOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
-                        error_94 = _c.sent();
-                        console.log("Error calculating fee: ", (_a = error_94 === null || error_94 === void 0 ? void 0 : error_94.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_94 === null || error_94 === void 0 ? void 0 : error_94.request);
-                        return [2 /*return*/, { error: (_b = error_94 === null || error_94 === void 0 ? void 0 : error_94.response) === null || _b === void 0 ? void 0 : _b.data, request: error_94 === null || error_94 === void 0 ? void 0 : error_94.request, status: error_94.response ? error_94.response.status : null }];
+                        error_95 = _c.sent();
+                        console.log("Error calculating fee: ", (_a = error_95 === null || error_95 === void 0 ? void 0 : error_95.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_95 === null || error_95 === void 0 ? void 0 : error_95.request);
+                        return [2 /*return*/, { error: (_b = error_95 === null || error_95 === void 0 ? void 0 : error_95.response) === null || _b === void 0 ? void 0 : _b.data, request: error_95 === null || error_95 === void 0 ? void 0 : error_95.request, status: error_95.response ? error_95.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2633,7 +2665,7 @@ var OrdersOperation = /** @class */ (function () {
     };
     OrdersOperation.prototype.updateImage = function (info, condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var formData, i, response, error_95;
+            var formData, i, response, error_96;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2650,9 +2682,9 @@ var OrdersOperation = /** @class */ (function () {
                         console.log('Image uploaded successfully:', response.data);
                         return [2 /*return*/, response.data]; // Trả về dữ liệu phản hồi từ máy chủ
                     case 2:
-                        error_95 = _a.sent();
-                        console.error('Error uploading image:', error_95.response.data);
-                        throw error_95; // Ném lỗi để xử lý bên ngoài
+                        error_96 = _a.sent();
+                        console.error('Error uploading image:', error_96.response.data);
+                        throw error_96; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2661,7 +2693,7 @@ var OrdersOperation = /** @class */ (function () {
     //get_images
     OrdersOperation.prototype.getImage = function (condition) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, zipFile_1, imageUrls_1, error_96;
+            var response, zipFile_1, imageUrls_1, error_97;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -2698,9 +2730,9 @@ var OrdersOperation = /** @class */ (function () {
                         _a.sent();
                         return [2 /*return*/, imageUrls_1];
                     case 4:
-                        error_96 = _a.sent();
-                        console.error('Error getting image:', error_96.message);
-                        throw error_96; // Ném lỗi để xử lý bên ngoài
+                        error_97 = _a.sent();
+                        console.error('Error getting image:', error_97.message);
+                        throw error_97; // Ném lỗi để xử lý bên ngoài
                     case 5: return [2 /*return*/];
                 }
             });
@@ -2716,7 +2748,7 @@ var ScheduleOperation = /** @class */ (function () {
     ScheduleOperation.prototype.get = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_97;
+            var response, data, error_98;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2729,10 +2761,10 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, data: data.data, message: data.message }];
                     case 2:
-                        error_97 = _c.sent();
-                        console.log("Error getting tasks: ", (_a = error_97 === null || error_97 === void 0 ? void 0 : error_97.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_97 === null || error_97 === void 0 ? void 0 : error_97.request);
-                        return [2 /*return*/, { error: (_b = error_97 === null || error_97 === void 0 ? void 0 : error_97.response) === null || _b === void 0 ? void 0 : _b.data, request: error_97 === null || error_97 === void 0 ? void 0 : error_97.request, status: error_97.response ? error_97.response.status : null }];
+                        error_98 = _c.sent();
+                        console.log("Error getting tasks: ", (_a = error_98 === null || error_98 === void 0 ? void 0 : error_98.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_98 === null || error_98 === void 0 ? void 0 : error_98.request);
+                        return [2 /*return*/, { error: (_b = error_98 === null || error_98 === void 0 ? void 0 : error_98.response) === null || _b === void 0 ? void 0 : _b.data, request: error_98 === null || error_98 === void 0 ? void 0 : error_98.request, status: error_98.response ? error_98.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2741,7 +2773,7 @@ var ScheduleOperation = /** @class */ (function () {
     ScheduleOperation.prototype.create = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_98;
+            var response, data, error_99;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2754,10 +2786,10 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_98 = _c.sent();
-                        console.log("Error creating new tasks: ", (_a = error_98 === null || error_98 === void 0 ? void 0 : error_98.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_98 === null || error_98 === void 0 ? void 0 : error_98.request);
-                        return [2 /*return*/, { error: (_b = error_98 === null || error_98 === void 0 ? void 0 : error_98.response) === null || _b === void 0 ? void 0 : _b.data, request: error_98 === null || error_98 === void 0 ? void 0 : error_98.request, status: error_98.response ? error_98.response.status : null }];
+                        error_99 = _c.sent();
+                        console.log("Error creating new tasks: ", (_a = error_99 === null || error_99 === void 0 ? void 0 : error_99.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_99 === null || error_99 === void 0 ? void 0 : error_99.request);
+                        return [2 /*return*/, { error: (_b = error_99 === null || error_99 === void 0 ? void 0 : error_99.response) === null || _b === void 0 ? void 0 : _b.data, request: error_99 === null || error_99 === void 0 ? void 0 : error_99.request, status: error_99.response ? error_99.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2766,7 +2798,7 @@ var ScheduleOperation = /** @class */ (function () {
     ScheduleOperation.prototype.update = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_99;
+            var response, data, error_100;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2779,10 +2811,10 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_99 = _c.sent();
-                        console.log("Error updating tasks: ", (_a = error_99 === null || error_99 === void 0 ? void 0 : error_99.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_99 === null || error_99 === void 0 ? void 0 : error_99.request);
-                        return [2 /*return*/, { error: (_b = error_99 === null || error_99 === void 0 ? void 0 : error_99.response) === null || _b === void 0 ? void 0 : _b.data, request: error_99 === null || error_99 === void 0 ? void 0 : error_99.request, status: error_99.response ? error_99.response.status : null }];
+                        error_100 = _c.sent();
+                        console.log("Error updating tasks: ", (_a = error_100 === null || error_100 === void 0 ? void 0 : error_100.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_100 === null || error_100 === void 0 ? void 0 : error_100.request);
+                        return [2 /*return*/, { error: (_b = error_100 === null || error_100 === void 0 ? void 0 : error_100.response) === null || _b === void 0 ? void 0 : _b.data, request: error_100 === null || error_100 === void 0 ? void 0 : error_100.request, status: error_100.response ? error_100.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2791,7 +2823,7 @@ var ScheduleOperation = /** @class */ (function () {
     ScheduleOperation.prototype.deleteTask = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_100;
+            var response, data, error_101;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2804,10 +2836,10 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_100 = _c.sent();
-                        console.log("Error deleting tasks: ", (_a = error_100 === null || error_100 === void 0 ? void 0 : error_100.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_100 === null || error_100 === void 0 ? void 0 : error_100.request);
-                        return [2 /*return*/, { error: (_b = error_100 === null || error_100 === void 0 ? void 0 : error_100.response) === null || _b === void 0 ? void 0 : _b.data, request: error_100 === null || error_100 === void 0 ? void 0 : error_100.request, status: error_100.response ? error_100.response.status : null }];
+                        error_101 = _c.sent();
+                        console.log("Error deleting tasks: ", (_a = error_101 === null || error_101 === void 0 ? void 0 : error_101.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_101 === null || error_101 === void 0 ? void 0 : error_101.request);
+                        return [2 /*return*/, { error: (_b = error_101 === null || error_101 === void 0 ? void 0 : error_101.response) === null || _b === void 0 ? void 0 : _b.data, request: error_101 === null || error_101 === void 0 ? void 0 : error_101.request, status: error_101.response ? error_101.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2823,7 +2855,7 @@ var AdministrativeOperation = /** @class */ (function () {
     AdministrativeOperation.prototype.get = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_101;
+            var response, data, error_102;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2836,10 +2868,10 @@ var AdministrativeOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, data: data.data, message: data.message }];
                     case 2:
-                        error_101 = _c.sent();
-                        console.error("Error getting administrative: ", (_a = error_101 === null || error_101 === void 0 ? void 0 : error_101.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_101 === null || error_101 === void 0 ? void 0 : error_101.request);
-                        return [2 /*return*/, { error: (_b = error_101 === null || error_101 === void 0 ? void 0 : error_101.response) === null || _b === void 0 ? void 0 : _b.data, request: error_101 === null || error_101 === void 0 ? void 0 : error_101.request, status: error_101.response ? error_101.response.status : null }];
+                        error_102 = _c.sent();
+                        console.error("Error getting administrative: ", (_a = error_102 === null || error_102 === void 0 ? void 0 : error_102.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_102 === null || error_102 === void 0 ? void 0 : error_102.request);
+                        return [2 /*return*/, { error: (_b = error_102 === null || error_102 === void 0 ? void 0 : error_102.response) === null || _b === void 0 ? void 0 : _b.data, request: error_102 === null || error_102 === void 0 ? void 0 : error_102.request, status: error_102.response ? error_102.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
