@@ -21,8 +21,8 @@ import * as JSZip from 'jszip';
 class UsersAuthenticate {
     private baseUrl: string;
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
-        this.baseUrl = "http://localhost:5000/api/v1/users";
+        // this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/users";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/users";
     }
 
     async sendOTP(phoneNumber: string, email: string): Promise<any> {
@@ -65,8 +65,8 @@ class UsersAuthenticate {
 class StaffsAuthenticate {
     private baseUrl: string;
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
-        this.baseUrl = "http://localhost:5000/api/v1/staffs";
+        // this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/staffs";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/staffs";
     }
 
     async login(username: string, password: string): Promise<any> {
@@ -128,8 +128,8 @@ class StaffsAuthenticate {
 class BusinessAuthenticate {
     private baseUrl: string;
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/business";
-        this.baseUrl = "http://localhost:5000/api/v1/business";
+        // this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/business";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/business";
     }
 
     async login(username: string, password: string): Promise<any> {
@@ -155,8 +155,8 @@ class BusinessAuthenticate {
 class PartnerStaffAuthenticate {
     private baseUrl: string;
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staffs";
-        this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
+        // this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/partner_staffs";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/partner_staffs";
     }
 
     async login(username: string, password: string) : Promise<any> {
@@ -208,8 +208,8 @@ class UsersOperation {
     private baseUrl: string;
 
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/users";
-        this.baseUrl = "http://localhost:5000/api/v1/users";
+        // this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/users";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/users";
     }
 
     async findByUser(condition: FindingUserByUserCondition) : Promise<any> {
@@ -360,8 +360,8 @@ export interface UpdatingLicenseInfo {
 class AgencyOperation {
     private baseUrl: string;
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/agencies";
-        this.baseUrl = "http://localhost:5000/api/v1/agencies";
+        // this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/agencies";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/agencies";
     }
 
     async checkExist(condition: CheckingExistAgencyCondition) {
@@ -609,8 +609,8 @@ class TransportPartnersOperation {
     private baseUrl: string;
 
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/transport_partners";
-        this.baseUrl = "http://localhost:5000/api/v1/transport_partners";
+        // this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/transport_partners";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/transport_partners";
     }
 
     async createByAdmin(info: CreatingTransportPartnerByAdminInfo) {
@@ -777,8 +777,8 @@ class VehicleOperation {
     private baseUrl: string;
 
     constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/vehicles";
-        this.baseUrl = "http://localhost:5000/api/v1/vehicles";
+        // this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/vehicles";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/vehicles";
     }
 
     async checkExist(condition: CheckingExistVehicleCondition) {
@@ -1028,8 +1028,8 @@ class StaffsOperation {
 	private baseUrl: string;
 
 	constructor() {
-		// this.baseUrl = "https://tdlogistics.govt.hu/api/v1/staffs";
-		this.baseUrl = "http://localhost:5000/api/v1/staffs";
+		// this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/staffs";
+		this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/staffs";
 	}
 
 	// ROLE: any
@@ -1405,8 +1405,8 @@ class BusinessOperation {
 	private baseUrl: string;
 
 	constructor() {
-		// this.baseUrl = "https://tdlogistics.govt.hu/api/v1/business";
-		this.baseUrl = "http://localhost:5000/api/v1/business";
+		// this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/business";
+		this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/business";
 
 	}
 
@@ -1751,8 +1751,8 @@ class PartnerStaffOperation {
 	private baseUrl: string;
 
 	constructor() {
-		// this.baseUrl = "https://tdlogistics.govt.hu/api/v1/partner_staffs";
-		this.baseUrl = "http://localhost:5000/api/v1/partner_staffs";
+		// this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/partner_staffs";
+		this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/partner_staffs";
 	}
 
 	// ROLE: PARTNER_DRIVER, PARTNER_SHIPPER
@@ -2013,7 +2013,7 @@ export interface GettingHistoryInfo {
 class ShippersOperation {
 	private baseUrl: string;
 	constructor() {
-		this.baseUrl = "http://localhost:5000/api/v1/shippers";
+		this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/shippers";
 	}
 
 	async getTask(condition: GettingTasksCondition) {
@@ -2093,8 +2093,8 @@ export interface UndertakingShipmentInfo {
 class ShipmentsOperation {
     private baseUrl: string;
 	constructor() {
-        // this.baseUrl = "https://tdlogistics.govt.hu/api/v1/shipments";
-		this.baseUrl = "http://localhost:5000/api/v1/shipments";
+        // this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/shipments";
+		this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/shipments";
 	}
 
     async check(condition: ShipmentID) {
@@ -2384,7 +2384,7 @@ export interface UpdatingOrderImageCondition {
 class OrdersOperation {
     private baseUrl: string;
     constructor() {
-        this.baseUrl = "http://localhost:5000/api/v1/orders";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/orders";
     }
 
     async get(conditions: GettingOrdersConditions) {
@@ -2611,7 +2611,7 @@ export interface TaskId {
 class ScheduleOperation {
     private baseUrl: string;
     constructor() {
-        this.baseUrl = "http://localhost:5000/api/v1/schedules";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/schedules";
     }
 
     async get(conditions: GettingTasksConditions) {
@@ -2684,7 +2684,7 @@ export interface AdministrativeInfo {
 class AdministrativeOperation {
     private baseUrl: string;
     constructor() {
-        this.baseUrl = "http://localhost:5000/api/v1/administrative";
+        this.baseUrl = "https://api.tdlogistics.net.vn/api/v1/administrative";
     }
 
     async get(conditions: AdministrativeInfo) {
