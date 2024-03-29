@@ -2018,7 +2018,13 @@ class PartnerStaffOperation {
 	} 
 }
   
+export interface CreatingNewTasksInfo {
+    shipment_id: string,
+    vehicle_id: string,
+}
+
 export interface GettingTasksCondition {
+    staff_id?: string,
 	option?: number,
 }
 
@@ -2035,6 +2041,21 @@ class ShippersOperation {
 	constructor() {
 		this.baseUrl = "http://localhost:5000/api/v1/shippers";
 	}
+
+    async createNewTasks(info: CreatingNewTasksInfo) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_tasks`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error creating new tasks: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
 
 	async getTask(condition: GettingTasksCondition) {
 		try {
@@ -2076,6 +2097,77 @@ class ShippersOperation {
 			return { error: data.error, data: data.data, message: data.message };
 		} catch (error: any) {
 			console.log("Error getting history: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+		}
+	}
+}
+
+export interface CreatingNewTasksInfo {
+    shipment_ids: Array<string>,
+    vehicle_id: string,
+}
+
+export interface GettingTasksCondition {
+    staff_id?: string,
+	option?: number,
+}
+
+export interface ConfirmingCompletedTaskInfo {
+	id: number,
+}
+
+export interface GettingHistoryInfo {
+	option?: number,
+}
+
+
+class DriversOperation {
+    private baseUrl: string;
+	constructor() {
+		this.baseUrl = "http://localhost:5000/api/v1/drivers";
+	}
+
+    async createNewTasks(info: CreatingNewTasksInfo) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_tasks`, info, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error creating new tasks: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
+
+	async getTask(condition: GettingTasksCondition) {
+		try {
+			const response: AxiosResponse = await axios.post(`${this.baseUrl}/get_tasks`, condition, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, data: data.data, message: data.message };
+		} catch (error: any) {
+			console.log("Error getting tasks: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+		}
+	}
+
+	async confirmCompletedTask(info: ConfirmingCompletedTaskInfo) {
+		try {
+			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/confirm_completed`, info, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error confirming completed task: ", error?.response?.data);
             console.error("Request that caused the error: ", error?.request);
             return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
@@ -2737,6 +2829,7 @@ export {
 	BusinessOperation,
 	PartnerStaffOperation,
 	ShippersOperation,
+    DriversOperation,
     ShipmentsOperation,
     OrdersOperation,
     ScheduleOperation,
