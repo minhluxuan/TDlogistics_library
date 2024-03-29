@@ -300,8 +300,6 @@ export interface CheckingExistAgencyCondition {
 }
 
 export interface CreatingAgencyInfo {
-    username: string,
-    user_password: string,
     user_fullname: string,
     user_phone_number: string,
     user_email: string,
