@@ -313,6 +313,7 @@ export interface CreatingAgencyInfo {
     user_bin: string,
     user_bank: string,
     user_salary: number,
+    individual: boolean,
 
     type: string,
     level: number,
