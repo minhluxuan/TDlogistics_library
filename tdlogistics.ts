@@ -314,7 +314,8 @@ export interface CreatingAgencyInfo {
     user_bank: string,
     user_salary: number,
     individual: boolean,
-
+    
+    tax_number?: string,
     type: string,
     level: number,
     postal_code: string,
