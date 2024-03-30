@@ -2495,6 +2495,10 @@ export interface UpdatingOrderImageCondition {
     type: string
 }
 
+export interface UpdatingOrderSignatureInfo {
+    image: File,
+};
+
 class OrdersOperation {
     private baseUrl: string;
     constructor() {
@@ -2696,6 +2700,43 @@ class OrdersOperation {
 			console.error('Error getting image:', error.message);
 			throw error; // Ném lỗi để xử lý bên ngoài
 		} 
+    }
+
+    async updateSignature(info: UpdatingOrderSignatureInfo, condition: UpdatingOrderImageCondition) {
+        try {       
+			// Tạo FormData object và thêm hình ảnh vào đó
+			const formData = new FormData();
+			formData.append('image', info.image);
+	
+			// Gửi yêu cầu POST để tải lên hình ảnh
+			const response: AxiosResponse = await axios.post(`${this.baseUrl}/signature?order_id=${condition.order_id}&type=${condition.type}`, formData , {
+				withCredentials: true,
+			});
+	
+			const data = response.data;
+            return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.error('Error uploading image:', error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null }; // Ném lỗi để xử lý bên ngoài
+		}
+    }
+
+    async getSignature(condition: UpdatingOrderImageCondition) {
+        try {
+            const response = await axios.get(`${this.baseUrl}/signature?order_id=${condition.order_id}&type=${condition.type}`, {
+                withCredentials: true,
+                responseType: 'arraybuffer',
+            });
+    
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const imgUrl = URL.createObjectURL(blob);
+    
+            return imgUrl;
+        } catch (error: any) {
+            console.error("Error getting signature: ", error);
+            return error.response.data;
+        }
     }
 }
 

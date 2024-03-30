@@ -2604,6 +2604,7 @@ var ShipmentsOperation = /** @class */ (function () {
 }());
 exports.ShipmentsOperation = ShipmentsOperation;
 ;
+;
 var OrdersOperation = /** @class */ (function () {
     function OrdersOperation() {
         this.baseUrl = "http://localhost:5000/api/v1/orders";
@@ -2919,6 +2920,58 @@ var OrdersOperation = /** @class */ (function () {
             });
         });
     };
+    OrdersOperation.prototype.updateSignature = function (info, condition) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var formData, response, data, error_104;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        formData = new FormData();
+                        formData.append('image', info.image);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/signature?order_id=").concat(condition.order_id, "&type=").concat(condition.type), formData, {
+                                withCredentials: true,
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, message: data.message }];
+                    case 2:
+                        error_104 = _c.sent();
+                        console.error('Error uploading image:', (_a = error_104 === null || error_104 === void 0 ? void 0 : error_104.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_104 === null || error_104 === void 0 ? void 0 : error_104.request);
+                        return [2 /*return*/, { error: (_b = error_104 === null || error_104 === void 0 ? void 0 : error_104.response) === null || _b === void 0 ? void 0 : _b.data, request: error_104 === null || error_104 === void 0 ? void 0 : error_104.request, status: error_104.response ? error_104.response.status : null }]; // Ném lỗi để xử lý bên ngoài
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    OrdersOperation.prototype.getSignature = function (condition) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, blob, imgUrl, error_105;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/signature?order_id=").concat(condition.order_id, "&type=").concat(condition.type), {
+                                withCredentials: true,
+                                responseType: 'arraybuffer',
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        blob = new Blob([response.data], { type: response.headers['content-type'] });
+                        imgUrl = URL.createObjectURL(blob);
+                        return [2 /*return*/, imgUrl];
+                    case 2:
+                        error_105 = _a.sent();
+                        console.error("Error getting signature: ", error_105);
+                        return [2 /*return*/, error_105.response.data];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     return OrdersOperation;
 }());
 exports.OrdersOperation = OrdersOperation;
@@ -2929,7 +2982,7 @@ var ScheduleOperation = /** @class */ (function () {
     ScheduleOperation.prototype.get = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_104;
+            var response, data, error_106;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2942,10 +2995,10 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, data: data.data, message: data.message }];
                     case 2:
-                        error_104 = _c.sent();
-                        console.log("Error getting tasks: ", (_a = error_104 === null || error_104 === void 0 ? void 0 : error_104.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_104 === null || error_104 === void 0 ? void 0 : error_104.request);
-                        return [2 /*return*/, { error: (_b = error_104 === null || error_104 === void 0 ? void 0 : error_104.response) === null || _b === void 0 ? void 0 : _b.data, request: error_104 === null || error_104 === void 0 ? void 0 : error_104.request, status: error_104.response ? error_104.response.status : null }];
+                        error_106 = _c.sent();
+                        console.log("Error getting tasks: ", (_a = error_106 === null || error_106 === void 0 ? void 0 : error_106.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_106 === null || error_106 === void 0 ? void 0 : error_106.request);
+                        return [2 /*return*/, { error: (_b = error_106 === null || error_106 === void 0 ? void 0 : error_106.response) === null || _b === void 0 ? void 0 : _b.data, request: error_106 === null || error_106 === void 0 ? void 0 : error_106.request, status: error_106.response ? error_106.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2954,7 +3007,7 @@ var ScheduleOperation = /** @class */ (function () {
     ScheduleOperation.prototype.create = function (info) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_105;
+            var response, data, error_107;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2967,10 +3020,10 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_105 = _c.sent();
-                        console.log("Error creating new tasks: ", (_a = error_105 === null || error_105 === void 0 ? void 0 : error_105.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_105 === null || error_105 === void 0 ? void 0 : error_105.request);
-                        return [2 /*return*/, { error: (_b = error_105 === null || error_105 === void 0 ? void 0 : error_105.response) === null || _b === void 0 ? void 0 : _b.data, request: error_105 === null || error_105 === void 0 ? void 0 : error_105.request, status: error_105.response ? error_105.response.status : null }];
+                        error_107 = _c.sent();
+                        console.log("Error creating new tasks: ", (_a = error_107 === null || error_107 === void 0 ? void 0 : error_107.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_107 === null || error_107 === void 0 ? void 0 : error_107.request);
+                        return [2 /*return*/, { error: (_b = error_107 === null || error_107 === void 0 ? void 0 : error_107.response) === null || _b === void 0 ? void 0 : _b.data, request: error_107 === null || error_107 === void 0 ? void 0 : error_107.request, status: error_107.response ? error_107.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -2979,7 +3032,7 @@ var ScheduleOperation = /** @class */ (function () {
     ScheduleOperation.prototype.update = function (info, condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_106;
+            var response, data, error_108;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -2992,10 +3045,10 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_106 = _c.sent();
-                        console.log("Error updating tasks: ", (_a = error_106 === null || error_106 === void 0 ? void 0 : error_106.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_106 === null || error_106 === void 0 ? void 0 : error_106.request);
-                        return [2 /*return*/, { error: (_b = error_106 === null || error_106 === void 0 ? void 0 : error_106.response) === null || _b === void 0 ? void 0 : _b.data, request: error_106 === null || error_106 === void 0 ? void 0 : error_106.request, status: error_106.response ? error_106.response.status : null }];
+                        error_108 = _c.sent();
+                        console.log("Error updating tasks: ", (_a = error_108 === null || error_108 === void 0 ? void 0 : error_108.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_108 === null || error_108 === void 0 ? void 0 : error_108.request);
+                        return [2 /*return*/, { error: (_b = error_108 === null || error_108 === void 0 ? void 0 : error_108.response) === null || _b === void 0 ? void 0 : _b.data, request: error_108 === null || error_108 === void 0 ? void 0 : error_108.request, status: error_108.response ? error_108.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -3004,7 +3057,7 @@ var ScheduleOperation = /** @class */ (function () {
     ScheduleOperation.prototype.deleteTask = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_107;
+            var response, data, error_109;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -3017,10 +3070,10 @@ var ScheduleOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, message: data.message }];
                     case 2:
-                        error_107 = _c.sent();
-                        console.log("Error deleting tasks: ", (_a = error_107 === null || error_107 === void 0 ? void 0 : error_107.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_107 === null || error_107 === void 0 ? void 0 : error_107.request);
-                        return [2 /*return*/, { error: (_b = error_107 === null || error_107 === void 0 ? void 0 : error_107.response) === null || _b === void 0 ? void 0 : _b.data, request: error_107 === null || error_107 === void 0 ? void 0 : error_107.request, status: error_107.response ? error_107.response.status : null }];
+                        error_109 = _c.sent();
+                        console.log("Error deleting tasks: ", (_a = error_109 === null || error_109 === void 0 ? void 0 : error_109.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_109 === null || error_109 === void 0 ? void 0 : error_109.request);
+                        return [2 /*return*/, { error: (_b = error_109 === null || error_109 === void 0 ? void 0 : error_109.response) === null || _b === void 0 ? void 0 : _b.data, request: error_109 === null || error_109 === void 0 ? void 0 : error_109.request, status: error_109.response ? error_109.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
@@ -3036,7 +3089,7 @@ var AdministrativeOperation = /** @class */ (function () {
     AdministrativeOperation.prototype.get = function (conditions) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, error_108;
+            var response, data, error_110;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -3049,10 +3102,10 @@ var AdministrativeOperation = /** @class */ (function () {
                         data = response.data;
                         return [2 /*return*/, { error: data, data: data.data, message: data.message }];
                     case 2:
-                        error_108 = _c.sent();
-                        console.error("Error getting administrative: ", (_a = error_108 === null || error_108 === void 0 ? void 0 : error_108.response) === null || _a === void 0 ? void 0 : _a.data);
-                        console.error("Request that caused the error: ", error_108 === null || error_108 === void 0 ? void 0 : error_108.request);
-                        return [2 /*return*/, { error: (_b = error_108 === null || error_108 === void 0 ? void 0 : error_108.response) === null || _b === void 0 ? void 0 : _b.data, request: error_108 === null || error_108 === void 0 ? void 0 : error_108.request, status: error_108.response ? error_108.response.status : null }];
+                        error_110 = _c.sent();
+                        console.error("Error getting administrative: ", (_a = error_110 === null || error_110 === void 0 ? void 0 : error_110.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_110 === null || error_110 === void 0 ? void 0 : error_110.request);
+                        return [2 /*return*/, { error: (_b = error_110 === null || error_110 === void 0 ? void 0 : error_110.response) === null || _b === void 0 ? void 0 : _b.data, request: error_110 === null || error_110 === void 0 ? void 0 : error_110.request, status: error_110.response ? error_110.response.status : null }];
                     case 3: return [2 /*return*/];
                 }
             });
