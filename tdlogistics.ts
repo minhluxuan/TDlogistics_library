@@ -2178,7 +2178,7 @@ class DriversOperation {
 
 //Shipment Operation
 export interface CreatingShipmentInfo {
-    transport_partner_id?: string
+    agency_destination?: string
 }
 
 export interface FindingShipmentConditions {
