@@ -484,7 +484,7 @@ class AgencyOperation {
                 formData.append('files', info.licenseFiles[i]);
             }
 			// Gửi yêu cầu POST để tải lên hình ảnh
-			const response: AxiosResponse = await axios.post(`${this.baseUrl}/update_agency_company_license?agency_id=${condition.agency_id}`, formData , {
+			const response: AxiosResponse = await axios.put(`${this.baseUrl}/update_agency_company_license?agency_id=${condition.agency_id}`, formData , {
 				withCredentials: true,
 			});
 		
@@ -2115,7 +2115,7 @@ export interface GettingTasksCondition {
 	option?: number,
 }
 
-export interface ConfirmingCompletedTaskInfo {
+export interface ConfirmingCompletedTaskCondition {
 	id: number,
 }
 
@@ -2160,9 +2160,9 @@ class DriversOperation {
 		}
 	}
 
-	async confirmCompletedTask(info: ConfirmingCompletedTaskInfo) {
+	async confirmCompletedTask(condition: ConfirmingCompletedTaskCondition) {
 		try {
-			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/confirm_completed`, info, {
+			const response: AxiosResponse = await axios.delete(`${this.baseUrl}/confirm_completed?id=${condition.id}`, {
 				withCredentials: true,
 			});
 
