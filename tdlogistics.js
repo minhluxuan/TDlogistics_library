@@ -2283,7 +2283,7 @@ var DriversOperation = /** @class */ (function () {
             });
         });
     };
-    DriversOperation.prototype.confirmCompletedTask = function (info) {
+    DriversOperation.prototype.confirmCompletedTask = function (condition) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             var response, data, error_82;
@@ -2291,7 +2291,7 @@ var DriversOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/confirm_completed"), info, {
+                        return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/confirm_completed?id=").concat(condition.id), {
                                 withCredentials: true,
                             })];
                     case 1:
