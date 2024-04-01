@@ -2929,7 +2929,7 @@ var OrdersOperation = /** @class */ (function () {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
                         formData = new FormData();
-                        formData.append('image', info.image);
+                        formData.append('signature', info.signature);
                         return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/signature?order_id=").concat(condition.order_id, "&type=").concat(condition.type), formData, {
                                 withCredentials: true,
                             })];
