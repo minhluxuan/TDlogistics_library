@@ -2496,7 +2496,7 @@ export interface UpdatingOrderImageCondition {
 }
 
 export interface UpdatingOrderSignatureInfo {
-    image: File,
+    signature: File,
 };
 
 class OrdersOperation {
@@ -2706,7 +2706,7 @@ class OrdersOperation {
         try {       
 			// Tạo FormData object và thêm hình ảnh vào đó
 			const formData = new FormData();
-			formData.append('image', info.image);
+			formData.append('signature', info.signature);
 	
 			// Gửi yêu cầu POST để tải lên hình ảnh
 			const response: AxiosResponse = await axios.post(`${this.baseUrl}/signature?order_id=${condition.order_id}&type=${condition.type}`, formData , {
