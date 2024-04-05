@@ -2044,6 +2044,23 @@ class ShippersOperation {
 		this.baseUrl = "http://localhost:5000/api/v1/shippers";
 	}
 
+    // ROLE: AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
+    async getObjectsCanHandleTask() {
+        try {
+            const response: AxiosResponse = await axios.get(`${this.baseUrl}/get_objects`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error getting object can handle task: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
+
+    // ROLE: AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     async createNewTasks(info: CreatingNewTasksInfo) {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_tasks`, info, {
@@ -2059,6 +2076,7 @@ class ShippersOperation {
         }
     }
 
+    // ROLE: AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, AGENCY_SHIPPER
 	async getTask(condition: GettingTasksCondition) {
 		try {
 			const response: AxiosResponse = await axios.post(`${this.baseUrl}/get_tasks`, condition, {
@@ -2074,6 +2092,7 @@ class ShippersOperation {
 		}
 	}
 
+    // ROLE: AGENCY_SHIPPER
 	async confirmCompletedTask(condition: ConfirmingCompletedTaskCondition) {
 		try {
 			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/confirm_completed?id=${condition.id}`, {
@@ -2089,6 +2108,7 @@ class ShippersOperation {
 		}
 	}
 
+    // ROLE: AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, AGENCY_SHIPPER 
 	async getHistory(condition: GettingHistoryInfo) {
 		try {
 			const response: AxiosResponse = await axios.post(`${this.baseUrl}/get_history`, condition, {
@@ -2130,6 +2150,23 @@ class DriversOperation {
 		this.baseUrl = "http://localhost:5000/api/v1/drivers";
 	}
 
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER
+    async getObjectsCanHandleTask() {
+        try {
+            const response: AxiosResponse = await axios.get(`${this.baseUrl}/get_objects`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error getting object can handle task: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
+
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER 
     async createNewTasks(info: CreatingNewTasksInfo) {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_tasks`, info, {
@@ -2145,6 +2182,7 @@ class DriversOperation {
         }
     }
 
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER
 	async getTask(condition: GettingTasksCondition) {
 		try {
 			const response: AxiosResponse = await axios.post(`${this.baseUrl}/get_tasks`, condition, {
@@ -2160,6 +2198,7 @@ class DriversOperation {
 		}
 	}
 
+    // ROLE: PARTNER_DRIVER
 	async confirmCompletedTask(condition: ConfirmingCompletedTaskCondition) {
 		try {
 			const response: AxiosResponse = await axios.delete(`${this.baseUrl}/confirm_completed?id=${condition.id}`, {
