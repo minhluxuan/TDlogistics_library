@@ -1432,6 +1432,21 @@ class BusinessOperation {
 
 	}
 
+    async getAuthenticatedBusinessInfo() {
+        try {
+            const response: AxiosResponse<any> = await axios.get(`${this.baseUrl}/get_info`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, info: data.info, message: data.message };
+        } catch (error: any) {
+            console.log("Error getting authenticated business info: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
+
     async signup(info: SigningUpInfo) {
         try {
             const response: AxiosResponse<any> = await axios.post(`${this.baseUrl}/signup`, info, {
