@@ -2035,7 +2035,7 @@ class PartnerStaffOperation {
 	} 
 }
   
-export interface CreatingNewTasksInfo {
+export interface CreatingNewShipperTasksInfo {
     shipment_id: string,
     vehicle_id: string,
 }
@@ -2076,7 +2076,7 @@ class ShippersOperation {
     }
 
     // ROLE: AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
-    async createNewTasks(info: CreatingNewTasksInfo) {
+    async createNewTasks(info: CreatingNewShipperTasksInfo) {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_tasks`, info, {
                 withCredentials: true,
@@ -2140,7 +2140,7 @@ class ShippersOperation {
 	}
 }
 
-export interface CreatingNewTasksInfo {
+export interface CreatingNewDriverTasksInfo {
     shipment_ids: Array<string>,
     vehicle_id: string,
 }
@@ -2182,7 +2182,7 @@ class DriversOperation {
     }
 
     // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER 
-    async createNewTasks(info: CreatingNewTasksInfo) {
+    async createNewTasks(info: CreatingNewDriverTasksInfo) {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_tasks`, info, {
                 withCredentials: true,
