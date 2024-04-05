@@ -2074,9 +2074,9 @@ class ShippersOperation {
 		}
 	}
 
-	async confirmCompletedTask(info: ConfirmingCompletedTaskInfo) {
+	async confirmCompletedTask(condition: ConfirmingCompletedTaskCondition) {
 		try {
-			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/confirm_completed`, info, {
+			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/confirm_completed?id=${condition.id}`, {
 				withCredentials: true,
 			});
 
