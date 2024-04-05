@@ -2052,7 +2052,7 @@ class ShippersOperation {
             });
 
             const data = response.data;
-            return { error: data.error, message: data.message };
+            return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
             console.log("Error getting object can handle task: ", error?.response?.data);
             console.error("Request that caused the error: ", error?.request);
@@ -2158,7 +2158,7 @@ class DriversOperation {
             });
 
             const data = response.data;
-            return { error: data.error, message: data.message };
+            return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
             console.log("Error getting object can handle task: ", error?.response?.data);
             console.error("Request that caused the error: ", error?.request);
@@ -2217,7 +2217,7 @@ class DriversOperation {
 
 //Shipment Operation
 export interface CreatingShipmentInfo {
-    agency_destination?: string
+    agency_id_destination?: string
 }
 
 export interface FindingShipmentConditions {
@@ -2260,6 +2260,21 @@ class ShipmentsOperation {
 			return { error: data.error, existed: data.existed, message: data.message };
 		} catch (error: any) {
 			console.log("Error checking exist shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+		}
+    }
+
+    async getAllAgencies() {
+        try {
+			const response = await axios.get(`${this.baseUrl}/get_agencies`, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, data: data.data, message: data.message };
+		} catch (error: any) {
+			console.log("Error getting all agencies: ", error?.response?.data);
             console.error("Request that caused the error: ", error?.request);
             return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
