@@ -2232,7 +2232,7 @@ class DriversOperation {
 
 //Shipment Operation
 export interface CreatingShipmentInfo {
-    agency_id_destination?: string
+    agency_id_dest?: string
 }
 
 export interface FindingShipmentConditions {
