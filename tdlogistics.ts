@@ -942,6 +942,7 @@ class VehicleOperation {
         }
     }
 
+    // ROLE: DRIVER, PARTNER_DRIVER
     async undertakeShipment(info: UndertakingShipmentInfo) {
         try {
             const response = await axios.get(`${this.baseUrl}/undertake?shipment_id=${info.shipment_id}`, {
@@ -2471,6 +2472,23 @@ class ShipmentsOperation {
             return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
     }
+
+    // ROLE: ADMIN, MANAGER, TELLER
+    async approve(condition: ShipmentID) {
+        try {
+			const response = await axios.put(`${this.baseUrl}/approve?shipment_id=${condition.shipment_id}`, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error approve shipment: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+		}
+    }
+
 }
 
 export interface CheckingExistOrderCondition {
