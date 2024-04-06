@@ -791,6 +791,10 @@ export interface DeletingShipmentsFromVehicleCondition {
     vehicle_id: string,
 }
 
+export interface UndertakingShipmentInfo {
+    shipment_id: string,
+}
+
 export interface DeletingVehicleCondition {
     vehicle_id: string,
 }
@@ -893,7 +897,6 @@ class VehicleOperation {
         }
     }
 
-
     async update(info: UpdatingVehicleInfo, condition: UpdatingVehicleCondition) {
         try {
             const response = await axios.put(`${this.baseUrl}/update?vehicle_id=${condition.vehicle_id}`, info, {
@@ -934,6 +937,21 @@ class VehicleOperation {
             return { error: data.error, info: data.info, message: data.message };
         } catch (error: any) {
             console.log("Error deleting shipments from vehicle: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
+
+    async undertakeShipment(info: UndertakingShipmentInfo) {
+        try {
+            const response = await axios.get(`${this.baseUrl}/undertake?shipment_id=${info.shipment_id}`, {
+                withCredentials: true,
+            });
+
+            const data = response.data;
+            return { error: data.error, message: data.message };
+        } catch (error: any) {
+            console.log("Error undertaking shipment: ", error?.response?.data);
             console.error("Request that caused the error: ", error?.request);
             return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
