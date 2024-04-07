@@ -2274,7 +2274,6 @@ export interface ShipmentID {
 
 export interface UndertakingShipmentInfo {
     shipment_id: string,
-    status_code: number
 }
 
 class ShipmentsOperation {
