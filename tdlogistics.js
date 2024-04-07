@@ -2744,7 +2744,7 @@ var ShipmentsOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/approve?shipment_id=").concat(condition.shipment_id), {
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/accept?shipment_id=").concat(condition.shipment_id), {
                                 withCredentials: true,
                             })];
                     case 1:

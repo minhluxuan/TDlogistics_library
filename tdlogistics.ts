@@ -2476,7 +2476,7 @@ class ShipmentsOperation {
     // ROLE: ADMIN, MANAGER, TELLER
     async approve(condition: ShipmentID) {
         try {
-			const response = await axios.put(`${this.baseUrl}/approve?shipment_id=${condition.shipment_id}`, {
+			const response = await axios.put(`${this.baseUrl}/accept?shipment_id=${condition.shipment_id}`, {
 				withCredentials: true,
 			});
 
@@ -2488,7 +2488,6 @@ class ShipmentsOperation {
             return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
     }
-
 }
 
 export interface CheckingExistOrderCondition {
