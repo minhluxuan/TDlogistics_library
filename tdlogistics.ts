@@ -18,6 +18,7 @@ import * as JSZip from 'jszip';
 //     // showing custome notification on UI
 // });
 
+
 class UserOperation {
     private baseUrl: string;
     constructor() {
@@ -2961,6 +2962,103 @@ class AdministrativeOperation {
     }
 }
 
+export interface GettingRoutesConditions {
+    vehicle_id: string,
+    source: string,
+    destination: string,
+    from_departure_time: string,
+    to_departure_time: string,
+}
+
+export interface CreatingNewRouteInfo {
+    vehicle_id: string,
+    source: string,
+    destination: string,
+    departure_time: string,
+}
+
+export interface UpdatingRouteInfo {
+    vehicle_id: string,
+    source: string,
+    destination: string,
+    departure_time: string,
+}
+
+export interface RouteId {
+    id: number
+}
+
+class RoutesOperation {
+    private baseUrl: string;
+    constructor() {
+        this.baseUrl = "http://localhost:5000/api/v1/routes";
+    }
+
+    // ROLE: any
+    async get(conditions: GettingRoutesConditions) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/search`, conditions, {
+                withCredentials: true
+            });
+
+            const data = response.data;
+            return { error: data, data: data.data, message: data.message }
+        } catch (error: any) {
+            console.error("Error getting routes: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
+
+    // ROLE: ADMIN, MANAGER
+    async create(info: CreatingNewRouteInfo) {
+        try {
+            const response: AxiosResponse = await axios.post(`${this.baseUrl}/create`, info, {
+                withCredentials: true
+            });
+
+            const data = response.data;
+            return { error: data, message: data.message }
+        } catch (error: any) {
+            console.error("Error creating new routes: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
+
+    // ROLE: ADMIN, MANAGER
+    async update(condition: RouteId, info: UpdatingRouteInfo) {
+        try {
+            const response: AxiosResponse = await axios.put(`${this.baseUrl}/update?id=${condition.id}`, info, {
+                withCredentials: true
+            });
+
+            const data = response.data;
+            return { error: data, message: data.message }
+        } catch (error: any) {
+            console.error("Error updating route: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
+
+    // ROLE: ADMIN, MANAGER
+    async delete(condition: RouteId) {
+        try {
+            const response: AxiosResponse = await axios.delete(`${this.baseUrl}/delete?id=${condition.id}`, {
+                withCredentials: true
+            });
+
+            const data = response.data;
+            return { error: data, message: data.message }
+        } catch (error: any) {
+            console.error("Error deleting route: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+        }
+    }
+}
+
 export {
 	UserOperation,
 	UsersAuthenticate,
@@ -2980,4 +3078,5 @@ export {
     OrdersOperation,
     ScheduleOperation,
     AdministrativeOperation,
+    RoutesOperation,
 }
