@@ -2130,7 +2130,7 @@ class ShippersOperation {
     // ROLE: AGENCY_SHIPPER
 	async confirmCompletedTask(condition: ConfirmingCompletedTaskCondition) {
 		try {
-			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/confirm_completed?id=${condition.id}`, {
+			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/confirm_completed?id=${condition.id}`, null, {
 				withCredentials: true,
 			});
 
@@ -2476,7 +2476,7 @@ class ShipmentsOperation {
     // ROLE: ADMIN, MANAGER, TELLER
     async approve(condition: ShipmentID) {
         try {
-			const response = await axios.put(`${this.baseUrl}/accept?shipment_id=${condition.shipment_id}`, {
+			const response = await axios.put(`${this.baseUrl}/accept?shipment_id=${condition.shipment_id}`, null, {
 				withCredentials: true,
 			});
 

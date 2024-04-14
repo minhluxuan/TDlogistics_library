@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AdministrativeOperation = exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.DriversOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.VehicleOperation = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.PartnerStaffAuthenticate = exports.BusinessAuthenticate = exports.StaffsAuthenticate = exports.UsersAuthenticate = exports.UserOperation = void 0;
+exports.RoutesOperation = exports.AdministrativeOperation = exports.ScheduleOperation = exports.OrdersOperation = exports.ShipmentsOperation = exports.DriversOperation = exports.ShippersOperation = exports.PartnerStaffOperation = exports.BusinessOperation = exports.VehicleOperation = exports.StaffsOperation = exports.TransportPartnersOperation = exports.AgencyOperation = exports.UsersOperation = exports.PartnerStaffAuthenticate = exports.BusinessAuthenticate = exports.StaffsAuthenticate = exports.UsersAuthenticate = exports.UserOperation = void 0;
 var axios_1 = require("axios");
 var FormData = require("form-data");
 var JSZip = require("jszip");
@@ -2264,7 +2264,7 @@ var ShippersOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/confirm_completed?id=").concat(condition.id), {
+                        return [4 /*yield*/, axios_1.default.patch("".concat(this.baseUrl, "/confirm_completed?id=").concat(condition.id), null, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -2744,7 +2744,7 @@ var ShipmentsOperation = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _c.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/accept?shipment_id=").concat(condition.shipment_id), {
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/accept?shipment_id=").concat(condition.shipment_id), null, {
                                 withCredentials: true,
                             })];
                     case 1:
@@ -3275,3 +3275,114 @@ var AdministrativeOperation = /** @class */ (function () {
     return AdministrativeOperation;
 }());
 exports.AdministrativeOperation = AdministrativeOperation;
+var RoutesOperation = /** @class */ (function () {
+    function RoutesOperation() {
+        this.baseUrl = "http://localhost:5000/api/v1/routes";
+    }
+    // ROLE: any
+    RoutesOperation.prototype.get = function (conditions) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_117;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/search"), conditions, {
+                                withCredentials: true
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data, data: data.data, message: data.message }];
+                    case 2:
+                        error_117 = _c.sent();
+                        console.error("Error getting routes: ", (_a = error_117 === null || error_117 === void 0 ? void 0 : error_117.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_117 === null || error_117 === void 0 ? void 0 : error_117.request);
+                        return [2 /*return*/, { error: (_b = error_117 === null || error_117 === void 0 ? void 0 : error_117.response) === null || _b === void 0 ? void 0 : _b.data, request: error_117 === null || error_117 === void 0 ? void 0 : error_117.request, status: error_117.response ? error_117.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    // ROLE: ADMIN, MANAGER
+    RoutesOperation.prototype.create = function (info) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_118;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.post("".concat(this.baseUrl, "/create"), info, {
+                                withCredentials: true
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data, message: data.message }];
+                    case 2:
+                        error_118 = _c.sent();
+                        console.error("Error creating new routes: ", (_a = error_118 === null || error_118 === void 0 ? void 0 : error_118.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_118 === null || error_118 === void 0 ? void 0 : error_118.request);
+                        return [2 /*return*/, { error: (_b = error_118 === null || error_118 === void 0 ? void 0 : error_118.response) === null || _b === void 0 ? void 0 : _b.data, request: error_118 === null || error_118 === void 0 ? void 0 : error_118.request, status: error_118.response ? error_118.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    // ROLE: ADMIN, MANAGER
+    RoutesOperation.prototype.update = function (condition, info) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_119;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.put("".concat(this.baseUrl, "/update?id=").concat(condition.id), info, {
+                                withCredentials: true
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data, message: data.message }];
+                    case 2:
+                        error_119 = _c.sent();
+                        console.error("Error updating route: ", (_a = error_119 === null || error_119 === void 0 ? void 0 : error_119.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_119 === null || error_119 === void 0 ? void 0 : error_119.request);
+                        return [2 /*return*/, { error: (_b = error_119 === null || error_119 === void 0 ? void 0 : error_119.response) === null || _b === void 0 ? void 0 : _b.data, request: error_119 === null || error_119 === void 0 ? void 0 : error_119.request, status: error_119.response ? error_119.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    // ROLE: ADMIN, MANAGER
+    RoutesOperation.prototype.delete = function (condition) {
+        var _a, _b;
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data, error_120;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _c.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.delete("".concat(this.baseUrl, "/delete?id=").concat(condition.id), {
+                                withCredentials: true
+                            })];
+                    case 1:
+                        response = _c.sent();
+                        data = response.data;
+                        return [2 /*return*/, { error: data, message: data.message }];
+                    case 2:
+                        error_120 = _c.sent();
+                        console.error("Error deleting route: ", (_a = error_120 === null || error_120 === void 0 ? void 0 : error_120.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_120 === null || error_120 === void 0 ? void 0 : error_120.request);
+                        return [2 /*return*/, { error: (_b = error_120 === null || error_120 === void 0 ? void 0 : error_120.response) === null || _b === void 0 ? void 0 : _b.data, request: error_120 === null || error_120 === void 0 ? void 0 : error_120.request, status: error_120.response ? error_120.response.status : null }];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    return RoutesOperation;
+}());
+exports.RoutesOperation = RoutesOperation;
