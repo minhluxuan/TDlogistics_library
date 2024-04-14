@@ -2963,11 +2963,11 @@ class AdministrativeOperation {
 }
 
 export interface GettingRoutesConditions {
-    vehicle_id: string,
-    source: string,
-    destination: string,
-    from_departure_time: string,
-    to_departure_time: string,
+    vehicle_id?: string,
+    source?: string,
+    destination?: string,
+    from_departure_time?: string,
+    to_departure_time?: string,
 }
 
 export interface CreatingNewRouteInfo {
@@ -2978,10 +2978,10 @@ export interface CreatingNewRouteInfo {
 }
 
 export interface UpdatingRouteInfo {
-    vehicle_id: string,
-    source: string,
-    destination: string,
-    departure_time: string,
+    vehicle_id?: string,
+    source?: string,
+    destination?: string,
+    departure_time?: string,
 }
 
 export interface RouteId {
