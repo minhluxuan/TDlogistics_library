@@ -2719,7 +2719,7 @@ class OrdersOperation {
             });
 
             const data = response.data;
-            return { error: data.error, message: data.message };
+            return { error: data.error, data: data.data, message: data.message };
         } catch (error: any) {
             console.log("Error updating order: ", error?.response?.data);
             console.error("Request that caused the error: ", error?.request);

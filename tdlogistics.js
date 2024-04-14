@@ -2945,7 +2945,7 @@ var OrdersOperation = /** @class */ (function () {
                     case 1:
                         response = _c.sent();
                         data = response.data;
-                        return [2 /*return*/, { error: data.error, message: data.message }];
+                        return [2 /*return*/, { error: data.error, data: data.data, message: data.message }];
                     case 2:
                         error_105 = _c.sent();
                         console.log("Error updating order: ", (_a = error_105 === null || error_105 === void 0 ? void 0 : error_105.response) === null || _a === void 0 ? void 0 : _a.data);
