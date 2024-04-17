@@ -2073,6 +2073,10 @@ export interface GettingHistoryInfo {
 	option?: number,
 }
 
+export interface DeletingShipperTasksCondition {
+    id: number,
+}
+
 class ShippersOperation {
 	private baseUrl: string;
 	constructor() {
@@ -2158,6 +2162,22 @@ class ShippersOperation {
             return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
+
+    // ROLE: AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
+    async deleteTask(condition: DeletingShipperTasksCondition) {
+        try {
+			const response: AxiosResponse = await axios.post(`${this.baseUrl}/delete`, condition, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error deleting task: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+		}
+    }
 }
 
 export interface CreatingNewDriverTasksInfo {
@@ -2174,6 +2194,10 @@ export interface ConfirmingCompletedTaskCondition {
 	id: number,
 }
 
+export interface DeletingDriverTaskCondition {
+    id: number,
+}
+
 export interface GettingHistoryInfo {
 	option?: number,
 }
@@ -2185,7 +2209,7 @@ class DriversOperation {
 		this.baseUrl = "http://localhost:5000/api/v1/drivers";
 	}
 
-    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     async getObjectsCanHandleTask() {
         try {
             const response: AxiosResponse = await axios.get(`${this.baseUrl}/get_objects`, {
@@ -2201,7 +2225,7 @@ class DriversOperation {
         }
     }
 
-    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER 
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
     async createNewTasks(info: CreatingNewDriverTasksInfo) {
         try {
             const response: AxiosResponse = await axios.post(`${this.baseUrl}/create_tasks`, info, {
@@ -2217,7 +2241,7 @@ class DriversOperation {
         }
     }
 
-    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER, PARTNER_DRIVER
 	async getTask(condition: GettingTasksCondition) {
 		try {
 			const response: AxiosResponse = await axios.post(`${this.baseUrl}/get_tasks`, condition, {
@@ -2248,6 +2272,22 @@ class DriversOperation {
             return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
 		}
 	}
+
+    // ROLE: ADMIN, MANAGER, HUMAN_RESOURCE_MANAGER, AGENCY_MANAGER, AGENCY_HUMAN_RESOURCE_MANAGER
+    async deleteTask(condition: DeletingDriverTaskCondition) {
+        try {
+			const response: AxiosResponse = await axios.post(`${this.baseUrl}/delete`, condition, {
+				withCredentials: true,
+			});
+
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.log("Error deleting task: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+		}
+    }
 }
 
 //Shipment Operation
