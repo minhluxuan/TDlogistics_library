@@ -227,6 +227,10 @@ export interface UpdatingUserCondition {
     user_id: string,
 }
 
+export interface UpdatingUserAvatarInfo {
+    avatar: File,
+}
+
 class UsersOperation {
     private baseUrl: string;
 
@@ -294,6 +298,43 @@ class UsersOperation {
             return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
         }
     }
+
+    async updateAvatar(info: UpdatingUserAvatarInfo) {
+		try {       
+			// Tạo FormData object và thêm hình ảnh vào đó
+			const formData = new FormData();
+			formData.append('avatar', info.avatar);
+	
+			// Gửi yêu cầu PUT để tải lên hình ảnh
+			const response: AxiosResponse = await axios.put(`${this.baseUrl}/update_avatar`, formData , {
+				withCredentials: true,
+			});
+	
+			const data = response.data;
+            return { error: data.error, message: data.message };
+		} catch (error: any) {
+			console.error('Error uploading image:', error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null }; // Ném lỗi để xử lý bên ngoài
+		}   
+	}
+
+    async getAvatar () {
+		try {
+            const response = await axios.get(`${this.baseUrl}/get_avatar`, {
+                withCredentials: true,
+                responseType: 'arraybuffer',
+            });
+    
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const imgUrl = URL.createObjectURL(blob);
+    
+            return imgUrl;
+        } catch (error: any) {
+            console.error("Error getting avatar: ", error);
+            return error.response.data;
+        }
+	}
 }
 
 export interface CheckingExistAgencyCondition {
