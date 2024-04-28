@@ -1032,6 +1032,7 @@ export interface CreatingStaffByAgencyInfo {
     district: string,
     town: string,
     detail_address: string,
+    managed_wards?: Array<String>
 }
 
 export interface CreatingStaffByAdminInfo {
@@ -1051,6 +1052,7 @@ export interface CreatingStaffByAdminInfo {
     district: string,
     town: string,
     detail_address: string,
+    managed_wards?: Array<String>
 }
   
 export interface FindingStaffByStaffCondition {
@@ -1084,6 +1086,7 @@ export interface UpdatingStaffInfo {
     district?: string,
     town?: string,
     detail_address?: string,
+    managed_wards?: Array<String>
 }
   
 export interface UpdatingStaffCondition {
@@ -2576,6 +2579,7 @@ export interface CheckingExistOrderCondition {
 }
 
 export interface GettingOrdersConditions {
+    order_id: string,
     name_receiver?: string,
     phone_receiver?: string,
     province_source?: string,
