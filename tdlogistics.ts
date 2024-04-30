@@ -1109,6 +1109,14 @@ export interface UpdatingPasswordsInfo {
 export interface FindingAvatarCondition {
     staff_id: string,
 }
+
+export interface RemovingManagedWardsCondition {
+    staff_id: string,
+}
+
+export interface RemovingManagedWardsInfo {
+    removed_wards: Array<string>
+}
   
 class StaffsOperation {
 	private baseUrl: string;
@@ -1306,6 +1314,23 @@ class StaffsOperation {
             return error.response.data;
         }
 	}
+
+    // ROLE: "ADMIN", "MANAGER", "HUMAN_RESOURCE_MANAGER", "AGENCY_MANAGER", "AGENCY_HUMAN_RESOURCE_MANAGER"
+    async removeManagedWards(condition: RemovingManagedWardsCondition, info: RemovingManagedWardsInfo) {
+        try {
+			const response: AxiosResponse = await axios.patch(`${this.baseUrl}/remove_managed_wards?staff_id=${condition.staff_id}`, info , {
+				withCredentials: true,
+			});
+			
+			const data = response.data;
+			return { error: data.error, message: data.message };
+		} 
+		catch (error: any) {
+			console.log("Error removing managed wards: ", error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null };
+		}    
+    }
 }
   
 export interface CreateBusinessByAgencyInfo {
@@ -2649,7 +2674,7 @@ export interface UpdatingOrderInfo {
     width?: number,
     length?: number,
     COD?: number,
-    status_code?: number,
+    status_code?: number, 
 }
 
 export interface CancelingOrderCondition {
