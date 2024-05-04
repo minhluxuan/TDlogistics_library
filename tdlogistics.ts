@@ -2729,6 +2729,7 @@ export interface CalculatingFeeInfo {
     length: number,
     width: number,
     height: number,
+    mass: number,
 }
 
 export interface UpdatingOrderImageInfo {
