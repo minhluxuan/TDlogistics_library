@@ -446,25 +446,28 @@ var UsersOperation = /** @class */ (function () {
         });
     };
     UsersOperation.prototype.getAvatar = function () {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var response, blob, imgUrl, error_14;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var response, blob, imgUrl, data, error_14;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
+                        _c.trys.push([0, 2, , 3]);
                         return [4 /*yield*/, axios_1.default.get("".concat(this.baseUrl, "/get_avatar"), {
                                 withCredentials: true,
                                 responseType: 'arraybuffer',
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _c.sent();
                         blob = new Blob([response.data], { type: response.headers['content-type'] });
                         imgUrl = URL.createObjectURL(blob);
-                        return [2 /*return*/, imgUrl];
+                        data = response.data;
+                        return [2 /*return*/, { error: data.error, data: imgUrl, message: data.message }];
                     case 2:
-                        error_14 = _a.sent();
-                        console.error("Error getting avatar: ", error_14);
-                        return [2 /*return*/, error_14.response.data];
+                        error_14 = _c.sent();
+                        console.error('Error getting avatar:', (_a = error_14 === null || error_14 === void 0 ? void 0 : error_14.response) === null || _a === void 0 ? void 0 : _a.data);
+                        console.error("Request that caused the error: ", error_14 === null || error_14 === void 0 ? void 0 : error_14.request);
+                        return [2 /*return*/, { error: (_b = error_14 === null || error_14 === void 0 ? void 0 : error_14.response) === null || _b === void 0 ? void 0 : _b.data, request: error_14 === null || error_14 === void 0 ? void 0 : error_14.request, status: error_14.response ? error_14.response.status : null }]; // Ném lỗi để xử lý bên ngoài
                     case 3: return [2 /*return*/];
                 }
             });

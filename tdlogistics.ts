@@ -329,10 +329,12 @@ class UsersOperation {
             const blob = new Blob([response.data], { type: response.headers['content-type'] });
             const imgUrl = URL.createObjectURL(blob);
     
-            return imgUrl;
+            const data = response.data;
+            return { error: data.error, data: imgUrl, message: data.message };
         } catch (error: any) {
-            console.error("Error getting avatar: ", error);
-            return error.response.data;
+            console.error('Error getting avatar:', error?.response?.data);
+            console.error("Request that caused the error: ", error?.request);
+            return { error: error?.response?.data, request: error?.request, status: error.response ? error.response.status : null }; // Ném lỗi để xử lý bên ngoài
         }
 	}
 }
