@@ -2637,7 +2637,7 @@ export interface CheckingExistOrderCondition {
 }
 
 export interface GettingOrdersConditions {
-    order_id: string,
+    order_id?: string,
     name_receiver?: string,
     phone_receiver?: string,
     province_source?: string,
