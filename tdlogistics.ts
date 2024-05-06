@@ -2650,6 +2650,7 @@ export interface GettingOrdersConditions {
 }
 
 export interface CreatingOrderByUserInformation {
+    name_sender: string,
     name_receiver: string,
     phone_number_receiver: string,
     mass: number,
